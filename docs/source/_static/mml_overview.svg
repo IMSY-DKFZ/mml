@@ -1,0 +1,1161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="391.46051mm"
+   height="249.62672mm"
+   viewBox="0 0 391.46051 249.62672"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="mml_overview.svg"
+   inkscape:export-filename="/home/patrick/Documents/mml_overview.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.81134749"
+     inkscape:cx="544.77275"
+     inkscape:cy="509.646"
+     inkscape:window-width="1920"
+     inkscape:window-height="1007"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59126" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-2-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-0-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-53" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-83"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-7-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-53-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-2-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-0-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-2-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-0-8" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Mend-0-2-1-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path59132-6-0-5-4" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.17271955,1.6650057)">
+    <rect
+       style="opacity:1;fill:#00ff00;fill-opacity:0.18966493;stroke-width:0.70353;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect425876"
+       width="391.46051"
+       height="140.08798"
+       x="0.17271955"
+       y="107.87374"
+       ry="0.061296236" />
+    <rect
+       style="opacity:1;fill:#0069ff;fill-opacity:0.26702139;fill-rule:evenodd;stroke-width:0.461355"
+       id="rect31"
+       width="391.46051"
+       height="109.53875"
+       x="0.17271955"
+       y="-1.6650057" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="11.555449"
+       y="12.88359"
+       id="text13412"><tspan
+         sodipodi:role="line"
+         id="tspan13410"
+         style="stroke-width:0.264583"
+         x="11.555449"
+         y="12.88359">MML initialization</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="16.044098"
+       y="185.92523"
+       id="text13412-3"><tspan
+         sodipodi:role="line"
+         id="tspan13410-8"
+         style="stroke-width:0.264583"
+         x="16.044098"
+         y="185.92523">MML runtime</tspan></text>
+    <rect
+       style="opacity:1;fill:#808000;fill-opacity:0.586723;stroke-width:0.370133"
+       id="rect13658"
+       width="84.11795"
+       height="106.31824"
+       x="14.140798"
+       y="25.348328" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.529767"
+       id="rect13658-7"
+       width="84.11795"
+       height="217.8024"
+       x="201.74025"
+       y="25.908815" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.438329"
+       id="rect13658-7-3"
+       width="84.11795"
+       height="149.10564"
+       x="298.02884"
+       y="25.635073" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.280705"
+       id="rect13658-7-3-1"
+       width="84.11795"
+       height="61.149738"
+       x="298.03839"
+       y="181.23714" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.530208"
+       id="rect13658-7-8"
+       width="84.11795"
+       height="218.16579"
+       x="107.03899"
+       y="25.908815" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.150228"
+       id="rect13658-7-8-0"
+       width="69.106232"
+       height="21.318933"
+       x="115.31686"
+       y="38.490421" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.236908"
+       id="rect13658-7-8-0-2"
+       width="69.106232"
+       height="53.018021"
+       x="208.73599"
+       y="42.528431" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.236908"
+       id="rect13658-7-8-0-2-4"
+       width="69.106232"
+       height="53.018021"
+       x="209.48604"
+       y="112.78736" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-7)"
+       d="m 276.60836,129.59649 10.69988,0.073 0.29998,50.18267 -7.17611,0.12986"
+       id="path230377-3-8"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-7-6)"
+       d="m 270.10903,135.37084 20.09251,0.0413 0.0158,76.89185 -10.11364,-0.0543"
+       id="path230377-3-8-3"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.178313"
+       id="rect13658-7-8-0-2-3"
+       width="69.106232"
+       height="30.035204"
+       x="306.45987"
+       y="42.904099" />
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.206931"
+       id="rect13658-7-8-0-7"
+       width="69.106232"
+       height="40.449959"
+       x="115.36466"
+       y="64.135361" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="26.199905"
+       y="32.708828"
+       id="text25960"><tspan
+         sodipodi:role="line"
+         id="tspan25958"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="26.199905"
+         y="32.708828">__main__.wrapped_main</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="207.364"
+       y="33.318031"
+       id="text25960-0"><tspan
+         sodipodi:role="line"
+         id="tspan25958-9"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="207.364"
+         y="33.318031">mml.core.scripts.base_scheduler.</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="207.364"
+         y="39.050671"
+         id="tspan149161">         AbstractBaseScheduler</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="301.17734"
+       y="32.612228"
+       id="text25960-0-6"><tspan
+         sodipodi:role="line"
+         id="tspan25958-9-1"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="301.17734"
+         y="32.612228">mml.core.data_loading.file_manager.</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="301.17734"
+         y="38.344868"
+         id="tspan149161-29">                MMLFileManager</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="301.80301"
+       y="187.97458"
+       id="text25960-0-6-1"><tspan
+         sodipodi:role="line"
+         id="tspan25958-9-1-5"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="301.80301"
+         y="187.97458">mml.core.data_loading.task_struct.</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="301.80301"
+         y="193.70721"
+         id="tspan149161-29-9">                       TaskStruct</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="138.93922"
+       y="44.541447"
+       id="text25960-0-7"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="138.93922"
+         y="44.541447"
+         id="tspan149161-2">__init__</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="232.20984"
+       y="49.573875"
+       id="text25960-0-7-28"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="232.20984"
+         y="49.573875"
+         id="tspan149161-2-97">__init__</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="237.1958"
+       y="119.19656"
+       id="text25960-0-7-28-7"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="237.1958"
+         y="119.19656"
+         id="tspan149161-2-97-6">run</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="332.00241"
+       y="49.379166"
+       id="text25960-0-7-28-1"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="332.00241"
+         y="49.379166"
+         id="tspan149161-2-97-9">__init__</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="132.94472"
+       y="70.192215"
+       id="text25960-0-7-5"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="132.94472"
+         y="70.192215"
+         id="tspan149161-2-9">create_routine</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.1033"
+       id="rect13658-7-8-0-7-4"
+       width="76.093887"
+       height="9.154376"
+       x="112.32029"
+       y="113.16006" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="114.04749"
+       y="119.21691"
+       id="text25960-0-7-5-3"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="114.04749"
+         y="119.21691"
+         id="tspan149161-2-9-1">(optional) after_preparation_hook</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.1033"
+       id="rect13658-7-8-0-7-4-2"
+       width="76.093887"
+       height="9.154376"
+       x="112.26968"
+       y="124.59082" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="113.99689"
+       y="130.64769"
+       id="text25960-0-7-5-3-6"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="113.99689"
+         y="130.64769"
+         id="tspan149161-2-9-1-6">(optional) before_finishing_hook</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="119.98859"
+       y="34.116962"
+       id="text25960-0-7-2"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="119.98859"
+         y="34.116962"
+         id="tspan149161-2-3">concrete scheduler class</tspan></text>
+    <rect
+       style="fill:#80147c;fill-opacity:0.586723;stroke-width:0.282718"
+       id="rect13658-3"
+       width="74.935951"
+       height="69.629883"
+       x="19.491709"
+       y="55.884342" />
+    <rect
+       style="opacity:1;fill:#808000;fill-opacity:0.586723;stroke-width:0.831935;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect96124"
+       width="64.716179"
+       height="36.214825"
+       x="25.932154"
+       y="83.726921" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="29.840342"
+       y="89.388054"
+       id="text25960-6"><tspan
+         sodipodi:role="line"
+         id="tspan25958-7"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="29.840342"
+         y="89.388054">mml_main</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="26.090319"
+       y="62.717411"
+       id="text25960-6-6"><tspan
+         sodipodi:role="line"
+         id="tspan25958-7-2"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="26.090319"
+         y="62.717411">@hydra.main</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="28.330164"
+       y="90.627831"
+       id="text40376"><tspan
+         sodipodi:role="line"
+         id="tspan40374"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="28.330164"
+         y="90.627831" /><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="28.330164"
+         y="95.919495"
+         id="tspan43092">- (optional) continue logic</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="28.330164"
+         y="101.21115"
+         id="tspan121751">- (optional) best params logic</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="28.330164"
+         y="106.50282"
+         id="tspan135050">- intantiate scheduler</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="28.330164"
+         y="111.79448"
+         id="tspan135052">- run scheduler</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="28.330164"
+         y="117.08614"
+         id="tspan135054">- return value from run</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="215.41447"
+       y="55.399429"
+       id="text40376-3"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="55.399429"
+         id="tspan135054-1">- acquire run dir lock</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="60.691093"
+         id="tspan155753">- create MMLFileManager</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="65.982758"
+         id="tspan158755">- resolve task_list and pivot</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="71.274414"
+         id="tspan159537">- create TaskStructFactory</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="76.566078"
+         id="tspan159539">- create full schedule</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="81.857742"
+         id="tspan159541">- write &quot;scheduler_plan.txt&quot;</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="87.149399"
+         id="tspan164657">- if continue: update schedule</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="215.41447"
+         y="92.441063"
+         id="tspan202491">- run generic checks</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="216.97244"
+       y="125.68296"
+       id="text40376-3-5"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="125.68296"
+         id="tspan202491-5">- loop over schedule:</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="130.97462"
+         id="tspan240712">    - always first: prepare_exp</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="136.26628"
+         id="tspan240714">    - always last: finish_exp</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="141.55795"
+         id="tspan247760">    - seed</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="146.84961"
+         id="tspan255206">    - run command</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="152.14127"
+         id="tspan255208">    - update status_log</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="216.97244"
+         y="157.43294"
+         id="tspan265260">- return self.return_value</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="118.53159"
+       y="50.066441"
+       id="text40376-3-5-6"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.53159"
+         y="50.066441"
+         id="tspan265260-9">- should call super().__init__ first</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.53159"
+         y="55.358101"
+         id="tspan325418">- additional custom definitions</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="118.46645"
+       y="76.697884"
+       id="text40376-3-5-6-1"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="76.697884"
+         id="tspan325418-7">custom logic to define each step </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="81.989548"
+         id="tspan328529">of the schedule, extends both </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="87.281204"
+         id="tspan328531">self.command and self.params </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="92.572868"
+         id="tspan476971">with custom scheduler methods</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="97.864532"
+         id="tspan330801">based on self.subroutines and </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="103.1562"
+         id="tspan330803">potential other config options</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.46645"
+         y="108.44786"
+         id="tspan328527" /></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.168031"
+       id="rect13658-7-8-0-2-4-4"
+       width="69.106232"
+       height="26.671083"
+       x="209.87563"
+       y="174.09451" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-83)"
+       d="m 271.02691,189.18012 13.30189,0.12855 0.0123,-2.74296 13.8931,-0.004"
+       id="path230377-3-89"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="229.1188"
+       y="180.50371"
+       id="text25960-0-7-28-7-7"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="229.1188"
+         y="180.50371"
+         id="tspan149161-2-97-6-4">prepare_exp</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="217.36203"
+       y="186.99011"
+       id="text40376-3-5-4"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.36203"
+         y="186.99011"
+         id="tspan265260-8">- if continue: load old tasks</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.36203"
+         y="192.28177"
+         id="tspan271002">- else create task structs</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.36203"
+         y="197.57344"
+         id="tspan271004">- after_preparation_hook()</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.184096"
+       id="rect13658-7-8-0-2-4-4-4"
+       width="69.106232"
+       height="32.014671"
+       x="209.65045"
+       y="207.99165" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="228.89363"
+       y="214.40085"
+       id="text25960-0-7-28-7-7-9"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="228.89363"
+         y="214.40085"
+         id="tspan149161-2-97-6-4-2">finish_exp</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="217.13686"
+       y="220.88725"
+       id="text40376-3-5-4-0"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.13686"
+         y="220.88725"
+         id="tspan271004-9">- before_finishing_hook()</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.13686"
+         y="226.17891"
+         id="tspan280332">- remove intermediates</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.13686"
+         y="231.47058"
+         id="tspan280706">- delete MMLFileManager</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="217.13686"
+         y="236.76224"
+         id="tspan280708">- delete &quot;schedule_plan.txt&quot;</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.269308"
+       id="rect13658-7-8-0-2-4-4-4-3-9"
+       width="69.106232"
+       height="68.510597"
+       x="115.64649"
+       y="138.26465" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="124.30634"
+       y="144.67384"
+       id="text25960-0-7-28-7-7-9-9-0"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="124.30634"
+         y="144.67384"
+         id="tspan149161-2-97-6-4-2-4-8">custom processing step</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="118.37038"
+       y="151.16023"
+       id="text40376-3-5-4-0-8-8"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="151.16023"
+         id="tspan280708-3-6">defines a step as part of the </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="156.45189"
+         id="tspan403500">processing of this scheduler, </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="161.74356"
+         id="tspan403502">a step marks an &quot;atomic&quot; action</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="167.03522"
+         id="tspan403504">and is the finest granularity to </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="172.32687"
+         id="tspan403506">use the continue functionality, </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="177.61855"
+         id="tspan403508">except for model training, which</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="182.9102"
+         id="tspan407418">is restored on epoch granularity;</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="188.20187"
+         id="tspan407422">may use the many convenience </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="193.49353"
+         id="tspan407424">functions of the base scheduler </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="198.78519"
+         id="tspan407426">to access or create common core</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.37038"
+         y="204.07686"
+         id="tspan407428">core objects</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="312.99652"
+       y="55.191193"
+       id="text40376-3-4"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="312.99652"
+         y="55.191193"
+         id="tspan202491-1">- create various run subdirs</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="312.99652"
+         y="60.482857"
+         id="tspan227868">- scan for existing tasks data</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="312.99652"
+         y="65.774521"
+         id="tspan228398">- import path assignments</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="312.99652"
+         y="71.066177"
+         id="tspan228400">- find reusables</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.164943"
+       id="rect13658-7-8-0-2-3-7"
+       width="69.106232"
+       height="25.699821"
+       x="306.26654"
+       y="143.28697" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="318.05081"
+       y="149.76204"
+       id="text25960-0-7-28-1-2"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="318.05081"
+         y="149.76204"
+         id="tspan149161-2-97-9-7">remove_intermediates</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="314.39072"
+       y="156.10323"
+       id="text40376-3-4-2"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="314.39072"
+         y="156.10323"
+         id="tspan228400-0">based on path assignments </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="314.39072"
+         y="161.39488"
+         id="tspan319392">and reuse.clean_up config </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="314.39072"
+         y="166.68655"
+         id="tspan319394">     removes stored files</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.155269"
+       id="rect13658-7-8-0-2-3-4"
+       width="69.106232"
+       height="22.773746"
+       x="306.53745"
+       y="113.11797" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="318.32172"
+       y="119.59301"
+       id="text25960-0-7-28-1-9"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="318.32172"
+         y="119.59301"
+         id="tspan149161-2-97-9-5">construct_saving_path</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="316.77832"
+       y="126.46342"
+       id="text40376-3-4-0"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="316.77832"
+         y="126.46342"
+         id="tspan228400-1">should be used to create </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="316.77832"
+         y="131.75508"
+         id="tspan298886">       ANY path for files</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="26.614122"
+       y="69.047813"
+       id="text40376-9"><tspan
+         sodipodi:role="line"
+         id="tspan40374-1"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="26.614122"
+         y="69.047813">- loads and compiles config</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="26.614122"
+         y="74.339478"
+         id="tspan43092-2">- set logging handlers</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="26.614122"
+         y="79.631142"
+         id="tspan112635">- (optional) multirun loops</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="26.266283"
+       y="40.493839"
+       id="text40376-5"><tspan
+         sodipodi:role="line"
+         id="tspan40374-3"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="26.266283"
+         y="40.493839">- load env variables</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="26.266283"
+         y="45.7855"
+         id="tspan4259">- load mml plugins</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="26.266283"
+         y="51.077164"
+         id="tspan43092-5">- set search path for configs</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
+       d="m 76.062025,105.24647 27.107125,-0.0174 -0.21064,-62.530096 10.59278,0.101037"
+       id="path230377"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0)"
+       d="m 183.23803,49.262469 13.74602,-0.04105 -0.0231,-2.500427 9.67709,0.05504"
+       id="path230377-3"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-8)"
+       d="m 59.957564,111.01827 138.738916,0.0387 0.009,6.04007 9.57741,-0.11115"
+       id="path230377-3-9"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-2)"
+       d="m 212.08901,75.333482 -15.29378,-0.01286 0.0247,-7.380144 -10.19718,-0.06818"
+       id="path230377-3-6"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-2-6)"
+       d="m 211.70875,196.60373 -15.29378,-0.0129 -0.0342,-78.47567 -5.84992,-0.0341"
+       id="path230377-3-6-4"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-2-8)"
+       d="m 216.03797,219.6493 -15.09224,-0.0375 -0.12607,-90.8554 -10.19718,-0.0682"
+       id="path230377-3-6-8"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-2-1)"
+       d="M 269.95294,59.425636 292.1143,59.297682 292.22262,48.70259 304.2084,48.57423"
+       id="path230377-3-6-5"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-2-1-6)"
+       d="m 266.54707,225.2597 25.69751,-0.0367 -0.002,-76.86648 11.61287,0.0721"
+       id="path230377-3-6-5-3"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="303.62466"
+       y="201.88928"
+       id="text40376-3-4-2-3"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="201.88928"
+         id="tspan319394-6">- lightweight representation of a task</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="207.18094"
+         id="tspan367553">- attach persistent information either </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="212.47261"
+         id="tspan368329">   inside paths or models (these will </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="217.76427"
+         id="tspan368331">   be recovered in continue mode)</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="223.05594"
+         id="tspan368333">- created and contained in scheduler's</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="228.3476"
+         id="tspan368335">   TaskStructFactory</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="233.63925"
+         id="tspan373659">- access inside scheduler via </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="303.62466"
+         y="238.93092"
+         id="tspan376091">   self.get_struct(task_name)</tspan></text>
+    <rect
+       style="fill:#808000;fill-opacity:0.586723;stroke-width:0.136475"
+       id="rect13658-7-8-0-2-4-4-4-3-9-4"
+       width="69.106232"
+       height="17.593985"
+       x="115.53439"
+       y="212.65065" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58611px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="124.19423"
+       y="219.05984"
+       id="text25960-0-7-28-7-7-9-9-0-4"><tspan
+         sodipodi:role="line"
+         style="font-size:4.58611px;stroke-width:0.264583"
+         x="124.19423"
+         y="219.05984"
+         id="tspan149161-2-97-6-4-2-4-8-7">other processing step</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="118.25829"
+       y="225.54623"
+       id="text40376-3-5-4-0-8-8-6"><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="118.25829"
+         y="225.54623"
+         id="tspan407428-5">some different processing step...</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="143.37918"
+       y="237.07521"
+       id="text443484"><tspan
+         sodipodi:role="line"
+         id="tspan443482"
+         style="stroke-width:0.264583"
+         x="143.37918"
+         y="237.07521">...</tspan></text>
+  </g>
+</svg>
