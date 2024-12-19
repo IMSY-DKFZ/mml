@@ -1,0 +1,17 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+cbs:
+  ###
+  #  - custom cutmix callback :class:`~mml.core.data_loading.augmentations.mixup_cutmix.CutMixCallback`
+  #  - see docstring for kwargs
+  cutmix:
+    _target_: mml.core.data_loading.augmentations.mixup_cutmix.CutMixCallback
+    alpha: 0.4
+    label_smoothing: 0.0
+    minmax: null

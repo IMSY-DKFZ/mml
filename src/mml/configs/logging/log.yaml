@@ -1,0 +1,34 @@
+# @package logging
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - exp_logger: tensorboard
+  - render: colorlog
+  - notifier: none
+###
+# default: True
+#  - enables the highlight text feature of the base AbstractBaseScheduler, colouring specific parts of logs
+#  - see :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.highlight_text`
+highlight_text: True
+###
+# default: True
+#  - capture emitted python warnings and log them as well
+#  - see `logging documentation <https://docs.python.org/3/library/logging.html#logging.captureWarnings>`_
+capture_warnings: True
+###
+# default: 0
+#  - logs example images with prediction and reference to oversee training progress (once per epoch and phase)
+#  - examples will be logged only to tensorboard logger currently
+#  - see :meth:`~mml.core.models.lightning_single_frame.SingleFrameLightningModule.log_images_prediction_reference`
+samples: 0
+###
+# default: false
+#  - whether to log the epochs confusion matrix
+#  - confusion matrix will be logged only to tensorboard logger currently
+#  - see :meth:`~mml.core.models.lightning_single_frame.SingleFrameLightningModule.log_confusion_matrix`
+cm: false

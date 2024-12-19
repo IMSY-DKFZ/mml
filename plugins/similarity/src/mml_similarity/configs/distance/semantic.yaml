@@ -1,0 +1,16 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+distance:
+  name: semantic
+  # _mode will be loaded from similarity mode and ignored otherwise, no need to modify directly
+  _mode:
+    scheduler:
+      _target_: mml_similarity.scripts.semantic_scheduler.SemanticScheduler
+    subroutines:
+      - distance

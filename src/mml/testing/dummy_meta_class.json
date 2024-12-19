@@ -1,0 +1,112 @@
+{
+  "name": "dummy_task",
+  "description": "Used for testing of loading and writing task meta information.",
+  "creation_protocol": "Obsolete",
+  "reference": "Obsolete",
+  "url": "Obsolete",
+  "download": "Obsolete",
+  "license": "unknown",
+  "release": "Obsolete",
+  "task_type": "classification",
+  "keywords": [
+    "dermatoscopy",
+    "medical",
+    "tissue_pathology"
+  ],
+  "means": [
+    0.7533503770828247,
+    0.5765432715415955,
+    0.488544762134552
+  ],
+  "stds": [
+    0.2007199078798294,
+    0.19744035601615906,
+    0.20265881717205048
+  ],
+  "sizes": [
+    553,
+    577,
+    761,
+    769
+  ],
+  "modalities": {
+    "image": ".bmp; ",
+    "class": ""
+  },
+  "idx_to_class": {
+    "0": "test",
+    "1": "another",
+    "2": "random"
+  },
+  "class_occ": {
+    "test": 3,
+    "another": 4,
+    "random": 3
+  },
+  "unlabeled_samples": {},
+  "train_folds": [
+    [
+      "ID0",
+      "ID1"
+    ],
+    [
+      "ID2",
+      "ID3"
+    ],
+    [
+      "ID4",
+      "ID5"
+    ],
+    [
+      "ID6",
+      "ID7"
+    ],
+    [
+      "ID8",
+      "ID9"
+    ]
+  ],
+  "train_samples": {
+    "ID0": {
+      "image": "dummy0.bmp",
+      "class": 0
+    },
+    "ID1": {
+      "image": "dummy1.bmp",
+      "class": 1
+    },
+    "ID2": {
+      "image": "dummy2.bmp",
+      "class": 2
+    },
+    "ID3": {
+      "image": "dummy3.bmp",
+      "class": 1
+    },
+    "ID4": {
+      "image": "dummy4.bmp",
+      "class": 0
+    },
+    "ID5": {
+      "image": "dummy5.bmp",
+      "class": 2
+    },
+    "ID6": {
+      "image": "dummy6.bmp",
+      "class": 2
+    },
+    "ID7": {
+      "image": "dummy7.bmp",
+      "class": 1
+    },
+    "ID8": {
+      "image": "dummy8.bmp",
+      "class": 0
+    },
+    "ID9": {
+      "image": "dummy9.bmp",
+      "class": 1
+    }
+  },
+  "test_samples": {}
+}

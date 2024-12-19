@@ -1,0 +1,32 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+cbs:
+  ###
+  #  - enables early stopping (by default based on validation loss, but configurable)
+  #  - many kwargs may be accessed e.g. via `+cbs.early.min_delta=0.001`, only some are documented here directly
+  #  - details: https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.EarlyStopping.html#earlystopping
+  early:
+    _target_: lightning.pytorch.callbacks.EarlyStopping
+    ###
+    # default: val/loss
+    #  - the monitor parameter controls the metric that is observed and required to improve to prevent stopping
+    #  - may be set to any metric that is measured (see :doc:`metrics`), but the task name needs to be inserted (e.g. val/mml_fake_task/MulticlassAccuracy)
+    monitor: 'val/loss'
+    ###
+    # default: min
+    #  - either min or max
+    #  - if adapting the monitor parameter it is important to also give the orientation of the metric
+    #  - if "the bigger, the better" this mode should be max
+    mode: 'min'
+    ###
+    # default: 10
+    #  - controls the number of epochs awaiting improvement before training is stopped
+    #  - note that trainer.min_epochs overrules stopping too early
+    #  - if using lr_scheduler=plateau make sure EarlyStopping patience is larger than lr_scheduler.patience
+    patience: 10

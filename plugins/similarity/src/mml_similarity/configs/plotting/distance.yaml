@@ -1,0 +1,25 @@
+#@package plotting
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+distance:
+  # generic part
+  # kamada or tsne
+  kamada_kawai: True
+  legend_size: 20  # <= 0 deactivates legend  # colorization by...
+  criteria: null  # maybe either null, medical, task_type, target or domain
+  node_size: 700
+  # kamada kawai specific options
+  label_nodes: True
+  color_nodes: True
+  color_map: 'jet'  # also 'hsv'
+  plot_edges: True
+  label_edges: True
+  edge_thresh: 0.65  # 0 for no edges, -1 for all edges,
+  # tsne specific options
+  draw_centers: False
+  draw_cluster_labels: False

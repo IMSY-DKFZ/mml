@@ -1,0 +1,17 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.lr_scheduler.ExponentialLR`
+#  - exponential learning rate scheduler
+#  - see `ExponentialLR <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ExponentialLR.html>`_
+_target_: torch.optim.lr_scheduler.ExponentialLR
+###
+# default: 0.99
+#  - multiplicative factor of learning rate decay
+gamma: 0.99

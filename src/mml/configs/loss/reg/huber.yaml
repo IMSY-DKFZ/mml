@@ -1,0 +1,16 @@
+# @package loss.reg
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.nn.HuberLoss`
+#  - pytorch huber loss
+_target_: torch.nn.HuberLoss
+###
+# default: 1.0
+#  - see `pytorch docs <https://pytorch.org/docs/stable/generated/torch.nn.HuberLoss.html>`_
+delta: 1.0

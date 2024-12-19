@@ -1,0 +1,98 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /sampling: full
+  - override /lr_scheduler: none
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.TrainingScheduler`
+    #  - the train scheduler performs model training, as well as optionally testing and prediction
+    _target_: mml.core.scripts.schedulers.train_scheduler.TrainingScheduler
+  ###
+  # default: [train]
+  #  - "train" routine trains models on the target task(s)
+  #  - "predict" produces logits on test and unlabeled split that will be stored, these can be used for postprocessing
+  #  - "test" evaluates without any postprocessing
+  subroutines:
+    - train
+#    - predict  # produce logits that will be stored, these can be used for postprocessing
+#    - test  # evaluate without any postprocessing
+# training options
+  ###
+  # default: true
+  #  - whether to use cross validation
+  #  - if true will train one model for each split in the data (of the pivot task)
+  #  - predict and test routines will be performed for each split separately
+  cv: true
+  ###
+  # default: true
+  #  - whether to nest the pivot task (setting aside a fraction for testing)
+  #  - will automatically create a tagged variant for each fold (see cross validation)
+  #  - the original validation split of that fold will be excluded as test data
+  #  - the remaining train data is redistributed into same number of folds as the previous total number of splits
+  #  - nesting allows to set aside the original test data and rely on a fraction of left-out training data during the development phase
+  nested: true
+  ###
+  # default: true
+  #  - set false to avoid exploding storage usage, incompatible with usage of predict or test
+  #  - will deactivate any storing of model weights (except for the snaphots during training, see :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.create_trainer`)
+  #  - you may alternatively set `remove.parameters=true` which will only delete model weights after the scheduler terminates successfully
+  store_parameters: true
+  ###
+  # default: true
+  #  - if true selects the model state with the best validation score, otherwise uses final epoch model
+  store_best: true
+# multitask options
+  ###
+  # default: false
+  #  - whether to add additional tasks to be learned in parallel, set to false or any integer greater 1
+  #  - will add a model head for each additional task
+  #  - make sure potential additional task's TaskType is supported by the model backbone
+  multitask: false
+  ###
+  # default: random
+  #  - co tasks selection strategy, can be random, or an explicit list of co-tasks
+  #  - (potential) co-tasks must be given in the task_list!
+  co_tasks: random
+  ###
+  # default: null
+  #  - wighting of tasks in the overall loss
+  #  - if null all tasks are weighted equally, if a list of floats pivot is first and co_tasks next
+  task_weights: null
+# evaluation options
+  ###
+  # default: null
+  #  - allows to predict/test on another task than the pivot one,
+  #  - can also be a list of tasks, if so multiple predictions / tests are performed (one for each)
+  eval_on: null
+# blueprint options
+  ###
+  # default: False
+  #  - whether to use a (previously generated) blueprint to override some configurations
+  #  - blueprint must be loaded (via reuse.blueprint) and assigned to the pivot task
+  #  - see the ``suggest`` plugin for an example how to generate blueprints
+  use_blueprint: False
+  ###
+  # default: [arch,augmentations,cbs,loss,lr_scheduler,mode,optimizer,preprocessing,sampling,trainer,tta,tune]
+  #  - these pipeline keys will be for one stored as a documentation of the training pipeline
+  #  - on the other hand if using a blueprint, only these keys will be loaded to override the given sections
+  pipeline_keys:
+    - 'arch'
+    - 'augmentations'
+    - 'cbs'
+    - 'loss'
+    - 'lr_scheduler'
+    - 'mode'
+    - 'optimizer'
+    - 'preprocessing'
+    - 'sampling'
+    - 'trainer'
+    - 'tta'
+    - 'tune'

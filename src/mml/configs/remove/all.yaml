@@ -1,0 +1,42 @@
+# @package remove
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# this is the "remove" functionality, remove files created according to keys after a successful mml run
+
+###
+# default: True
+#  - backup files
+backup: True
+###
+# default: True
+#  - training pipeline blueprints
+blueprint: True
+###
+# default: True
+#  - model storage
+models: True
+###
+# default: True
+#  - model weights
+parameters: True
+###
+# default: True
+#  - training pipeline
+pipeline: True
+###
+# default: True
+#  - model predictions
+predictions: True
+###
+# default: True
+#  - grid of example images as produced by the info mode
+sample_grid: True
+###
+# default: True
+#  - example images as produced by the info mode
+img_examples: True

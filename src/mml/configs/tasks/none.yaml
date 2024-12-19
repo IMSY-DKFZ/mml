@@ -1,0 +1,47 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# Convenience config for no tasks, e.g. useful for info mode upon some hpo study.
+
+
+###
+# default: []
+#  - the task list determines which :class:`~mml.core.data_loading.task_struct.TaskStruct` are available in the scheduler
+#  - must be provided straight as "task_list=[task_1,task_2,...]" -> do NOT call "tasks.task_list=..."
+task_list: [ ]
+
+pivot:
+  ###
+  # default: False
+  #  - the pivot task is a special highlighted task
+  #  - it will be added to the list of available tasks automatically
+  #  - must be provided straight as "pivot.name=task_1" -> do NOT call "tasks.pivot.name=..."
+  name: False
+  ###
+  # default: ''
+  #  - allows to attach (multiple) tags to the pivot task
+  #  - use as '+TAG_1?PAR_1?PAR_2+TAG_2+TAG_3?PAR_3' (+ separates tags and ? allows to provide parameters to tags)
+  #  - will be attached to the pivot task automatically
+  #  - must be provided straight as "pivot.tags=+tag_1+tag_2" -> do NOT call "tasks.pivot.tags=..."
+  tags: ''
+
+tagging:
+  ###
+  # default: ''
+  #  - convenience methods for tagging all tasks at once
+  #  - usage is identical to pivot.tags
+  #  - if a pivot task is provided make sure to have adapted pivot.name or pivot.tags identical
+  #  - must be provided straight as "tagging.all=+tag_1+tag_2" -> do NOT call "tasks.tagging.all=..."
+  all: False
+  ###
+  # default: []
+  #  - creates variants for all tasks, so multiple differently tagged versions of each task
+  #  - will result in n_tasks * n_tags tasks to be present
+  #  - use '+identity' to keep an unmodified variant
+  #  - must be provided straight as "tagging.variants=[+tag_1,+tag_2]" -> do NOT call "tasks.tagging.variants=..."
+  variants: [ ]

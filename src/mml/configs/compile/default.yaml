@@ -1,0 +1,19 @@
+# @package compile
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: False
+#  - enables torch.compile on the model returned by base schedulers :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.create_model`
+#  - some recommendations can be found here https://lightning.ai/docs/fabric/2.4.0/advanced/compile.html
+enable: False
+###
+#  - the kwargs passed to https://pytorch.org/docs/main/generated/torch.compile.html#torch-compile
+kwargs:
+  ###
+  # default: reduce-overhead
+  mode: reduce-overhead

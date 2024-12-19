@@ -1,0 +1,27 @@
+# package logging.exp_logger
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~lightning.pytorch.loggers.tensorboard.TensorBoardLogger`
+#  - see `lighnting docs <https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.loggers.tensorboard.html>`_
+_target_: lightning.pytorch.loggers.tensorboard.TensorBoardLogger
+###
+# default: ${proj_path}/tensorboard
+#  - the directory to store the logs in (${proj_path} will be replaced by hydra
+save_dir: ${proj_path}/tensorboard
+###
+# default: ${now:%Y-%m-%d}/${now:%H-%M-%S}
+#  - the experiment sub-directory
+#  - will be interpolated by hydra to current time
+name: ${now:%Y-%m-%d}/${now:%H-%M-%S}
+###
+# default: None (literally)
+#  - to be specified during runtime
+#  - this will be the :attr:`~mml.core.scripts.schedulers.base_scheduler.BaseScheduler.active_step_naming` of the scheduler
+#  - see :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.create_trainer` for more on this
+version: None

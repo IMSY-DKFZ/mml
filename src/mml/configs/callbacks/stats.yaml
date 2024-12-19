@@ -1,0 +1,19 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+cbs:
+  ###
+  #  - collects statistics on the device
+  #  - details: https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.DeviceStatsMonitor.html#devicestatsmonitor
+  stats:
+    _target_: lightning.pytorch.callbacks.DeviceStatsMonitor
+#  throughput is not yet fully supported and tested, it will need to set batch_size_fn in create_trainer as well as
+#  some flops_per_batch estimate in the lightning module
+#  throughput:
+#    _target_: lightning.pytorch.callbacks.ThroughputMonitor
+#    batch_size_fn: null

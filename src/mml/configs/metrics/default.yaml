@@ -1,0 +1,19 @@
+# @package metrics
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - cls: default
+  - mlcls: default
+  - seg: default
+  - reg: default
+
+###
+# default: 20
+#  - allows to use bootstrapping upon metrics for testing phase
+#  - see `torchmetrics docs <https://lightning.ai/docs/torchmetrics/stable/wrappers/bootstrapper.html>`_
+bootstrap: 20

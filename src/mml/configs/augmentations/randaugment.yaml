@@ -1,0 +1,20 @@
+# @package augmentations
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+normalization: imagenet  # image_net mean and std values are used
+cpu:
+  backend: albumentations
+  pipeline:
+    # the randaugment transform can also be composed with other transforms in a pipeline
+    - name: RandAugment
+      number: 2
+      magnitude: 6
+      mode: all
+      p: 0.5
+      cut_out: False
+gpu: { }

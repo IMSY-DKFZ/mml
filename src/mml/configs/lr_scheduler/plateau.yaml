@@ -1,0 +1,29 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.lr_scheduler.ReduceLROnPlateau`
+#  - reduce on plateau learning rate scheduler
+#  - see `ReduceLROnPlateau <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.ReduceLROnPlateau.html>`_
+_target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+###
+# default: min
+#  - direction of improvement (min for loss)
+mode: min
+###
+# default: 0.1
+#  - reduction factor if triggered by plateau
+factor: 0.1
+###
+# default: 5
+#  - number of epochs to wait for improvement before triggering a reduction
+patience: 5
+###
+# default: 0.0001
+#  - improvement threshold to determine if an improvement happened
+threshold: 0.0001

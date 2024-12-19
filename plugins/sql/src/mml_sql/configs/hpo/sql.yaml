@@ -1,0 +1,42 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# example hyperparameter optimization with optuna and mysql backend:
+# mml train proj=test hpo=sql hpo/sampler=grid --multirun
+
+defaults:
+  - sampler: tpe
+  # necessary to avoid an interpolation error during config composition
+  - /search_space@hydra.sweeper.params: none
+  - _self_
+  # override sweeper to Optuna!
+  - override /hydra/sweeper: optuna
+
+# basic optuna setup
+hpo:
+  storage: mysql://${oc.env:MML_MYSQL_USER}:${oc.env:MML_MYSQL_PW}@${oc.env:MML_HOSTNAME_OF_MYSQL_HOST}:${oc.env:MML_MYSQL_PORT}/${oc.env:MML_MYSQL_DATABASE}
+  direction: minimize  # this is the default setting expected by MML, all optimized metrics should be inverted if necessary to ensure this!
+  pruning: false  # activate by default as soon as available, see (#19)
+  trials: 100
+
+hydra:
+  # here we define Optuna hyperparameter search
+  # it optimizes for value returned from function with @hydra.main decorator
+  # learn more here: https://hydra.cc/docs/next/plugins/optuna_sweeper
+  sweeper:
+    _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+    # use the following line to make HPO deterministic, make sure to start jobs with different seed
+    # sampler.seed: ${seed}
+    study_name: ${proj}_${now:%Y-%m-%d_%H-%M-%S}
+    storage: ${hpo.storage}
+    n_jobs: 1  # jobs in parallel, as long as no parallel launcher is used make sure to proceed as in the README:.md
+    # 'minimize' or 'maximize' the objective
+    direction: ${hpo.direction}
+    # number of experiments that will be executed in a row by a single job (to parallelize see the README.md)
+    n_trials: ${hpo.trials}
+    params: ${search_space}

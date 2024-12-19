@@ -1,0 +1,61 @@
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+addopts = "-p pytest_cov --cov --cov-config=tox.ini --cov-append --strict-markers --junitxml=unit_test_report.xml --benchmark-skip"
+testpaths = [
+    "tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "gpu: marks tests as requiring a gpu to run",
+    "env: marks test that require the correct underlying mml.env file",
+    "plugin: marks tests that require the loading of plugins",
+    "serial",
+]
+
+filterwarnings = [
+    # note the use of single quote below to denote "raw" strings in TOML
+    'ignore:MMLFilemanager was not created by BaseScheduler:UserWarning',  # often we mock the filemanager
+    'ignore:.*not yet preprocessed. Pipeline contains.*:UserWarning',  # warning of non-preprocessed data
+    'ignore:.*does not have many workers.*:UserWarning',  # warning for low number of workers
+    'ignore:The number of training batches:UserWarning',  # warning for low number of batches
+    'ignore:THIS BEHAVIOUR CHANGED:UserWarning',  # warning for mml behaviour changes
+]
+
+[tool.isort]
+src_paths = ["src", "tests"]
+profile = "black"
+line_length = 120
+
+[tool.mypy]
+mypy_path = "src"
+check_untyped_defs = true
+disallow_any_generics = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+no_implicit_reexport = true
+disallow_untyped_defs = true
+warn_unused_ignores = true
+allow_redefinition = true
+warn_no_return = true
+
+[tool.ruff]
+# Set the maximum line length
+line-length = 120

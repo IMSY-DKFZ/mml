@@ -1,0 +1,20 @@
+# @package reuse
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# convenience version of reuse, when loading everything from the current project
+
+# this is the "reuse" functionality, load path/model attributes from previous runs or even other projects
+
+###
+# default: ${proj}
+#  - loads blueprints from current project
+blueprint: ${proj}
+###
+# default: ${proj}
+#  - loads models from current project
+models: ${proj}

@@ -1,0 +1,33 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+distance:
+  name: fed
+  fim:
+    samples: 600
+    empirical: False
+    ignore_bias: True
+    ignore_downsample: True
+    ignore_bn: False   # added recently, defaults to previous behaviour
+    average_filters: True
+    final_fraction: 0.6
+    nngeom: true
+  metric: cosine  # cosine, euclidean, jensenshannon
+  prefix: ''
+  # _mode will be loaded from similarity mode and ignored otherwise, no need to modify directly
+  _mode:
+    scheduler:
+      _target_: mml_similarity.scripts.fed_scheduler.FEDScheduler
+    subroutines:
+      - tune
+      - fim
+      - distance
+trainer:
+  min_epochs: 1
+  max_epochs: 1
+  check_val_every_n_epoch: 5

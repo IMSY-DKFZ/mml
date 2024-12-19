@@ -1,0 +1,15 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# note that some callbacks (e.g. checkpointing) are handled by MML internally, no need to add those here
+cbs:
+  ###
+  #  - logs information on learning rate
+  #  - details: https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.LearningRateMonitor.html#learningratemonitor
+  lrm:
+    _target_: lightning.pytorch.callbacks.LearningRateMonitor

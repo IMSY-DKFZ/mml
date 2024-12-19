@@ -1,0 +1,20 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+distance:
+  name: fid
+  eps: 1e-6
+  # _mode will be loaded from similarity mode and ignored otherwise, no need to modify directly
+  _mode:
+    scheduler:
+      _target_: mml_similarity.scripts.sample_based_scheduler.SampleBasedScheduler
+    subroutines:
+      - feature
+      - distance
+arch:
+  pretrained: True

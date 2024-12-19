@@ -1,0 +1,25 @@
+# @package preprocessing
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# specifies the pipeline to preprocess RGB images (e.g. scaling)
+# the only preprocessing backend currently supported is albumentations
+id: default  # this id must match the file name!
+###
+# default: pipeline consists of
+#  - SmallestMaxSize(max_size=256)
+#  - PadIfNeeded(min_height=288,min_width=288)
+#  - Resize(height=256,width=256)
+pipeline:
+  - name: SmallestMaxSize
+    max_size: 256
+  - name: PadIfNeeded
+    min_height: 288
+    min_width: 288
+  - name: Resize
+    height: 256
+    width: 256

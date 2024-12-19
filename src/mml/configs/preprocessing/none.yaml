@@ -1,0 +1,14 @@
+# @package preprocessing
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# this special pp represents no pp and should be left untouched
+id: none  # this id must match the file name!
+###
+# default: {}
+#  - an empty pipeline to neglect any preprocessing
+pipeline: { }

@@ -1,0 +1,32 @@
+# @package tune
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# use lightning tuner to find learning rate and/or maximal batch size
+# see https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.tuner.tuning.Tuner.html
+
+
+###
+# default: true
+#  - activate the learning rate tuning
+#  - happens before the actual fitting procedure through :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.lightning_tune`
+lr: true
+###
+# default: false
+#  - activate the batch size tuning
+#  - happens before the actual fitting procedure through :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.lightning_tune`
+bs: false
+###
+# default: {}
+#  - any additional kwargs to the learning rate finder
+#  - see `lr_find <https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.tuner.tuning.Tuner.html#lightning.pytorch.tuner.tuning.Tuner.lr_find>`_
+lr_kwargs: {}
+###
+# default: {}
+#  - any additional kwargs to the batch size finder
+#  - see `scale_batch_size <https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.tuner.tuning.Tuner.html#lightning.pytorch.tuner.tuning.Tuner.scale_batch_size>`_
+bs_kwargs: {}

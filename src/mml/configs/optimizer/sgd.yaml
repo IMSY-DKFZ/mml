@@ -1,0 +1,30 @@
+#@package optimizer
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.SGD`
+#  - stochastic gradient descent optimizer
+#  - see `SGD <https://pytorch.org/docs/stable/generated/torch.optim.SGD.html>`_
+_target_: torch.optim.SGD
+###
+# default: 0.0005
+#  - the initial learning rate
+lr: 0.0005
+###
+# default: 0
+#  - momentum factor
+momentum: 0
+###
+# default: 0
+#  - L2 penalty
+weight_decay: 0
+###
+# default: 0
+#  - dampening for momentum
+dampening: 0
+_convert_: "partial"

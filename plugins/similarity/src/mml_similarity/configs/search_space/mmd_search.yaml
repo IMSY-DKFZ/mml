@@ -1,0 +1,13 @@
+# @package search_space
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# define range of hyperparameters for mmd computation
+sampling.sample_num: range(5000,15000)
+sampling.balanced: choice(true, false)
+distance.kernel: choice("cauchy", "energy", "gaussian", "laplacian")
+distance.blur: interval(0.0, 1.0)

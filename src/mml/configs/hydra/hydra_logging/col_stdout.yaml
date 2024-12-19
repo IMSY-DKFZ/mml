@@ -1,0 +1,24 @@
+# @package hydra.hydra_logging
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# python logging configuration for tasks
+version: 1
+formatters:
+  colorlog:
+    '()': 'colorlog.ColoredFormatter'
+    format: "[%(cyan)s%(asctime)s%(reset)s][%(purple)sHYDRA%(reset)s] %(message)s"
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: colorlog
+    stream: ext://sys.stdout
+root:
+  level: INFO
+  handlers: [ console ]
+
+disable_existing_loggers: false

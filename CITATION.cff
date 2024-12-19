@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: Medical Meta Learner
+message: If you use the mml framework, please also consider citing our corresponding publications.
+type: software
+authors:
+  - given-names: Patrick
+    family-names: Godau
+    email: patrick.godau@dkfz-heidelberg.de
+    affiliation: German Cancer Research Center (DKFZ)
+    orcid: 'https://orcid.org/0000-0002-0365-7265'
+identifiers:
+  - type: doi
+    value: 10.1007/978-3-030-87202-1_42
+    description: Task fingerprinting
+repository-code: "https://github.com/IMSY-DKFZ/mml"
+url: 'https://fill-in-the-documentation.de'
+abstract: >-
+  Code for generating task fingerprints, working with
+  various heterogeneous datasets and integration of timm,
+  pytorch lightning and hydra libraries.
+keywords:
+  - Meta Learning
+  - task fingerprinting
+license: MIT
+version: 1.0.0
+date-released: '2024-12-19'

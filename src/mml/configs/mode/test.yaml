@@ -1,0 +1,19 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# convenience config entry to call train scheduler with test subroutine
+defaults:
+  - /mode@_global_: train
+  - _self_
+
+mode:
+  ###
+  # default: [test]
+  #  - "test" routine tests the loaded model on the test split of a task
+  subroutines:
+    - test

@@ -1,0 +1,16 @@
+# @package logging.notifier
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+dummy:
+  ###
+  # default: :class:`~mml.core.scripts.notifier.DummyNotifier`
+  #  - a notifier that does not emit any message
+  _target_: mml.core.scripts.notifier.DummyNotifier
+  on_start: False
+  on_end: False
+  on_failure: False

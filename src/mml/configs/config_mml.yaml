@@ -1,0 +1,92 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# This is the default main mml config file. You may create your personal alterations and set as default outside of this
+# repository via the `copy-conf` functionality (see docs, or ``mml.cli.py``).
+
+# specify here default training configuration
+defaults:
+  - _self_
+  - sys: local
+  - tasks: none
+  - arch: timm
+  - optimizer: adam
+  - lr_scheduler: none
+  - loss: default
+  - metrics: default
+  - callbacks: default
+  - trainer: default_trainer
+  - reuse: none
+  - remove: none
+  - preprocessing: default
+  - augmentations: default
+  - logging: log
+  - sampling: full
+  - search_space: none
+  - hpo: default
+  - tune: default
+  - compile: default
+  - loaders: default
+  - tta: none
+  - mode: info  # is done very last to allow overriding above defaults
+  - override hydra/hydra_logging: col_stdout
+  - override hydra/help: mml_help
+
+###
+# default: default
+#  - the project name, this will be used as a top-level folder name in the results directory
+#  - it is recommended to separate independent experiments to different projects
+#  - the reuse functionality allows cross-project reusability
+proj: default
+proj_path: ${out_dir}/${proj}
+###
+# default: 42
+#  - integer to seed the builtin random module, numpy and torch randomness through lightning.seed_everything
+#  - will be applied before every scheduler step (so potentially multiple times per mml call)
+#  - seeding of dataloader workers is taken care of by lightning
+#  - set to False or 0 if random seeding is desired, this reduces reproducibility
+seed: 42
+###
+# default: True
+#  - whether to allow gpu usage outside lightning training, e.g. for task creation or feature extraction
+#  - for all lightning related accelerator settings see :doc:`trainer`
+allow_gpu: True
+###
+# default: False
+#  - the continue flag allows to resume aborted / interrupted mml experiments
+#  - it will skip already completed commands in the scheduler and load the latest checkpoint of any model training
+#  - either set to 'latest' or specify a run directory by date and time
+#  - note that activating this will ignore all currently given CLI options (except the proj) and load the original config
+continue: False
+###
+# default: False
+#  - automatically load the best parameters of a previous hpo study, overwriting the currently specified values
+#  - supports two kinds of usages, a minimal but restricted way without persistent storage
+#  - provide the hpo identifier in the project of format %Y-%m-%d_%H-%M-%S_%f (e.g. 2024-12-03_12-28-46_362374)
+#  - this only works for studies that did not fail, the required summary is only generated at the end of the sweep
+#  - also requires to set the current proj to the respective one that conducted the hpo search
+#  - alternative set to study_name, requires a preserving hpo.storage (e.g. see mml-sql) to load the optuna.Study
+#  - this also works for partly failed / interrupted AND cross project studies
+use_best_params: False
+
+hydra:
+  # output paths for hydra logs
+  run:
+    dir: ${proj_path}/runs/${now:%Y-%m-%d}/${now:%H-%M-%S-%f}
+  sweep:
+    dir: ${proj_path}/hpo/${now:%Y-%m-%d_%H-%M-%S_%f}
+    subdir: ${hydra.job.num}
+  job:
+    name: ${proj}
+    chdir: true
+    # environment variables that are universal for all users
+    # for system specific variables (like data paths) use mml.env file!
+    env_set:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENCV_FFMPEG_THREADS: '1'

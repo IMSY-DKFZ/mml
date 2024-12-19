@@ -1,0 +1,27 @@
+# @package loss
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - cls: ce
+  - mlcls: bce
+  - seg: dice
+  - reg: huber
+
+###
+# default: true
+#  - automatically activates class weighing in case balanced sampling is turned off
+#  - see :meth:`~mml.core.models.lightning_single_frame.SingleFrameLightningModule.get_criteria`
+auto_activate_weighing: true
+###
+# default: null
+#  - provide weight option to loss criterion directly
+#  - incompatible with `sampling.balanced` and `loss.auto_activate_weighing`
+#  - see :meth:`~mml.core.models.lightning_single_frame.SingleFrameLightningModule.get_criteria`
+#
+class_weights: null
+# future options include a weighing schedule of tasks

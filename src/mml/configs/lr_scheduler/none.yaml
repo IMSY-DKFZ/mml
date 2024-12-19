@@ -1,0 +1,12 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: null
+#  - pseudo target to be caught within code and not to be instantiated
+_target_: null
