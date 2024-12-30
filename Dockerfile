@@ -26,7 +26,7 @@ WORKDIR /mml
 COPY plugins/ plugins/
 COPY src/ src/
 COPY tests/ tests/
-COPY MANIFEST.in pyproject.toml README.md setup.cfg tox.ini ./
+COPY MANIFEST.in pyproject.toml README.md setup.cfg ./
 
 # Install mml (insert your extras like e.g. "[dev, docs]" here)
 ENV EXTRAS=""
