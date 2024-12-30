@@ -1,0 +1,113 @@
+# This workflow will perform the full test & lint suite for mml-core with a multiple versions of Python and os
+
+name: mml full CI
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  test_and_coverage:
+    name: Test and lint
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.10"]
+      fail-fast: true
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: setup.cfg
+
+    - name: Install all dependencies
+      run: pip install .[dev]
+
+    - name: Run PyTest
+      run: pytest --cov-report=xml
+
+    - name: Upload coverage reports to Codecov
+      if: matrix.operating-system == 'ubuntu-latest' && matrix.python-version == '3.10'
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+  formatting_and_linting:
+    name: Check code formatting with ruff and pylint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: 'pip'
+        cache-dependency-path: setup.cfg
+
+    - name: Install all requirements
+      run: |
+        pip install ruff
+        pip install pylint pylint-exit anybadge
+
+    - name: Run checks
+      run: ruff check
+    - name: Run Pylint
+      run: |
+        mkdir ./pylint
+        pylint --output-format=text --max-line-length 120 src/mml | tee ./pylint/pylint.log || pylint-exit $?
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' ./pylint/pylint.log)
+        anybadge --label=Pylint --file=pylint/pylint.svg --value=$PYLINT_SCORE 2=red 4=orange 8=yellow 10=green
+        echo "Pylint score is $PYLINT_SCORE"
+
+  build_docker:
+    name: Test docker build 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        id: build
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: "test"
+
+  test_plugins:
+    name: Test mml plugins
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+    - name: Install mml-core
+      run: pip install .[dev]
+    - name: Iterate over plugins
+      run: |
+        cd plugins
+        while IFS='' read -r LINE || [ -n "${LINE}" ]; do
+          echo "Testing plugin: ${LINE}"
+          cd ${LINE}
+          pip install .
+          pytest
+          echo "Done testing plugin ${LINE}"
+          cd ..
+        done < index.txt
+        echo "Tested all plugins from plugins/index.txt"
+
+    
