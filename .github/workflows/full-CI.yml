@@ -31,7 +31,7 @@ jobs:
 
     - name: Run PyTest
       run: |
-        pytest --benchmark-enable
+        pytest --benchmark-enable -vvv
         coverage report
         coverage xml
 
@@ -115,7 +115,7 @@ jobs:
           echo "Testing plugin: ${LINE}"
           cd ${LINE}
           pip install .
-          pytest
+          pytest -vvv
           echo "Done testing plugin ${LINE}"
           cd ..
         done < index.txt
