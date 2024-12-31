@@ -1,0 +1,16 @@
+# @package search_space
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# define range of hyperparameters for fed computation
+sampling.sample_num: int(interval(5000, 15000))
+sampling.balanced: choice(true, false)
+distance.fim.samples: int(interval(500, 2000))
+distance.fim.ignore_bias: choice(true, false)
+distance.fim.ignore_downsample: choice(true, false)
+distance.fim.average_filters: choice(true, false)
+distance.fim.final_fraction: interval(0.2, 1.0)

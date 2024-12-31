@@ -1,0 +1,51 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# train task set for PAMI 2022
+
+task_list:
+  - 'lapgyn4_anatomical_structures'
+  - 'lapgyn4_surgical_actions'
+  - 'lapgyn4_instrument_count'
+  - 'lapgyn4_anatomical_actions'
+  #  - 'sklin2_skin_lesions'  # too few samples
+  #  - 'identify_nbi_infframes'  # too few samples
+  - 'laryngeal_tissues'
+  - 'nerthus_bowel_cleansing_quality'
+  - 'stanford_dogs_image_categorization'
+  - 'svhn'
+  - 'caltech101_object_classification'
+  - 'caltech256_object_classification'
+  - 'cifar10_object_classification'
+  - 'cifar100_object_classification'
+  - 'mnist_digit_classification'
+  - 'emnist_digit_classification'
+  - 'hyperkvasir_anatomical-landmarks'
+  - 'hyperkvasir_pathological-findings'
+  - 'hyperkvasir_quality-of-mucosal-views'
+  - 'hyperkvasir_therapeutic-interventions'
+  - 'cholec80_grasper_presence'
+  - 'cholec80_bipolar_presence'
+  - 'cholec80_hook_presence'
+  - 'cholec80_scissors_presence'
+  - 'cholec80_clipper_presence'
+  - 'cholec80_irrigator_presence'
+  - 'cholec80_specimenbag_presence'
+#  - 'derm7pt_skin_lesions'  # too few samples
+
+pivot:
+  name: False
+  tags: ''
+
+tagging:
+  all: False
+  variants:
+    - '+identity'
+    - '+subset?0_75'
+    - '+subset?0_50'
+    - '+subset?0_15'

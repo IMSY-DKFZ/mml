@@ -1,0 +1,41 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+
+# list your desired tasks here, use the name specified during task creation to reference it
+# you may add "tags" to tasks e.g. "task_alias_one+subset?0_05+confuse?0_1" shrinks the task to 5 percent of
+# training samples and afterward replaces 10 percent of the labels by random assignments
+
+# Available tags are:
+# identity -> does not change task, not necessary to be added for individual tasks, only necessary for tagging.variants
+# nested -> nests the task, shifting validation split to test data and re-distributing the remaining splits into train+val
+# (these tags are more for internal use, it is straightforward to implement additional tags, see the "mml-tags" plugin)
+
+# Note: keywords are separated with a '+' and following args are separated by a '?'. Any task name may never
+# incorporate a ' '. A tagged task thus generally looks like task_alias+tag1?value1?value2+tag2+tag3?value1fortag3...
+
+task_list:
+  - 'abc'
+  - '123'
+  - 'foo'
+
+# a pivot task is one of the tasks provided above (or False for no task) and has a special role in some schedules
+# the pivot task may be modified via keywords directly, this will automatically replace one non-modified version in
+# the tasklist above
+pivot:
+  name: False
+  tags: '+confuse?0_1'
+
+# convenience methods for tagging all tasks at once (all) or/and create variants (variants) so multiple differently
+# tagged versions of each task, use '+identity' to keep an unmodified variant
+tagging:
+  all: '+subset?0_05+confuse?0_1'
+  variants:
+    - '+identity'
+    - '+subset?0_05'
+    - '+confuse?0_1'

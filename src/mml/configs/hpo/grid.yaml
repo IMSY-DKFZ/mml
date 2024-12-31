@@ -1,0 +1,18 @@
+# @package hpo
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+#  - this config corresponds to the default multirun variant of hydra
+#  - use colons to provide multiple values via CLI (the search_space config is not used!)
+#  - will sequentially run one exp for each possible combination of config values (using the colon syntax)
+#  - example: ``mml train tasks=fake proj=test hpo=grid optimizer.lr=0.001,0.01 --multirun``
+#  - more details can be found in `hydra's multi-run documentation <https://hydra.cc/docs/tutorials/basic/running_your_app/multi-run/>`_
+storage: null
+direction: null
+pruning: null
+trials: null

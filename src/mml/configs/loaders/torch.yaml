@@ -1,0 +1,18 @@
+# @package loaders
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - /loaders: default
+  - _self_
+
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.PureTorchvisionImageLoader`
+#  - determines how the image modality is loaded
+#  - tries to use torchvision for image loading
+image:
+  _target_: mml.core.data_loading.modality_loaders.PureTorchvisionImageLoader

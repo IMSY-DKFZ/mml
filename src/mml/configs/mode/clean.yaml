@@ -1,0 +1,32 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /preprocessing: none
+
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.CleanScheduler`
+    #  - the clean scheduler assists in getting rid of file artifacts, reducing disk usage by mml
+    _target_: mml.core.scripts.schedulers.clean_scheduler.CleanScheduler
+  ###
+  # default: [temp,download]
+  #  - "temp" routine removes temporary files that may remain as artefacts during task creation
+  #  - "download" routine removes the downloads of a dataset
+  subroutines:
+    - temp
+    - download
+  ###
+  # default: false
+  #  - if true won't ask for confirmation to delete files
+  force: False
+  ###
+  # default: false
+  #  - if false only cares for tasks in task_list, otherwise all installed tasks will be considered
+  all: False

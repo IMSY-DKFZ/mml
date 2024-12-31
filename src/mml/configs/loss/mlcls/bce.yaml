@@ -1,0 +1,12 @@
+# @package loss.mlcls
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.nn.BCEWithLogitsLoss`
+#  - pytorch binary cross entropy loss
+_target_: torch.nn.BCEWithLogitsLoss

@@ -1,0 +1,41 @@
+# @package sampling
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: 0
+#  - number of samples per epoch
+#  - if 0 will use len(dataset) samples (even if balanced sampling is active)
+sample_num: 0
+###
+# default: false
+#  - if true will try to sample equally from each (target) class
+#  - if false samples randomly over the split
+#  - unbalanced sampling might activate weights in loss criterion, see loss.auto_activate_weighing
+balanced: false
+###
+# default: 300
+#  - number of samples used in one forward+backward pass
+#  - batch size will be overwritten if you activate tune.bs to automatically tune the batch size
+batch_size: 300
+###
+# default: false
+#  - whether the final (incomplete) batch will be dropped at the end of the epoch
+#  - directly passed to `DataLoader <https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader>`_
+drop_last: False
+###
+# default: false
+#  - if true activates a caching mechanism which trades in RAM usage for less disk access
+#  - only works for already preprocessed datasets!
+enable_caching: False
+###
+# default: 10000
+#  - sets a max_size of cache (in terms of images), cache will be disabled if more images are in the datasets loaded
+#  - avoid exploding RAM by keeping low or downsize images during preprocess
+#  - from experience increasing above 10000 does not yield any more benefits, but this may be very case dependent
+#  - for full optimization consider experimenting with num_workers entry of the config
+cache_max_size: 10000

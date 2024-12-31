@@ -1,0 +1,24 @@
+# @package arch
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+_target_: mml.core.models.timm.TimmGenericModel
+###
+# default: resnet34
+#  - the identifier of the model architecture in the timm library - to be passed to timm.create_model(model_name=...)
+#  - full list of models can be found here: https://huggingface.co/docs/timm/models
+#  - also note the timm.list_models() option (https://huggingface.co/docs/timm/reference/models#timm.list_models)
+name: resnet34
+###
+# default: true
+#  - boolean to indicate whether the model should be initialized with pretraiend weights (timm.create_model(pretrained=...)
+#  - results files for pretrained weights: https://github.com/huggingface/pytorch-image-models/tree/main/results
+pretrained: true
+###
+# default: 0.
+#  - dropout rate, set to some value within [0, 1), will be used to initialize a torch.nn.Dropout layer at the beginning of each classifier head
+drop_rate: 0.

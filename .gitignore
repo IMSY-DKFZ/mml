@@ -1,0 +1,29 @@
+# local settings e.g. regarding paths, also contains tokens
+src/mml/mml.env
+# any potential virtual environment
+venv/
+# intelliJ data
+.idea/*
+# dev install files
+src/mml_core.egg-info/
+plugins/*/src/*.egg-info
+# cache files
+/**/__pycache__/
+/**/.pytest_cache/
+/**/.mypy_cache/
+/**/.coverage
+# space to summarize your experiments
+/notebooks/
+# report files
+/unit_test_report.xml
+/coverage_report.xml
+# locally generated tox files
+/.tox/
+# locally generated documentation
+/docs/build/
+# pytest benchmark files
+.benchmarks
+# potential test builds
+/build/
+#Visual Studio Code configuration Files
+.vscode

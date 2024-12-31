@@ -1,0 +1,11 @@
+# @package augmentations
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+normalization: imagenet  # still uses IMAGENET normalization, use no_norm to deactivate even that
+cpu: { }
+gpu: { }

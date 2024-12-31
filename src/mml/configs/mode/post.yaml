@@ -1,0 +1,59 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# post-processing routine
+defaults:
+  - override /preprocessing: none
+
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.PostprocessScheduler`
+    #  - the post scheduler postprocesses mml models by calibration and ensembling
+    _target_: mml.core.scripts.schedulers.postprocess_scheduler.PostprocessScheduler
+  ###
+  # default: [calibrate,ensemble]
+  #  - "calibrate" routine calibrates model predictions
+  #  - "ensemble" routine ensembles (calibrated) predictions
+  subroutines:
+    - calibrate
+    - ensemble
+  # calibration parameters
+  ###
+  # default: val
+  #  - which prior to use for calibration
+  #  - either test, val (based on respective splits), quantify (infers on unlabeled) or a list [p0, p1, ...]
+  #  - if test or val the TRUE underlying priors of these datasplits are used
+  #  - quantify uses `Adjusted Classify & Count <https://link.springer.com/article/10.1007/s10618-008-0097-y>`_ on the unlabeled split
+  #  - if a list of floats these will be used directly
+  prior: val
+  # ensemble parameters
+  ###
+  # default: 0.5
+  #  - use this much of test data to select ensemble, remaining will be used as estimated performance
+  eval_frac: 0.5
+  ###
+  # default: 1000
+  #  - how many ensemble candidates shall be tested
+  budget: 1000
+  ###
+  # default: 10
+  #  - how many weight variations shall be tested, set to zero to weigh all ensemble member equal
+  weights_budget: 10
+  ###
+  # default: 5
+  #  - largest possible ensemble to test (up to this many base model are ensembled)
+  max_ensemble_size: 5
+  ###
+  # default: 0.3
+  #  - between 0 and 1, determines search order, larger means more random combinations to be tested
+  temperature: 0.3
+  ###
+  # default: 0.5
+  #  - between 0 and 1, determines deviation of weights to be inspected, larger means higher
+  weights_temperature:  0.5

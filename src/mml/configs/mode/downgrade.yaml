@@ -1,0 +1,19 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# convenience config entry to call upgrade scheduler with downgrade subroutine
+defaults:
+  - /mode@_global_: upgrade
+  - _self_
+
+mode:
+  ###
+  # default: [downgrade]
+  #  - "downgrade" undoes a compatibility upgrade back to `mode.version`
+  subroutines:
+    - downgrade

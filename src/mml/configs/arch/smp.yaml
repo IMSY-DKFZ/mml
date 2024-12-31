@@ -1,0 +1,25 @@
+# @package arch
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+_target_: mml.core.models.smp.SMPGenericModel
+###
+# default: unet
+#  - segmentation architecture, passed to smp.create_model(arch=...)
+#  - options are [unet, unetplusplus, manet, linknet, fpn, pspnet, deeplabv3, deeplapv3plus, pan]
+arch: unet
+###
+# default: tu-resnet34
+#  - the encoder backbone to use, passed to smp.create_model(encoder_name=...)
+#  - for a full list of supported backbones, see https://smp.readthedocs.io/en/latest/encoders.html
+#  - the <<tu->> prefix automatically tries to use a timm encoder, see https://smp.readthedocs.io/en/latest/encoders_timm.html
+encoder: tu-resnet34
+###
+# default: imagenet
+#  - weight initialization of the backbone, passed to smp.create_model(encoder_weights=...)
+#  - supported weights per backbone are found here: https://smp.readthedocs.io/en/latest/encoders.html
+weights: imagenet

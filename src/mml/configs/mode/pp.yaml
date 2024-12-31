@@ -1,0 +1,22 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /sampling: full
+
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.PreprocessScheduler`
+    #  - the pp scheduler preprocesses the data (of all splits) for faster training and inference
+    _target_: mml.core.scripts.schedulers.preprocess_scheduler.PreprocessScheduler
+  ###
+  # default: [preprocess]
+  #  - "preprocess" routine does the job and is the only subroutine for this scheduler
+  subroutines:
+    - preprocess

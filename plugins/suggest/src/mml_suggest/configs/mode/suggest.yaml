@@ -1,0 +1,42 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /preprocessing: none
+mode:
+  scheduler:
+    _target_: mml_suggest.scripts.suggest_scheduler.SuggestScheduler
+  subroutines:
+    - suggest
+  distances: fed  # str or list of str of distance.name to incorporate, make sure to set reuse.DISTANCE_NAME=PROJECT
+  # indicate per pipeline_key and distance measure a "correlation"
+  # if a (pipeline_key / distance) pair does not exist, will assume 1.0, may be overruled by high temperature value
+  relation:
+    arch:
+      fed: 2.0
+      semantic: 2.0
+    augmentations:
+      kld: 2.0
+  n: 1  # number of blueprints to generate
+  # likelihood of ignoring the derived probabilities during sampling and uniformly choose a value by random choice
+  temperature: 0.05
+  sim_cutoff: 0.1 # required quantile of similarity - only include source task within this quantile of task distance
+  perf_cutoff: 0.1 # required quantile of performance - only include models within this quantile of validation loss
+  # PipelineCfg
+  pipeline_keys:
+    - 'arch'
+    - 'augmentations'
+#    - 'cbs'  -> most callbacks are more monitoring, aside swa and early are recommendable anyway
+    - 'loss'
+    - 'lr_scheduler'
+    - 'optimizer'
+    - 'preprocessing'
+    - 'sampling'
+    - 'trainer'
+#    - 'tta'  -> tta influences test and predict, but not train and validation
+#    - 'tune'  -> we exclude this as non-transferable and recommend to tune in general

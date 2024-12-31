@@ -1,0 +1,17 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.lr_scheduler.CosineAnnealingLR`
+#  - cosine annealing learning rate scheduler
+#  - see `CosineAnnealingLR <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.CosineAnnealingLR.html>`_
+_target_: torch.optim.lr_scheduler.CosineAnnealingLR
+###
+# default: ${trainer.max_epochs}
+#  - resolved by hydra
+T_max: ${trainer.max_epochs}

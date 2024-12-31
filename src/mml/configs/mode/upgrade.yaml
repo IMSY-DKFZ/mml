@@ -1,0 +1,29 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /preprocessing: none
+
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.UpgradeScheduler`
+    #  - the upgrade scheduler assists in migrating your database between different versions of ``mml``
+    #  - whenever a backward compatibility breaking version is released (with respect to data and/or results) this scheduler may resolve upcoming issues
+    _target_: mml.core.scripts.schedulers.upgrade_scheduler.UpgradeScheduler
+  ###
+  # default: [upgrade]
+  #  - "upgrade" does a compatibility upgrade from `mode.version`
+  subroutines:
+    - upgrade
+  ###
+  # default: ???
+  #  - for the "upgrade" subroutine this marks the previous version
+  #  - for the "downgrade" subroutine this marks the target version
+  #  - is a required argument! Example ``mml upgrade mode.version=0.12.0``
+  version: ???

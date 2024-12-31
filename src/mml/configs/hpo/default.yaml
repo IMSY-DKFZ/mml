@@ -1,0 +1,61 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - sampler: tpe
+  # necessary to avoid an interpolation error during config composition
+  - /search_space@hydra.sweeper.params: none
+  - _self_
+  # override sweeper to Optuna!
+  - override /hydra/sweeper: optuna
+
+###
+#  - this config uses the optuna sweeper plugin of hydra
+#  - the considered hyperparameters are given by the search_space config
+#  - will sequentially run hpo.trials many experiments and sample hps according to hpo/sampler
+#  - default sampler is tpe (https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.TPESampler.html)
+#  - other samplers are ``hpo/sampler=random`` (https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.RandomSampler.html) and ``hpo/sampler=grid`` (https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.GridSampler.html)
+#  - example: ``mml train proj=test search_space=example hpo/sampler=grid --multirun``
+#  - more details can be found in `hydra's optuna sweeper documentation <https://hydra.cc/docs/plugins/optuna_sweeper/>`_
+hpo:
+  ###
+  # default: null
+  #  - the optuna storage to use, if null only a temporary in-memory storage will be created
+  #  - see mml-sql for details on how to set up permanent storage
+  storage: null
+  ###
+  # default: minimize
+  #  - direction of optimization, either minimize or maximize
+  #  - must be set according to the kind of return value by the respective scheduler
+  direction: minimize
+  ###
+  # default: False
+  #  - currently unused, intended for future pruning of hopeless runs
+  #  - see https://github.com/facebookresearch/hydra/issues/1954
+  pruning: false
+  ###
+  # default: 100
+  #  - number of trials, each trial is one mml call with (potentially) different sampled hyperparameters
+  trials: 100
+
+hydra:
+  # here we define Optuna hyperparameter search
+  # it optimizes for value returned from function with @hydra.main decorator
+  # learn more here: https://hydra.cc/docs/next/plugins/optuna_sweeper
+  sweeper:
+    _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+    # use the following line to make HPO deterministic, make sure to start jobs with different seed
+    # sampler.seed: ${seed}
+    study_name: ${proj}_${now:%Y-%m-%d_%H-%M-%S}
+    storage: ${hpo.storage}
+    n_jobs: 1  # jobs in parallel, as long as no parallel launcher is used this should be 1
+    # 'minimize' or 'maximize' the objective
+    direction: ${hpo.direction}
+    # number of experiments that will be executed in a row by a single job (to parallelize see the README.md)
+    n_trials: ${hpo.trials}
+    params: ${search_space}

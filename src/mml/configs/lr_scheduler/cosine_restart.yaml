@@ -1,0 +1,17 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.lr_scheduler.CosineAnnealingWarmRestarts`
+#  - cosine annealing learning rate scheduler with warm restarts
+#  - see `CosineAnnealingWarmRestarts <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.CosineAnnealingWarmRestarts.html>`_
+_target_: torch.optim.lr_scheduler.CosineAnnealingWarmRestarts
+###
+# default: 25
+#  - epochs until first restart
+T_0: 25

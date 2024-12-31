@@ -1,0 +1,7 @@
+recursive-include src/mml/configs *.yaml
+recursive-include src/mml/testing *.json
+include src/mml/testing/dummy_fake_preds.pt
+include src/mml/testing/dummy_fake_pipeline.yaml
+include src/mml/core/data_loading/augmentations/imagenet.json
+include src/mml/template.env
+include src/mml/core/visualization/mml_logo.txt

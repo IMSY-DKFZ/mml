@@ -1,0 +1,18 @@
+#@package sampling
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+sample_num: 10000
+balanced: false
+# batch size will be overwritten if trainer uses auto_batch_size
+batch_size: 100
+# whether the final batch will be dropped at the end of the epoch if it has less than batch_size samples
+drop_last: False
+# enable caching of small datasets into RAM, this only works for already preprocessed datasets!
+enable_caching: False
+# sets a max_size of cache (in terms of images), avoid exploding RAM by keeping low
+cache_max_size: 800

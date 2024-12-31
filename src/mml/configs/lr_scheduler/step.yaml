@@ -1,0 +1,21 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.lr_scheduler.StepLR`
+#  - step wise learning rate scheduler
+#  - see `StepLR <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.StepLR.html>`_
+_target_: torch.optim.lr_scheduler.StepLR
+###
+# default: 25
+#  - epochs to wait
+step_size: 25
+###
+# default: 0.1
+#  - multiplicative factor
+gamma: 0.1

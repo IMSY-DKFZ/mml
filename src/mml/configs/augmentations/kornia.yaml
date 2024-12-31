@@ -1,0 +1,30 @@
+# @package augmentations
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+normalization: imagenet  # image_net mean and std values are used
+cpu: { }
+gpu:
+  backend: kornia
+  pipeline:
+    - name: RandomCrop
+      size: [224, 224]
+    - name: RandomAffine
+      translate: [0.05, 0.05]
+      scale: [0.05, 0.05]
+      degrees: 15
+      p: 0.5
+    - name: RandomHorizontalFlip
+      p: 0.5
+    - name: RandomBrightness
+      brightness: [0.8, 1.2]
+      p: 0.5
+    - name: RandomContrast
+      contrast: [0.8, 1.2]
+      p: 0.5
+    - name: RandomErasing
+      p: 0.5

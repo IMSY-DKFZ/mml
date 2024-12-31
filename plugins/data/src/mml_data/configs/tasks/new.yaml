@@ -1,0 +1,23 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# config for recently added tasks.
+
+task_list:
+  - 'cholect45_triplet'
+  - 'cholect45_instrument'
+  - 'cholect45_verb'
+  - 'cholect45_target'
+  - 'cholect45_triplet_soft'
+pivot:
+  name: False
+  tags: ''
+
+tagging:
+  all: False
+  variants: [ ]

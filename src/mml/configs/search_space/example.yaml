@@ -1,0 +1,20 @@
+# @package search_space
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# define range of hyperparameters
+# see https://hydra.cc/docs/next/plugins/optuna_sweeper/ for detailed instructions
+
+
+###
+# default: choice(32, 64, 128)
+#  - searches these three variants of a batch size (adapting the "sampling.batch_size" config)
+sampling.batch_size: choice(32, 64, 128)
+###
+# default: interval(0.0001, 0.2)
+#  - searches the given interval for a learning rate (adapting the "optimizer.lr" config)
+optimizer.lr: interval(0.0001, 0.2)

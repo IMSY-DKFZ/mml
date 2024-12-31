@@ -1,0 +1,14 @@
+{
+  "pipeline": "dummy_project/PIPELINES/mml_fake_task+nested?0/pipeline_9999.yaml",
+  "parameters": "dummy_project/PARAMETERS/mml_fake_task+nested?0/model_9999.pth",
+  "performance": 3.1415,
+  "training_time": 1234.0,
+  "task": "mml_fake_task+nested?0",
+  "fold": 0,
+  "created": "2024-08-13T15:39:03",
+  "metrics": [],
+  "predictions": {
+    "mml_fake_task+nested?0": "dummy_project/PREDICTIONS/mml_fake_task+nested?0/preds-fold-0_9999.pt",
+    "mml_fake_task": "dummy_project/PREDICTIONS/mml_fake_task/preds-fold-0_9999.pt"
+  }
+}

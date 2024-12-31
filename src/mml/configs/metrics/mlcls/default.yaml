@@ -1,0 +1,15 @@
+# @package metrics.mlcls
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+- _target_: torchmetrics.classification.MultilabelAveragePrecision
+  average: macro
+  num_classes: 0
+- _target_: torchmetrics.classification.MultilabelRankingAveragePrecision
+  num_classes: 0
+- _target_: torchmetrics.classification.MultilabelCoverageError
+  num_classes: 0

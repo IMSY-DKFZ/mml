@@ -1,0 +1,23 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: ${oc.env:MML_DATA_PATH}
+#  - path to data folder
+#  - by default the environment variable is read
+data_dir: ${oc.env:MML_DATA_PATH}
+###
+# default: ${oc.env:MML_CLUSTER_RESULTS_PATH}
+#  - path to results (output) folder
+#  - by default the environment variable is read
+out_dir: ${oc.env:MML_RESULTS_PATH}
+###
+# default: ${oc.env:MML_LOCAL_WORKERS}
+#  - number of max processes to spawn
+#  - by default the environment variable is read
+num_workers: ${oc.env:MML_LOCAL_WORKERS}

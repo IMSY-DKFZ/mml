@@ -1,0 +1,112 @@
+{
+  "name": "dummy_task",
+  "description": "Used for testing of loading and writing task meta information.",
+  "creation_protocol": "Obsolete",
+  "reference": "Obsolete",
+  "url": "Obsolete",
+  "download": "Obsolete",
+  "license": "unknown",
+  "release": "Obsolete",
+  "task_type": "semantic_segmentation",
+  "keywords": [
+    "dermatoscopy",
+    "medical",
+    "tissue_pathology"
+  ],
+  "means": [
+    0.7533503770828247,
+    0.5765432715415955,
+    0.488544762134552
+  ],
+  "stds": [
+    0.2007199078798294,
+    0.19744035601615906,
+    0.20265881717205048
+  ],
+  "sizes": [
+    553,
+    577,
+    761,
+    769
+  ],
+  "modalities": {
+    "image": ".bmp; ",
+    "mask": "dummy"
+  },
+  "idx_to_class": {
+    "0": "background",
+    "1": "another",
+    "2": "random"
+  },
+  "class_occ": {
+    "background": 10,
+    "another": 8,
+    "random": 2
+  },
+  "unlabeled_samples": {},
+  "train_folds": [
+    [
+      "ID0",
+      "ID1"
+    ],
+    [
+      "ID2",
+      "ID3"
+    ],
+    [
+      "ID4",
+      "ID5"
+    ],
+    [
+      "ID6",
+      "ID7"
+    ],
+    [
+      "ID8",
+      "ID9"
+    ]
+  ],
+  "train_samples": {
+    "ID0": {
+      "image": "dummy0.bmp",
+      "mask": "EMPTY_MASK_TOKEN"
+    },
+    "ID1": {
+      "image": "dummy1.bmp",
+      "mask": "EMPTY_MASK_TOKEN"
+    },
+    "ID2": {
+      "image": "dummy2.bmp",
+      "mask": "dummy_mask_2.png"
+    },
+    "ID3": {
+      "image": "dummy3.bmp",
+      "mask": "dummy_mask_3.png"
+    },
+    "ID4": {
+      "image": "dummy4.bmp",
+      "mask": "EMPTY_MASK_TOKEN"
+    },
+    "ID5": {
+      "image": "dummy5.bmp",
+      "mask": "dummy_mask_5.png"
+    },
+    "ID6": {
+      "image": "dummy6.bmp",
+      "mask": "EMPTY_MASK_TOKEN"
+    },
+    "ID7": {
+      "image": "dummy7.bmp",
+      "mask": "dummy_mask_7.png"
+    },
+    "ID8": {
+      "image": "dummy8.bmp",
+      "mask": "EMPTY_MASK_TOKEN"
+    },
+    "ID9": {
+      "image": "dummy9.bmp",
+      "mask": "dummy_mask_9.png"
+    }
+  },
+  "test_samples": {}
+}

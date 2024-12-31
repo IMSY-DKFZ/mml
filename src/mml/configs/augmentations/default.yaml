@@ -1,0 +1,53 @@
+# @package augmentations
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: imagenet
+#  - determines the normalization strategy for images
+#  - 'imagenet': the imagenet mean and std of RGB channels are used, this is recommended if using imagenet pretrained models
+#  - 'task': use mean and std of RGB channels for each task, this is recommended if training from scratch
+#  - 'pretraining': try to extract pretraining normalization from the model, this may be less reliable than 'imagenet' option
+#  - 'null': do not normalise, e.g. to be used if images shall only be plotted but not fed through a model
+normalization: imagenet  # image_net mean and std values are used
+cpu:
+  ###
+  # default: albumentations
+  #  - backend for cpu augmentations, currently supports albumentations (https://albumentations.ai/) and torchvision (https://pytorch.org/vision/stable/transforms.html#start-here)
+  #  - the backend library determines the available transforms, which are listed in the cpu.pipeline config
+  backend: albumentations
+  ###
+  # default: [{name:RandomCrop,height:224,width:224},{name:ShiftScaleRotate,shift_limit:0.05,scale_limit:0.05,rotate_limit:15},{name:HorizontalFlip,p:0.5},{name:RandomBrightnessContrast,p:0.5},{name:CoarseDropout,p:0.5}]
+  #  - the actual augmentation pipeline, listed as a sequence of dictionaries with a 'name' each and optional kwargs
+  #  - available albumentations transforms are: https://albumentations.ai/docs/api_reference/full_reference/
+  #  - available torchvision transforms are: https://pytorch.org/vision/stable/transforms.html#v2-api-reference-recommended
+  #  - currently nesting / containers are not supported!
+  #  - formatting transformations (e.g. ToFloat / Normalize / ToTensor) are beeing taken care of mml automatically
+  #  - albumentations backend two custom added transform named 'ImageNetAA' (auto augment generated pipeline, no kwargs) and 'RandAugment' (see :meth:`~mml.core.data_loading.augmentations.albumentations.AlbumentationsAugmentationModule.get_rand_augment`)
+  pipeline:
+    - name: RandomCrop
+      height: 224
+      width: 224
+    - name: ShiftScaleRotate
+      shift_limit: 0.05
+      scale_limit: 0.05
+      rotate_limit: 15
+      p: 0.5
+    - name: HorizontalFlip
+      p: 0.5
+    - name: RandomBrightnessContrast
+      p: 0.5
+    - name: CoarseDropout
+      p: 0.5
+###
+# default: {}
+#  - gpu augmentations are structured similarly to cpu augmentations and require backend and pipeline specification
+#  - empty dictionary means no augmentations
+#  - supported backends are kornia and torchvision
+#  - available kornia transforms: https://kornia.readthedocs.io/en/latest/augmentation.html
+#  - nesting and containers are not supported either
+gpu: { }

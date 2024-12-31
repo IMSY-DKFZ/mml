@@ -1,0 +1,41 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /augmentations: no_norm
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.InfoScheduler`
+    #  - the info scheduler is intended to provide fast summarizing information on data / results
+    _target_: mml.core.scripts.schedulers.info_scheduler.InfoScheduler
+  ###
+  # default: [tasks,hpo,sample_grid,models]
+  #  - "tasks" routine shows information on the tasks provided
+  #  - "hpo" routine shows information on hpo results (see study_name parameter)
+  #  - "samples" routine plots sample images for each task (and/or jointly)
+  #  - "models" routine shows information on existing model descriptions for this project
+  subroutines:
+    - tasks
+    - hpo
+    - samples
+    - models
+  ###
+  # default: null
+  #  - provide a specific optuna study name to receive detailed information
+  #  - required for the hpo subroutine
+  #  - will only resolve in a warning if not provided
+  study_name: null
+  ###
+  # default: True
+  #  - generates a grid plot in tasks subroutine with each task corresponding to one cell
+  info_grid: True
+  ###
+  # default: True
+  #  - generates a sample image in tasks subroutine for each task
+  info_individual: True

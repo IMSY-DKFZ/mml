@@ -1,0 +1,15 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - _self_
+  - /distance: semantic
+  - /plotting: distance  # use similarity plotting settings
+  - override /sampling: extraction_default
+
+mode: ${distance._mode}  # pull up the config from distance._mode to top level config.mode (scheduler and subroutines)

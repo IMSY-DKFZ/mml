@@ -1,0 +1,12 @@
+#  @package  _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  # choose optuna hyperparameter sampler ('tpe', 'random', 'cmaes' or 'nsgaii', 'motpe')
+  # learn more here: https://optuna.readthedocs.io/en/stable/reference/samplers.html
+  - override /hydra/sweeper/sampler: grid

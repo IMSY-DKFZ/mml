@@ -1,0 +1,52 @@
+# @package trainer
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`lightning.Trainer`
+#  - the trainer is instantiated by the scheduler through :meth:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.create_trainer`
+#  - any kwargs accepted by :class:`~lightning.Trainer` can be provided as `trainer.KWARG=VALUE`
+#  - callbacks are determined separately through :doc:`callbacks` (see there for details on checkpointing)
+#  - the experiment logger is determined through :doc:`logging`
+#  - see `Trainer <https://lightning.ai/docs/pytorch/stable/common/trainer.html>`_ in the lightning documentation
+_target_: lightning.Trainer
+###
+# default: True
+#  - deactivate if image sizes change over time or to reduce memory consumption
+benchmark: True
+###
+# default: 16-mixed
+#  - deactivate if not supported by hardware or high precision is required
+precision: 16-mixed
+###
+# default: 10
+#  - will block "early stopping" and similar from interrupting the training until this number of epochs is reached
+min_epochs: 10
+###
+# default: 50
+#  - will stop training once this number of epochs is reached
+max_epochs: 50
+###
+# default: true
+#  - prints a model summary at the beginning of each fitting
+enable_model_summary: true
+###
+# default: 0
+#  - as it is set to zero, no sanity check is performed to reduce time
+num_sanity_val_steps: 0
+###
+# default: null
+#  - will stop training once the given training duration is reached
+max_time: null
+###
+# default: auto
+#  - determine the hardware accelerator, "auto" will choose depending on available hardware
+accelerator: auto
+###
+# default: 1
+#  - number of hardware devices, currently mml is not yet optimized for multi-GPU usage
+devices: 1

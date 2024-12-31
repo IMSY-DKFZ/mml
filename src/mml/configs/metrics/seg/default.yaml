@@ -1,0 +1,13 @@
+# @package metrics.seg
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+- _target_: torchmetrics.classification.Dice
+  average: macro
+  mdmc_average: samplewise
+  num_classes: 0
+  ignore_index: 255

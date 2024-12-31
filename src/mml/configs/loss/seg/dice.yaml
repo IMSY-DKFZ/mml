@@ -1,0 +1,21 @@
+# @package loss.seg
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~segmentation_models_pytorch.losses.DiceLoss`
+#  - segmentation models pytorch dice loss
+#  - see `source code <https://github.com/qubvel-org/segmentation_models.pytorch/blob/main/segmentation_models_pytorch/losses/dice.py>`_
+_target_: segmentation_models_pytorch.losses.DiceLoss
+###
+# default: multiclass
+#  - loss mode 'binary', 'multiclass' or 'multilabel'
+mode: 'multiclass'
+###
+# default: 255
+#  - mml ignores the index 255 by default in segmentation
+ignore_index: 255

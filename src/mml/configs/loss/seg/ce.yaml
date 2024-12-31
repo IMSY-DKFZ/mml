@@ -1,0 +1,21 @@
+# @package loss.seg
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.nn.HuberLoss`
+#  - pytorch huber loss
+_target_: torch.nn.CrossEntropyLoss
+###
+# default: 255
+#  - mml ignores the index 255 by default in segmentation
+#  - see `CrossEntropyLoss <https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html#torch.nn.CrossEntropyLoss>`_
+ignore_index: 255
+###
+# default: 0.0
+#  - allows for label smoothing if activated
+label_smoothing: 0.0

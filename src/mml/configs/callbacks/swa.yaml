@@ -1,0 +1,18 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+cbs:
+  ###
+  #  - activates stochastic weight averaging
+  #  - details: https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.StochasticWeightAveraging.html#stochasticweightaveraging
+  swa:
+    _target_: lightning.pytorch.callbacks.StochasticWeightAveraging
+    ###
+    # default: 0.005
+    #  - the SWA learning rate to use
+    swa_lrs: 0.005

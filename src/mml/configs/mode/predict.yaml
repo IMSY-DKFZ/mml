@@ -1,0 +1,19 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# convenience config entry to call train scheduler with predict subroutine
+defaults:
+  - /mode@_global_: train
+  - _self_
+
+mode:
+  ###
+  # default: [predict]
+  #  - "predict" routine predicts samples, requires appropriate models to be loaded
+  subroutines:
+    - predict

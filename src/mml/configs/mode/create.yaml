@@ -1,0 +1,39 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /preprocessing: none
+
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.CreateScheduler`
+    #  - the clean scheduler assists in getting rid of file artifacts, reducing disk usage by mml
+    _target_: mml.core.scripts.schedulers.create_scheduler.CreateScheduler
+  ###
+  # default: [dataset,task]
+  #  - "dataset" routine creates the necessary datasets, comprising potential download and extraction
+  #  - "task" routine creates the task description files and necessary transformation, requires datasets
+  #  - only datasets/tasks non-present will trigger a computation so it is safe to keep both subroutines
+  subroutines:
+    - dataset
+    - task
+  ###
+  # default: 5
+  #  - changes the default value into how many splits the generated tasks should be distributed to
+  #  - must be an integer larger 1
+  #  - only applies if the task creator uses the internal :meth:`~mml.core.data_preparation.task_creator.TaskCreator.split_folds` method
+  #  - does not apply if :meth:`~mml.core.data_preparation.task_creator.TaskCreator.use_existing_folds` is used instead
+  n_folds: 5
+  ###
+  # default: true
+  #  - changes the default value whether the splitting into folds should respect class distributions
+  #  - only applies to classification tasks
+  #  - only applies if the task creator uses the internal :meth:`~mml.core.data_preparation.task_creator.TaskCreator.split_folds` method
+  #  - does not apply if :meth:`~mml.core.data_preparation.task_creator.TaskCreator.use_existing_folds` is used instead
+  ensure_balancing: true

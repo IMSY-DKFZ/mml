@@ -1,0 +1,24 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - override /augmentations: no_norm
+  - override /sampling: extraction_default
+
+mode:
+  scheduler:
+    _target_: mml_dimensionality.scripts.dimensionality_scheduler.DimensionalityScheduler
+  subroutines:
+    - estimate
+  k: 25
+  max_subsets: 5
+  subset_min_size: 100
+  inv_mle: true
+
+sampling:
+  sample_num: 1000

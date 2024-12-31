@@ -1,0 +1,30 @@
+# @package _global_
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+defaults:
+  - train  # this mode inherits all properties and config options from train mode
+mode:
+  scheduler:
+    ###
+    # default: :class:`~mml.core.scripts.schedulers.clean_scheduler.TransferScheduler`
+    #  - the tl scheduler enables transfer learning, aka finetuning from an existing pretrained model
+    _target_: mml.core.scripts.schedulers.transfer_scheduler.TransferScheduler
+  ###
+  # default: ???
+  #  - the task the pretrained model was trained on
+  pretrain_task: ???
+  ###
+  # default: performance
+  #  - strategy to select the model among all models that have been pretrained on the given task
+  #  - model must be loaded via the reuse functionality!
+  #  - one of performance (=best loss), created (=latest), random
+  model_selection: performance
+  ###
+  # default: False
+  #  - if True freeze the backbone of the model and only learn head parameters (also called linear probing)
+  freeze: False

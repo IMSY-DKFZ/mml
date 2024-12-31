@@ -1,0 +1,31 @@
+# @package loaders
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# a universal loader strategy, covering as many formats as possible, while potentially sacrificing some performance
+
+defaults:
+  - /loaders: default
+  - _self_
+
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.CombinedModalityLoader`
+#  - determines how the image modality is loaded
+#  - tries to use following modality loaders in order
+#    - :class:`~mml.core.data_loading.modality_loaders.PureTorchvisionImageLoader`
+#    - :class:`~mml.core.data_loading.modality_loaders.OpenCVImageLoader`
+#    - :class:`~mml.core.data_loading.modality_loaders.NumpyArrayImageLoader`
+#    - :class:`~mml.core.data_loading.modality_loaders.PillowImageLoader`
+#    - :class:`~mml.core.data_loading.modality_loaders.ScikitImageLoader`
+image:
+  _target_: mml.core.data_loading.modality_loaders.CombinedModalityLoader
+  loaders:
+    - _target_: mml.core.data_loading.modality_loaders.PureTorchvisionImageLoader
+    - _target_: mml.core.data_loading.modality_loaders.OpenCVImageLoader
+    - _target_: mml.core.data_loading.modality_loaders.NumpyArrayImageLoader
+    - _target_: mml.core.data_loading.modality_loaders.PillowImageLoader
+    - _target_: mml.core.data_loading.modality_loaders.ScikitImageLoader

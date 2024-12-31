@@ -1,0 +1,26 @@
+# @package logging.notifier
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+
+slack:
+  ###
+  # default: :class:`~mml.core.scripts.notifier.SlackNotifier`
+  #  - a notifier that sends slack messages
+  _target_: mml.core.scripts.notifier.SlackNotifier
+  ###
+  # default: False
+  #  - whether to send messages on mml start
+  on_start: False
+  ###
+  # default: False
+  #  - whether to send messages on mml end
+  on_end: False
+  ###
+  # default: False
+  #  - whether to send messages on mml failure
+  on_failure: True

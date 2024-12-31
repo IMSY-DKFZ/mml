@@ -1,0 +1,43 @@
+# @package loaders
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# enumerates the modality loaders that will be used to bring sample entries to tensor ready format
+# keys must match a Modality
+
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.OpenCVImageLoader`
+#  - determines how the image modality is loaded
+#  - tries to use open CV for image loading
+image:
+  _target_: mml.core.data_loading.modality_loaders.OpenCVImageLoader
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.OpenCVMaskLoader`
+#  - determines how masks are loaded
+#  - tries to use open CV for mask loading
+mask:
+  _target_: mml.core.data_loading.modality_loaders.OpenCVMaskLoader
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.ClassLoader`
+#  - determines how the class modality is loaded
+class:
+  _target_: mml.core.data_loading.modality_loaders.ClassLoader
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.MultiLabelClassLoader`
+#  - determines how the classes modality is loaded
+classes:
+  _target_: mml.core.data_loading.modality_loaders.MultiLabelClassLoader
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.SoftLabelClassLoader`
+#  - determines how the soft_classes modality is loaded
+soft_classes:
+  _target_: mml.core.data_loading.modality_loaders.SoftLabelClassLoader
+###
+# default: :class:`~mml.core.data_loading.modality_loaders.ValueLoader`
+#  - determines how the value modality is loaded
+value:
+  _target_: mml.core.data_loading.modality_loaders.ValueLoader

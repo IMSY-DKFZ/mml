@@ -1,0 +1,22 @@
+# @package lr_scheduler
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: :class:`~torch.optim.lr_scheduler.OneCycleLR`
+#  - one cycle learning rate scheduler
+#  - see `OneCycleLR <https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.OneCycleLR.html>`_
+_target_: torch.optim.lr_scheduler.OneCycleLR
+###
+# default: 0.001
+#  - max learning rate
+max_lr: 0.001
+###
+# default: ${trainer.trainer.max_epochs}
+#  - number of epochs
+#  - inferred by hydra
+epochs: ${trainer.trainer.max_epochs}

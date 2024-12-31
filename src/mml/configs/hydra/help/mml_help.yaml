@@ -1,0 +1,124 @@
+# @package hydra.help
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+app_name: Medical Meta Learner
+header: |-
+  ╔═════════════════════════════════════════════════════════╗
+  ║       _____ ______   _____ ______   ___                 ║
+  ║      |\   _ \  _   \|\   _ \  _   \|\  \                ║
+  ║      \ \  \\\__\ \  \ \  \\\__\ \  \ \  \               ║
+  ║       \ \  \\|__| \  \ \  \\|__| \  \ \  \              ║
+  ║        \ \  \    \ \  \ \  \    \ \  \ \  \____         ║
+  ║         \ \__\    \ \__\ \__\    \ \__\ \_______\       ║
+  ║          \|__|     \|__|\|__|     \|__|\|_______|       ║
+  ║                ____  _  _    __  _  _  ____  _  _       ║
+  ║               (  _ \( \/ )  (  )( \/ )/ ___)( \/ )      ║
+  ║                ) _ ( )  /    )( / \/ \\___ \ )  /       ║
+  ║               (____/(__/    (__)\_)(_/(____/(__/        ║
+  ╚═════════════════════════════════════════════════════════╝
+
+footer: |-
+  MML was developed by the division of Intelligent Medical Systems
+  at the German Cancer Research Center (DKFZ)in Heidelberg, Germany. 
+  The main author is Patrick Godau (patrick.godau@dkfz-heidelberg.de).
+  © 2024 Division of Intelligent Medical Systems, DKFZ
+  
+template: |-
+  ${hydra.help.header}
+
+  This help provides a basic overview on CLI of MML. You can find a lot more 
+  details please in the documentation (https://imsy.pages.dkfz.de/ise/mml) or 
+  ask for help at our issue tracker (https://git.dkfz.de/imsy/ise/mml/-/issues).
+  
+  Basic call pattern is
+  
+  mml [mode] [overrides] [hydra.overrides] [hydra-flags]
+  
+  Besides there are also the following mml-core CLIs (without any arguments):
+    * mml-env-setup   - sets up an `mml.env` file at your current location
+    * mml-copy-conf   - sets up mml configs outside the mml-core package
+  
+  ╔══════╗
+  ║ mode ║
+  ╚══════╝
+  Available modes include:
+    * create    - Installs datasets and tasks on the workstation.
+    * pp        - Preprocesses tasks with the given "preprocessing".
+    * train     - Trains, tests and/or predicts (single or multi-task).
+    * post      - Postprocessing via calibration and ensembling.
+    * info      - Provides information on tasks, trained models, etc..
+    * clean     - May be used the remove artefacts from mml.
+    * upgrade   - Used to migrate mml results and data upwards.
+    * downgrade - Used to migrate mml results and data downwards.
+  
+  Note that mml plugins may add further modes. You can find all available
+  modes in the full list of config groups below (see overrides).
+  
+  See also: https://imsy.pages.dkfz.de/ise/mml/modes.html
+  
+  ╔═══════════╗
+  ║ overrides ║
+  ╚═══════════╝
+  MML offers a flexible system to override experiment configuration from 
+  the command line. It is powered by Hydra (https://hydra.cc) and more 
+  details on the syntax can be found in the respective documentation 
+  (https://hydra.cc/docs/advanced/override_grammar/basic/). In a nutshell 
+  configuration options are grouped and one can either override a whole 
+  group of options with existing config files (e.g. lr_scheduler=cosine) 
+  or set values inside a config group (e.g. lr_scheduler.verbose=false). 
+  
+  **Note**: 
+  Hydra configuration is presented in a simplified manner above. There are
+  special cases of combining config files (e.g. callbacks=[early,mixup]), 
+  accessing nested config files (e.g. loss/mlcls=ce) or adding new keys to 
+  a configuration (e.g. +lr_scheduler.eta_min=0.01).
+  
+  The following is an overview of configuration groups available (including 
+  group options provided by mml plugins.
+  
+  $APP_CONFIG_GROUPS 
+  
+  The configuration groups and overrides will be compiled to a final single 
+  job configuration (or multiple in --multirun mode as described below). 
+  The final configuration can be displayed with the help of hydra-flags 
+  (see below) and is also stored in the run folder inside the .hydra subdir.
+  
+  See also: https://imsy.pages.dkfz.de/ise/mml/usage.html#basics
+  And: https://imsy.pages.dkfz.de/ise/mml/cli/overview.html
+  
+  ╔═════════════════╗
+  ║ hydra.overrides ║
+  ╚═════════════════╝
+  The same override style also let's you alter configurations that directly 
+  influence the internal behaviour of hydra. The corresponding config groups
+  are:
+  
+  $HYDRA_CONFIG_GROUPS
+  
+  The most common use cases are for example:
+    * hydra.verbose=true  - verbose mode, all logging.debug messages are print
+    
+  See also: https://hydra.cc/docs/configure_hydra/intro/
+  
+  ╔═════════════╗
+  ║ hydra-flags ║
+  ╚═════════════╝
+  hydra offers some functionality that is inherited by mml. The existing 
+  options are:
+  
+  $FLAGS_HELP
+  
+  Noteworthy are 
+    * --cfg=job    - print the compiled config (without running mml)
+    * --multirun   - used for hyperparameter search, starts multiple jobs
+    * --info       - information on the defaults tree, config search paths, etc
+  
+  See also: https://hydra.cc/docs/advanced/hydra-command-line-flags/
+
+  -------
+  ${hydra.help.footer}
