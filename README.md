@@ -6,7 +6,7 @@
 
 (Please note: badges are not yet finalized and are currently prepared for GitHub transition)
 
-[![docs status](https://readthedocs.org/projects/mml/badge/?version=develop)](https://mml.readthedocs.io/en/develop/?badge=develop)
+[![docs status](https://readthedocs.org/projects/mml/badge/?version=latest)](https://mml.readthedocs.io/en/latest/)
 ![build status](https://github.com/IMSY-DKFZ/mml/actions/workflows/<WORKFLOW_FILE>/badge.svg)
 [![pypi Badge](https://img.shields.io/pypi/v/mml-core)](https://pypi.org/project/mml-core/)
 [![license](https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray)](https://github.com/ashleve/lightning-hydra-template#license)
