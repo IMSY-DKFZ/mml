@@ -73,13 +73,13 @@ jobs:
           python -m build
       - name: Cd into plugin and build distributions
         run: |
-          cd plugins/${{ matrix.plugins }}
+          cd plugins/${{ matrix.plugin }}
           python -m build
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
-          name: plugin-${{ matrix.plugins }}-dists
-          path: plugins/${{ matrix.plugins }}/dist/
+          name: plugin-${{ matrix.plugin }}-dists
+          path: plugins/${{ matrix.plugin }}/dist/
 
   test-pypi-publish:
     runs-on: ubuntu-latest
@@ -109,6 +109,8 @@ jobs:
         with:
           packages-dir: dist/
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+          verbose: true
 
   test-pypi-plugin-publish:
     runs-on: ubuntu-latest
@@ -137,7 +139,7 @@ jobs:
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
-          name: plugin-${{ matrix.plugins }}-dists
+          name: plugin-${{ matrix.plugin }}-dists
           path: dist/
 
       - name: Publish distributions to TestPyPI
@@ -145,4 +147,6 @@ jobs:
         with:
           packages-dir: dist/
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+          verbose: true
 
