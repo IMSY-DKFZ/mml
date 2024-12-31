@@ -1,0 +1,147 @@
+# This workflow will build and upload of mml-core and plugins to PyPI when a tag NOT containing "rc" is created (precisely 
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+name: Core & Plugins Packaging
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'  # must match the version pattern
+
+permissions:
+  contents: read
+
+jobs:
+  build-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Build release distributions
+        run: |
+          pip install -U build
+          python -m build
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+
+  discover-plugins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      plugins: ${{ steps.list-plugins.outputs.plugins }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: output all the plugins
+        id: list-plugins
+        working-directory: plugins
+        run: |
+          json_array=()
+          while IFS='' read -r LINE || [ -n "${LINE}" ]; do
+            echo "Detected plugin: ${LINE}"
+            json_array+=("\"$LINE\"")
+          done < index.txt
+          json_elements=$(IFS=,; echo "${json_array[*]}")
+          echo "plugins=[$json_elements]" | tee -a "$GITHUB_OUTPUT"
+
+  build-plugins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - discover-plugins
+    strategy:
+      matrix: 
+        plugin: ${{ fromJson(needs.discover-plugins.outputs.plugins) }}
+      fail-fast: false
+      max-parallel: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install build dependencies
+        run: |
+          pip install -U build
+          python -m build
+      - name: Cd into plugin and build distributions
+        run: |
+          cd plugins/${{ matrix.plugin }}
+          python -m build
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-${{ matrix.plugin }}-dists
+          path: plugins/${{ matrix.plugin }}/dist/
+
+  pypi-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - build-core
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
+    # Dedicated environments with protections for publishing are strongly recommended.
+    # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
+    environment:
+      name: pypi
+      # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
+      # url: https://pypi.org/p/YOURPROJECT
+
+    steps:
+      - name: Retrieve release distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+
+      - name: Publish distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          skip-existing: false
+          verbose: true
+
+  test-pypi-plugin-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs:
+      - discover-plugins
+      - build-plugins
+    
+    strategy:
+      matrix: 
+        plugin: ${{ fromJson(needs.discover-plugins.outputs.plugins) }}
+      fail-fast: false
+      max-parallel: 10
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
+    # Dedicated environments with protections for publishing are strongly recommended.
+    # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
+    environment:
+      name: pypi
+      # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
+      # url: https://pypi.org/p/YOURPROJECT
+
+    steps:
+      - name: Retrieve release distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin-${{ matrix.plugin }}-dists
+          path: dist/
+
+      - name: Publish distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          skip-existing: false
+          verbose: true
