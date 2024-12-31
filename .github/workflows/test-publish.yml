@@ -31,7 +31,6 @@ jobs:
           path: dist/
 
   discover-plugins:
-    name: Find out all the plugins listed in plugins/index.txt and create a dynamic matrix
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
@@ -49,8 +48,7 @@ jobs:
             json_array+=("\"$LINE\"")
           done < index.txt
           json_elements=$(IFS=,; echo "${json_array[*]}")
-          json_output="{ \"plugins\": [$json_elements] }"
-          echo "plugins=$json_output" | tee -a "$GITHUB_OUTPUT"
+          echo "plugins=[$json_elements]" | tee -a "$GITHUB_OUTPUT"
 
   test-build-plugins:
     runs-on: ubuntu-latest
