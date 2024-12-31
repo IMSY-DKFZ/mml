@@ -1,4 +1,4 @@
-# MML Data plugin
+# MML Tasks plugin
 
 This plugin provides a wide range of datasets and tasks, ready to be imported.
 
@@ -8,7 +8,7 @@ This plugin provides a wide range of datasets and tasks, ready to be imported.
 ## Install
 
 ```commandline
-pip install mml-data
+pip install mml-tasks
 ```
 
 Some of the tasks require the [kaggle API](https://github.com/Kaggle/kaggle-api), which requires some authentication 
@@ -24,7 +24,7 @@ export KAGGLE_KEY=your_kaggle_api_key
 ## Usage
 
 Tasks can be created with the `create` mode as usual. Furthermore, mml-data provides some convenience functionality 
-to show and filter for available tasks. Type `mml-data --help` for more details.
+to show and filter for available tasks. Type `mml-tasks --help` for more details.
 
 ## Outdated URLs
 

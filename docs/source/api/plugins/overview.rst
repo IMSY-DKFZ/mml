@@ -3,7 +3,7 @@ plugins
 
 The following is a comprehensive list of official ``mml`` plugins.
 
-  * :doc:`data` - with quite a bunch of :class:`~mml.core.data_preparation.task_creator.TaskCreator` s
+  * :doc:`tasks` - with quite a bunch of :class:`~mml.core.data_preparation.task_creator.TaskCreator` s
   * :doc:`sql` - enable hyperparameter tuning through an sql database
   * :doc:`dimensionality` - estimate complexity of a task
   * :doc:`similarity` - estimate knowledge transfer between any two tasks
@@ -18,7 +18,7 @@ The following is a comprehensive list of official ``mml`` plugins.
    :maxdepth: 1
    :caption: Plugin References
 
-   data
+   tasks
    dimensionality
    drive
    lsf
