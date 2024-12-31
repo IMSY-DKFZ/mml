@@ -57,7 +57,7 @@ jobs:
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
+          name: plugins-dists
           path: dist/
 
   test-pypi-publish:
@@ -84,8 +84,15 @@ jobs:
           name: release-dists
           path: dist/
 
+      - name: Retrieve plugin distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin-dists
+          path: dist/
+
       - name: Publish distributions to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
           repository-url: https://test.pypi.org/legacy/
+        
