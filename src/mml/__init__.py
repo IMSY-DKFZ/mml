@@ -9,5 +9,5 @@ import os
 os.environ["NO_ALBUMENTATIONS_UPDATE"] = "1"
 
 VERSION = (1, 0, 0)
-__version__ = ".".join(map(str, VERSION)) + ".rc7"
+__version__ = ".".join(map(str, VERSION)) + ".rc8"
 __all__ = ["__version__"]
