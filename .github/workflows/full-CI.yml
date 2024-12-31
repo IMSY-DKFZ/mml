@@ -30,7 +30,10 @@ jobs:
       run: pip install .[dev]
 
     - name: Run PyTest
-      run: pytest --cov-report=xml
+      run: |
+        pytest --benchmark-enable
+        coverage report
+        coverage xml
 
     - name: Upload pytest test results
       # Use always() to always run this step to publish test results when there are test failures
