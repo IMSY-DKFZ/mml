@@ -40,7 +40,7 @@ It features:
   * easy expandability via plugins or directly hooking into runtime objects via scripts or notebooks
   * good documentation, broad testing and ambitious goals
 
-Please read the [official documentation page](https://imsy.pages.dkfz.de/ise/mml) for more.
+Please read the [official documentation page](https://mml.readthedocs.io/en/latest/index.html) for more.
 Main author: Patrick Godau, Deutsches Krebsforschungszentrum (DKFZ) Heidelberg
 
 Division of Intelligent Medical Systems
@@ -69,7 +69,7 @@ and replace <personal_access_token> with your actual token. You may add extras a
 
 ### plugins
 
-Plugins extend `mml` functionality. See [here](https://imsy.pages.dkfz.de/ise/mml/api/plugins/overview.html) for a 
+Plugins extend `mml` functionality. See [here](https://mml.readthedocs.io/en/latest/api/plugins/overview.html) for a 
 list of available plugins. Use the previous `pip` and replace `mml-core` with one of the plugins to install.
 
 ### local environment variables

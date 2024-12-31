@@ -101,7 +101,7 @@ def wrapped_mml() -> float:
         show_logo(indent=8)
         print("╔═══════════════════════════════════════════════════════════╗")
         print("║ For usage details you may                                 ║")
-        print("║     * visit the docs (https://imsy.pages.dkfz.de/ise/mml) ║")
+        print("║     * visit the docs (https://mml.readthedocs.io)         ║")
         print('║     * call "mml --help"                                   ║')
         print("╚═══════════════════════════════════════════════════════════╝")
         if os.getenv("MML_ENV_PATH", None):

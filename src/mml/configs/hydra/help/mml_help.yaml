@@ -32,8 +32,8 @@ template: |-
   ${hydra.help.header}
 
   This help provides a basic overview on CLI of MML. You can find a lot more 
-  details please in the documentation (https://imsy.pages.dkfz.de/ise/mml) or 
-  ask for help at our issue tracker (https://git.dkfz.de/imsy/ise/mml/-/issues).
+  details please in the documentation (https://mml.readthedocs.io) or 
+  ask for help at our issue tracker (https://github.com/IMSY-DKFZ/mml/issues).
   
   Basic call pattern is
   
@@ -59,7 +59,7 @@ template: |-
   Note that mml plugins may add further modes. You can find all available
   modes in the full list of config groups below (see overrides).
   
-  See also: https://imsy.pages.dkfz.de/ise/mml/modes.html
+  See also: https://mml.readthedocs.io/en/latest/modes.html
   
   ╔═══════════╗
   ║ overrides ║
@@ -88,8 +88,8 @@ template: |-
   The final configuration can be displayed with the help of hydra-flags 
   (see below) and is also stored in the run folder inside the .hydra subdir.
   
-  See also: https://imsy.pages.dkfz.de/ise/mml/usage.html#basics
-  And: https://imsy.pages.dkfz.de/ise/mml/cli/overview.html
+  See also: https://mml.readthedocs.io/en/latest/usage.html#basics
+  And: https://mml.readthedocs.io/en/latest/cli/overview.html
   
   ╔═════════════════╗
   ║ hydra.overrides ║

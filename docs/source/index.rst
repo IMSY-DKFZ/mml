@@ -149,7 +149,7 @@ If you use this code in a research paper, **please cite**:
 .. |Python Badge| image:: https://img.shields.io/badge/python-3.8|3.9|3.10-informational
    :target: https://www.python.org/doc/versions/
 .. |Docs Badge| image:: https://img.shields.io/badge/docs-sphinx-informational
-   :target: https://imsy.pages.dkfz.de/ise/mml
+   :target: https://mml.readthedocs.io/en/latest/
 .. |Style Badge| image:: https://img.shields.io/badge/style-flake8-informational
    :target: https://flake8.pycqa.org/en/latest/
 .. |License Badge| image:: https://img.shields.io/badge/license-MIT-blue
