@@ -11,6 +11,7 @@ jobs:
   test_and_coverage:
     name: Test and lint
     runs-on: ${{ matrix.operating-system }}
+    timeout-minutes: 60
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
@@ -52,6 +53,7 @@ jobs:
   formatting_and_linting:
     name: Check code formatting with ruff and pylint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
     - name: Checkout
@@ -81,6 +83,7 @@ jobs:
   build_docker:
     name: Test docker build 
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
       - name: Check out the repo
@@ -98,6 +101,7 @@ jobs:
   test_plugins:
     name: Test mml plugins
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
     - name: Checkout
