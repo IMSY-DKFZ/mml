@@ -30,9 +30,38 @@ jobs:
           name: release-dists
           path: dist/
 
+  discover-plugins:
+    name: Find out all the plugins listed in plugins/index.txt and create a dynamic matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      plugins: ${{ steps.list-plugins.outputs.plugins }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: output all the plugins
+        id: list-plugins
+        working-directory: plugins
+        run: |
+          json_array=()
+          while IFS='' read -r LINE || [ -n "${LINE}" ]; do
+            echo "Detected plugin: ${LINE}"
+            json_array+=("\"$LINE\"")
+          done < index.txt
+          json_elements=$(IFS=,; echo "${json_array[*]}")
+          json_output="{ \"plugins\": [$json_elements] }"
+          echo "plugins=$json_output" | tee -a "$GITHUB_OUTPUT"
+
   test-build-plugins:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    needs:
+      - discover-plugins
+    strategy:
+      matrix: 
+        plugin: ${{ fromJson(needs.discover-plugins.outputs.plugins) }}
+      fail-fast: false
+      max-parallel: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -42,30 +71,21 @@ jobs:
         run: |
           pip install -U build
           python -m build
-      - name: Iterate over plugins and build distributions
+      - name: Cd into plugin and build distributions
         run: |
-          cd plugins
-          while IFS='' read -r LINE || [ -n "${LINE}" ]; do
-            echo "Building plugin: ${LINE}"
-            cd ${LINE}
-            python -m build
-            echo "Done building plugin ${LINE}"
-            cp -a dist/. ../dist/
-            cd ..
-          done < index.txt
-          echo "Built all plugins from plugins/index.txt"
+          cd plugins/${{ matrix.plugins }}
+          python -m build
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
-          name: plugins-dists
-          path: plugins/dist/
+          name: plugin-${{ matrix.plugins }}-dists
+          path: plugins/${{ matrix.plugins }}/dist/
 
   test-pypi-publish:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs:
       - test-build-core
-      - test-build-plugins
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
@@ -84,10 +104,40 @@ jobs:
           name: release-dists
           path: dist/
 
-      - name: Retrieve plugin distributions
+      - name: Publish distributions to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          repository-url: https://test.pypi.org/legacy/
+
+  test-pypi-plugin-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs:
+      - discover-plugins
+      - test-build-plugins
+    
+    strategy:
+      matrix: 
+        plugin: ${{ fromJson(needs.discover-plugins.outputs.plugins) }}
+      fail-fast: false
+      max-parallel: 10
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
+    # Dedicated environments with protections for publishing are strongly recommended.
+    # For more information, see: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-protection-rules
+    environment:
+      name: test-pypi
+      # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
+      # url: https://pypi.org/p/YOURPROJECT
+
+    steps:
+      - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
-          name: plugins-dists
+          name: plugin-${{ matrix.plugins }}-dists
           path: dist/
 
       - name: Publish distributions to TestPyPI
@@ -95,4 +145,4 @@ jobs:
         with:
           packages-dir: dist/
           repository-url: https://test.pypi.org/legacy/
-        
+
