@@ -2,8 +2,8 @@
 
 documentation:
 - changed-files:
-  - any-glob-to-any-file: 'docs/*'
+  - any-glob-to-any-file: docs/**
 
 plugin:
 - changed-files:
-  - any-glob-to-any-file: 'plugins/*'
+  - any-glob-to-any-file: plugins/**
