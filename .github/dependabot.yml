@@ -1,0 +1,39 @@
+# Manage Dependabot version updates
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Enable version updates for python
+  - package-ecosystem: "pip"
+    # Look for `setup.cfg` in the `root` directory
+    directory: "/"
+    # Check for updates once a month
+    schedule:
+      interval: "monthly"
+    pull-request-branch-name:
+      # Separate sections of the branch name with a slash
+      separator: /
+    # Allow up to 5 open pull requests for pip dependencies
+    open-pull-requests-limit: 5
+    assignees:
+      - "godaup"
+    # Combine all dependencies into a single pull request
+    groups:
+      python-packages:
+        patterns:
+          - "*"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    # Check for updates once a month
+    schedule:
+      interval: "monthly"
+    pull-request-branch-name:
+      # Separate sections of the branch name with a slash
+      separator: /
+    # Allow up to 5 open pull requests for GitHub Actions
+    open-pull-requests-limit: 5
+    assignees:
+      - "godaup"
