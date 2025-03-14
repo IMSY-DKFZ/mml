@@ -76,9 +76,9 @@ reqs = LSFSubmissionRequirements(
 # create batch of cmds
 cmds = list()
 # cmd 1 some dummy task
-prep_cmds.append(MMLJobDescription(prefix_req=reqs, mode='train', config_options={'tasks': 'fake', 'proj': 'dummy'}))
+cmds.append(MMLJobDescription(prefix_req=reqs, mode='train', config_options={'tasks': 'fake', 'proj': 'dummy'}))
 # cmd 2 another dummy task
-prep_cmds.append(MMLJobDescription(prefix_req=reqs, mode='train', config_options={'tasks': 'fake', 'proj': 'dummy'}))
+cmds.append(MMLJobDescription(prefix_req=reqs, mode='train', config_options={'tasks': 'fake', 'proj': 'dummy'}))
 # now write
 write_out_commands(cmd_list=cmds, name='exp1')
 # this creates a 'exp1.txt' at current working directory

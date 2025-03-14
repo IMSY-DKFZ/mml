@@ -10,6 +10,7 @@ Post release fixes.
 
 ### Bug fixes
  - create default project in `src.mml.interactive.loading.default_file_manager`
+ - fix documentation for `mml-drive` and `mml-lsf` plugins
 
 ## 1.0.2 (01/10/2025):
 Post release fixes. Remove outdated installation instructions.
