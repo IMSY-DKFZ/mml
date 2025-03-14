@@ -567,9 +567,10 @@ class TaskCreator:
             self.current_meta.class_occ.keys()
         ):
             raise RuntimeError("Inconsistent classes across idx_to_class and class_occ")
-        if self.current_meta.task_type == TaskType.CLASSIFICATION and sum(self.current_meta.class_occ.values()) != len(
-            self.current_meta.train_samples
-        ):
+        if self.current_meta.task_type == TaskType.CLASSIFICATION and (
+                sum(self.current_meta.class_occ.values()) not in
+                [len(self.current_meta.train_samples), sum([len(fold) for fold in self.current_meta.train_folds[1:]])]):
+            # class occurrences should either describe all train data or the train data except the validation split
             raise RuntimeError("Class occurrences are incorrect.")
         if self.current_meta.name == "default":
             raise RuntimeError("Task Creator was given no task name!")
