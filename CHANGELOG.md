@@ -12,6 +12,7 @@ Post release fixes.
  - create default project in `src.mml.interactive.loading.default_file_manager`
  - fix documentation for `mml-drive` and `mml-lsf` plugins
  - relax class_occurrences verification in `TaskCreator` (now compatible with `shrink_train` tag from `mml-tags`)
+ - fix `tl` mode model loading with new default value for `torch.load` in torch 2.6
 
 ## 1.0.2 (01/10/2025):
 Post release fixes. Remove outdated installation instructions.
