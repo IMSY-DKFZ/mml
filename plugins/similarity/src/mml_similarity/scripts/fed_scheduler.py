@@ -148,8 +148,8 @@ class FEDScheduler(AbstractTaskDistanceScheduler):
                 "routine beforehand or set reuse accordingly."
             )
         # load saved embeddings
-        source_embedding = torch.load(source_struct.paths["fim"])
-        target_embedding = torch.load(target_struct.paths["fim"])
+        source_embedding = torch.load(source_struct.paths["fim"], weights_only=False)
+        target_embedding = torch.load(target_struct.paths["fim"], weights_only=False)
         # filter embeddings for prefix
         source_embedding = {k: v for k, v in source_embedding.items() if k.startswith(self.cfg.distance.prefix)}
         target_embedding = {k: v for k, v in target_embedding.items() if k.startswith(self.cfg.distance.prefix)}
