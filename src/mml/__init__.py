@@ -8,6 +8,6 @@ import os
 # deactivate warning on non-up-to-date albumentations version
 os.environ["NO_ALBUMENTATIONS_UPDATE"] = "1"
 
-VERSION = (1, 0, 2)
+VERSION = (1, 0, 3)
 __version__ = ".".join(map(str, VERSION))
 __all__ = ["__version__"]
