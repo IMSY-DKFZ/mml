@@ -13,6 +13,7 @@ from omegaconf import DictConfig
 
 from mml.core.scripts.exceptions import MMLMisconfigurationException
 from mml.core.scripts.schedulers.train_scheduler import TrainingScheduler
+from mml.core.data_loading.task_struct import TaskStruct
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +72,7 @@ class TransferScheduler(TrainingScheduler):
             logger.info(f"Chose pretrain model based on creation date (latest: {storage.created}).")
         else:
             raise MMLMisconfigurationException("mode.model_selection must be one of [performance, random, created].")
-        state = torch.load(f=storage.parameters)["state_dict"]
+        state = torch.load(f=storage.parameters, weights_only=False)["state_dict"]
         # remove metrics and heads
         to_be_removed = []
         for key in state.keys():

@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.X (XX/XX/2025):
+Post release fixes.
+
+### Bug fixes
+ - create default project in `src.mml.interactive.loading.default_file_manager`
+ - fix documentation for `mml-drive` and `mml-lsf` plugins
+ - relax class_occurrences verification in `TaskCreator` (now compatible with `shrink_train` tag from `mml-tags`)
+ - fix `tl` mode model loading with new default value for `torch.load` in torch 2.6 (also generically for `mml.core.models.torch_base.BaseModel.load_checkpoint`)
+
 ## 1.0.2 (01/10/2025):
 Post release fixes. Remove outdated installation instructions.
 

@@ -31,7 +31,7 @@ notifier
 --------
 
 ``mml`` ships with two notifiers, but can easily be extended. There are three configuration files: ``none.yaml`` (the
-default, which does not provide any notifier), ``slack.yaml`` which allows notification via Slack and ``email.yaml` for
+default, which does not provide any notifier), ``slack.yaml`` which allows notification via Slack and ``email.yaml`` for
 email notification. Multiple notifiers can be combined via ``logging/notifier=[email,slack]``. For each notifier you
 can independently determine the events to send notifications (e.g. ``logging.notifier.slack.on_start=true``).
 

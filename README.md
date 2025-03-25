@@ -4,8 +4,6 @@
 
 ![](https://raw.githubusercontent.com/IMSY-DKFZ/mml/main/docs/source/_static/mml_logo.png)
 
-(Please note: badges are not yet finalized and are currently prepared for GitHub transition)
-
 [![docs status](https://readthedocs.org/projects/mml/badge/?version=latest)](https://mml.readthedocs.io/en/latest/)
 ![CI status](https://github.com/IMSY-DKFZ/mml/actions/workflows/full-CI.yml/badge.svg)
 [![pypi Badge](https://img.shields.io/pypi/v/mml-core)](https://pypi.org/project/mml-core/)
