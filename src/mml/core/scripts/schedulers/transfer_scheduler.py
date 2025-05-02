@@ -13,7 +13,6 @@ from omegaconf import DictConfig
 
 from mml.core.scripts.exceptions import MMLMisconfigurationException
 from mml.core.scripts.schedulers.train_scheduler import TrainingScheduler
-from mml.core.data_loading.task_struct import TaskStruct
 
 logger = logging.getLogger(__name__)
 

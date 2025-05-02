@@ -14,6 +14,7 @@ from omegaconf import OmegaConf
 @pytest.mark.parametrize("test_task_name", ["test_task_a", "test_task_d"])
 def test_train_probe_model(test_task_monkeypatch, mml_config, test_task_name) -> None:
     OmegaConf.set_struct(mml_config, False)
+    mml_config.allow_gpu = False
     mml_config.mode.subroutines = ["estimate"]
     mml_config.mode.k = 5
     mml_config.mode.max_subsets = 2

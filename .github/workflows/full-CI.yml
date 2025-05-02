@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        python-version: ["3.8", "3.10"]
+        python-version: ["3.10"]
       fail-fast: true
     steps:
     - name: Checkout
@@ -32,7 +32,7 @@ jobs:
 
     - name: Run PyTest
       run: |
-        pytest --benchmark-enable -vvv
+        pytest --benchmark-enable -vvv -m "not gpu"
         coverage report
         coverage xml
 
@@ -119,7 +119,7 @@ jobs:
           echo "Testing plugin: ${LINE}"
           cd ${LINE}
           pip install .
-          pytest -vvv
+          pytest -vvv -m "not gpu"
           echo "Done testing plugin ${LINE}"
           cd ..
         done < index.txt

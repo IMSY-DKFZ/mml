@@ -12,6 +12,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import hydra.utils
 import lightning
 import torch
+from lightning.pytorch.accelerators.cuda import CUDAAccelerator
 from lightning.pytorch.utilities import CombinedLoader
 from omegaconf import DictConfig
 from torch.utils.data import DataLoader
@@ -54,14 +55,13 @@ class MultiTaskDataModule(lightning.LightningDataModule):
             if self.do_cache[struct.name]:
                 if struct.preprocessed != self.cfg.preprocessing.id:
                     logger.error(
-                        f"Requested caching on dataset {struct.name} but data is not preprocessed! " f"Will deactivate"
+                        f"Requested caching on dataset {struct.name} but data is not preprocessed! Will deactivate"
                     )
                     self.do_cache[struct.name] = False
                 else:
                     if _cache_counter + struct.num_samples > self.cfg.sampling.cache_max_size:
                         logger.info(
-                            f"No caching for {struct.name}, since cache would likely exceed "
-                            f"sampling.cache_max_size."
+                            f"No caching for {struct.name}, since cache would likely exceed sampling.cache_max_size."
                         )
                         self.do_cache[struct.name] = False
                     else:
@@ -69,6 +69,16 @@ class MultiTaskDataModule(lightning.LightningDataModule):
         logger.debug(f"Cache information: {self.do_cache}")
         # new backend functionality
         self.has_gpu_augs = len(self.cfg.augmentations.gpu) > 0
+        if self.has_gpu_augs:
+            if self.cfg.trainer.accelerator == "cpu":
+                raise MMLMisconfigurationException("Set trainer.accelerator to cpu but provided gpu augmentations.")
+            if not self.cfg.allow_gpu:
+                warnings.warn(
+                    "Provided gpu augmentations but set allow_gpu=False. Please note that this config option"
+                    " is intended for any non-lightning computations. This means to properly deactivate "
+                    "gpu usage modify trainer.accelerator (e.g., set to cpu). Will continue with gpu "
+                    "augmentations."
+                )
         # will store gpu augmentations per device
         self.gpu_train_augs: Optional[AugmentationModule] = None
         self.gpu_test_augs: Optional[AugmentationModule] = None
@@ -316,9 +326,15 @@ class MultiTaskDataModule(lightning.LightningDataModule):
         return means, stds
 
     def get_loader_kwargs_from_cfg(self, task_name: str, phase: LearningPhase = LearningPhase.TRAIN) -> Dict[str, Any]:
+        try:
+            # if we are in a lightning context, we assure the accelerator type
+            gpu_acc = isinstance(self.trainer.accelerator, CUDAAccelerator)
+        except AttributeError:
+            # otherwise we fall back to the main config option
+            gpu_acc = self.cfg.allow_gpu
         kwargs = {
             "num_workers": self.cfg.num_workers // len(self.task_structs),
-            "pin_memory": True,
+            "pin_memory": gpu_acc,
             "drop_last": self.cfg.sampling.drop_last,
         }
         if kwargs["num_workers"] > 0:

@@ -259,7 +259,7 @@ class TaskCreatorState(IntEnum):
         """
         if self == TaskCreatorState.FINISHED:
             raise InvalidTransitionError(
-                "TaskCreator already finished. It is considered better practice to create a " "new one."
+                "TaskCreator already finished. It is considered better practice to create a new one."
             )
         elif action == TaskCreatorActions.NONE:
             return self

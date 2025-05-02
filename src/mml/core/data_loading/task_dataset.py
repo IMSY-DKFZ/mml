@@ -201,14 +201,14 @@ class TaskDataset(Dataset):
         """
         if 0 > fold or fold > len(self.task_description.train_folds):
             raise ValueError(
-                f"Invalid fold number {fold}, has to be in range 0 - " f"{len(self.task_description.train_folds)}."
+                f"Invalid fold number {fold}, has to be in range 0 - {len(self.task_description.train_folds)}."
             )
         if not isinstance(split, DataSplit):
             raise TypeError(f"Invalid split {split}, needs to be compatible to DataSplit class.")
         if split == DataSplit.TEST:
             self.allow_caching = False
             logger.debug(
-                "Deactivated caching for test data (commonly passed once and mml assumes not to be " "preprocessed)."
+                "Deactivated caching for test data (commonly passed once and mml assumes not to be preprocessed)."
             )
             self.samples = self.task_description.test_samples.values()
             self._sample_ids = list(self.task_description.test_samples.keys())
@@ -241,7 +241,7 @@ class TaskDataset(Dataset):
         self.samples = list(self.samples)
         self.active_fold = (split, fold)
         logger.debug(
-            f"Selected samples based on split {split} and fold {fold}. " f"Total sample num is {len(self.samples)}."
+            f"Selected samples based on split {split} and fold {fold}. Total sample num is {len(self.samples)}."
         )
         if len(self.samples) != len(self._sample_ids):
             raise RuntimeError(f"{len(self.samples)=}  {len(self._sample_ids)=}")
@@ -265,7 +265,7 @@ class TaskDataset(Dataset):
             sample = self.load_sample(index)
         except Exception as e:
             logger.warning(
-                f"Skipped sample (index {index}). Exception: {str(e)}.\n" f"Loading data was: {self.samples[index]}."
+                f"Skipped sample (index {index}). Exception: {str(e)}.\nLoading data was: {self.samples[index]}."
             )
             self._consecutive_errors += 1
             if self._consecutive_errors < _ERROR_RETRY:

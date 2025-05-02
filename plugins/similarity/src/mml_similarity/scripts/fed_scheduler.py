@@ -33,7 +33,7 @@ class FEDScheduler(AbstractTaskDistanceScheduler):
         super(FEDScheduler, self).__init__(cfg=cfg, available_subroutines=["tune", "fim", "distance"])
         if len(self.cfg.augmentations.gpu) != 0:
             raise MMLMisconfigurationException(
-                f"Distance computations for {self.distance_measure} do not support GPU" f" augmentations!"
+                f"Distance computations for {self.distance_measure} do not support GPU augmentations!"
             )
 
     def create_routine(self) -> None:
@@ -154,9 +154,9 @@ class FEDScheduler(AbstractTaskDistanceScheduler):
         source_embedding = {k: v for k, v in source_embedding.items() if k.startswith(self.cfg.distance.prefix)}
         target_embedding = {k: v for k, v in target_embedding.items() if k.startswith(self.cfg.distance.prefix)}
         # assure compatibility
-        assert set(source_embedding.keys()) == set(
-            target_embedding.keys()
-        ), f"Fisher embeddings of task {source_task_name} and task {target_task_name} are not matching!"
+        assert set(source_embedding.keys()) == set(target_embedding.keys()), (
+            f"Fisher embeddings of task {source_task_name} and task {target_task_name} are not matching!"
+        )
         # computing the distance
         distance = compute_task_distance(
             embedding_to_tensor(source_embedding),

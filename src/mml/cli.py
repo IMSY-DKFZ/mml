@@ -34,14 +34,13 @@ def copy_mml_env_file() -> None:
     default_env_path = template_env.parent / "mml.env"
     if default_env_path.exists():
         raise RuntimeError(
-            f"Found existing mml.env file at default location {default_env_path}. Please remove to "
-            f"redo mml env init."
+            f"Found existing mml.env file at default location {default_env_path}. Please remove to redo mml env init."
         )
     # copy and rename template
     destination = Path(os.getcwd()) / "mml.env"
     if destination.exists():
         raise RuntimeError(
-            f"Found existing mml.env file at current location {destination}. Please remove to " f"redo mml env init."
+            f"Found existing mml.env file at current location {destination}. Please remove to redo mml env init."
         )
     shutil.copyfile(src=template_env, dst=destination)
     # report
