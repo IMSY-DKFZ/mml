@@ -174,12 +174,12 @@ def calculate_wasserstein_distance(features_1: np.ndarray, features_2: np.ndarra
     """
     Return wasserstein distance of two feature matrices.
     """
-    assert (
-        len(features_1.shape) == len(features_2.shape) == 2
-    ), "wasserstein distance computation expects (samples x features) array"
-    assert (
-        features_1.shape[1] == features_2.shape[1]
-    ), "source and target data are expected to have identical feature shapes"
+    assert len(features_1.shape) == len(features_2.shape) == 2, (
+        "wasserstein distance computation expects (samples x features) array"
+    )
+    assert features_1.shape[1] == features_2.shape[1], (
+        "source and target data are expected to have identical feature shapes"
+    )
     if distance_cfg.method == "sinkhorn":
         if not _GEOMLOSS_AVAILABLE:
             raise ImportError("Did not find geomloss package. Please install >pip install geomloss<.")
@@ -220,12 +220,12 @@ def calculate_kullbach_leibler_divergence(
     Return kullbach leibler divergence of the feature means of two sample feature matrices.
     See https://arxiv.org/pdf/1908.07630.pdf for details.
     """
-    assert (
-        len(features_1.shape) == len(features_2.shape) == 2
-    ), "kullbach leibler distance computation expects (samples x features) array"
-    assert (
-        features_1.shape[1] == features_2.shape[1]
-    ), "source and target data are expected to have identical feature shapes"
+    assert len(features_1.shape) == len(features_2.shape) == 2, (
+        "kullbach leibler distance computation expects (samples x features) array"
+    )
+    assert features_1.shape[1] == features_2.shape[1], (
+        "source and target data are expected to have identical feature shapes"
+    )
     # average features
     source_avg = np.mean(features_1, axis=0)
     target_avg = np.mean(features_2, axis=0)

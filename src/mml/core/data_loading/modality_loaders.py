@@ -202,7 +202,7 @@ class OpenCVMaskLoader(ModalityLoader):
         if task_dataset.task_type != TaskType.SEMANTIC_SEGMENTATION:
             # prevent misuse
             logger.debug(
-                f"Will skip index mapper setup for OpenCVMaskLoader since given task type " f"{task_dataset.task_type}."
+                f"Will skip index mapper setup for OpenCVMaskLoader since given task type {task_dataset.task_type}."
             )
             return
         self.base_path = task_dataset.root.parent
@@ -232,7 +232,7 @@ class NonMappingOpenCVMaskLoader(ModalityLoader):
         if task_dataset.task_type != TaskType.SEMANTIC_SEGMENTATION:
             # prevent misuse
             logger.debug(
-                f"Will skip index mapper setup for OpenCVMaskLoader since given task type " f"{task_dataset.task_type}."
+                f"Will skip index mapper setup for OpenCVMaskLoader since given task type {task_dataset.task_type}."
             )
             return
         self.base_path = task_dataset.root.parent
@@ -252,7 +252,7 @@ class ClassLoader(ModalityLoader):
         if task_dataset.task_type != TaskType.CLASSIFICATION:
             # prevent misuse
             logger.debug(
-                f"Will skip index mapper setup for ClassLoader since given task type " f"{task_dataset.task_type}."
+                f"Will skip index mapper setup for ClassLoader since given task type {task_dataset.task_type}."
             )
             return
         self.index_mapper = {raw: task_dataset.classes.index(cls) for raw, cls in task_dataset.raw_idx_to_class.items()}
@@ -306,8 +306,7 @@ class SoftLabelClassLoader(ModalityLoader):
         if task_dataset.task_type != TaskType.MULTILABEL_CLASSIFICATION:
             # prevent misuse
             logger.debug(
-                f"Will skip index mapper setup for SoftLabelClassLoader since given task type "
-                f"{task_dataset.task_type}."
+                f"Will skip index mapper setup for SoftLabelClassLoader since given task type {task_dataset.task_type}."
             )
             return
         num_classes = len(task_dataset.classes)

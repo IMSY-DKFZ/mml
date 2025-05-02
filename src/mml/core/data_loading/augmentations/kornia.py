@@ -44,7 +44,7 @@ class KorniaAugmentationModule(AugmentationModule):
             pass
         elif sum([x is None for x in [self.means, self.stds]]) == 1:
             raise RuntimeError(
-                "Was presented either only STD or only MEAN normalization values. " "Require either none or both!"
+                "Was presented either only STD or only MEAN normalization values. Require either none or both!"
             )
         else:
             norm_trans.append(K.augmentation.Normalize(mean=self.means.get_rgb(), std=self.stds.get_rgb()))

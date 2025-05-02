@@ -54,6 +54,6 @@ class DataArchive:
                 buf = file.read(block_size)
         if hasher.hexdigest() != self.md5sum:
             raise RuntimeError(
-                f"incorrect md5sum for file {self.path.name}, should be {self.md5sum} but is " f"{hasher.hexdigest()}"
+                f"incorrect md5sum for file {self.path.name}, should be {self.md5sum} but is {hasher.hexdigest()}"
             )
         logger.info(f"file {self.path.name} has correct hash!")

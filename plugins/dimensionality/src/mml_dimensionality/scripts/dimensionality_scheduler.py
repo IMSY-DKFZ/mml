@@ -38,7 +38,7 @@ class DimensionalityScheduler(AbstractBaseScheduler):
             raise MMLMisconfigurationException("mode.k must be at least 3.")
         if self.cfg.augmentations.normalization is not None:
             raise MMLMisconfigurationException(
-                "Must deactivate normalization for dimensionality estimation. " "Best set augmentations=no_norm."
+                "Must deactivate normalization for dimensionality estimation. Best set augmentations=no_norm."
             )
 
     def create_routine(self):

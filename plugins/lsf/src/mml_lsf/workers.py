@@ -70,7 +70,7 @@ def check_lsf_workers(scheduler: AbstractBaseScheduler) -> None:
         if choices["sys"] == "local":
             logger.info("LSF cluster plugin detected local system, no changes made to the number of workers.")
             return
-        logger.info(f'LSF cluster plugin detected system: {choices["sys"]}.')
+        logger.info(f"LSF cluster plugin detected system: {choices['sys']}.")
     configured = scheduler.cfg.num_workers
     allowed = get_allowed_n_proc()
     if configured > allowed:

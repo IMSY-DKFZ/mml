@@ -47,7 +47,7 @@ class TorchvisionAugmentationModule(AugmentationModule):
                 t_list.append(v2.ToDtype(torch.float32, scale=True))
         elif sum([x is None for x in [self.means, self.stds]]) == 1:
             raise RuntimeError(
-                "Was presented either only STD or only MEAN normalization values. " "Require either none or both!"
+                "Was presented either only STD or only MEAN normalization values. Require either none or both!"
             )
         else:
             # Normalize expects float input
@@ -115,7 +115,7 @@ def mixup_cutmix_labels_getter(batch: Dict[str, Dict[str, torch.Tensor]]) -> tor
         if modality_cand.value in task_batch:
             return task_batch[modality_cand.value]
     raise RuntimeError(
-        f"Mixup_cutmix_labels_getter did not find a suitable target in batch with keys:" f" {task_batch.keys()}."
+        f"Mixup_cutmix_labels_getter did not find a suitable target in batch with keys: {task_batch.keys()}."
     )
 
 

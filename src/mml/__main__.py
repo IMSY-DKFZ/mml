@@ -105,7 +105,7 @@ def wrapped_mml() -> float:
         print('║     * call "mml --help"                                   ║')
         print("╚═══════════════════════════════════════════════════════════╝")
         if os.getenv("MML_ENV_PATH", None):
-            print(f'MML_ENV_PATH has been set to {os.getenv("MML_ENV_PATH")}')
+            print(f"MML_ENV_PATH has been set to {os.getenv('MML_ENV_PATH')}")
         else:
             print("MML_ENV_PATH has not been set")
         print('For a list of installed plugins call "mml --version".')
@@ -209,7 +209,7 @@ def wrapped_mml() -> float:
             else:
                 selected_path = Path(cfg["proj_path"]) / "runs" / cfg["continue"]
                 if not selected_path.exists():
-                    msg = f'Chosen value <continue={cfg["continue"]}> results in not existent path {selected_path}.'
+                    msg = f"Chosen value <continue={cfg['continue']}> results in not existent path {selected_path}."
                     logger.error(msg)
                     raise ValueError(msg)
             # change cwd to selected run
