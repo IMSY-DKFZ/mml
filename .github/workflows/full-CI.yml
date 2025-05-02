@@ -32,7 +32,7 @@ jobs:
 
     - name: Run PyTest
       run: |
-        pytest --benchmark-enable -vvv
+        pytest --benchmark-enable -vvv -m "not gpu"
         coverage report
         coverage xml
 
