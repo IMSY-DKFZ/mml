@@ -142,7 +142,7 @@ If you use this code in a research paper, **please cite**:
    :target: https://github.com/IMSY-DKFZ/mml
 .. |PyPI Badge| image:: https://img.shields.io/pypi/v/mml-core
    :target: https://pypi.org/project/mml-core/
-.. |Python Badge| image:: https://img.shields.io/badge/python-3.10|3.11|3.12-informational
+.. |Python Badge| image:: https://img.shields.io/badge/python-3.10-informational
    :target: https://www.python.org/doc/versions/
 .. |Docs Badge| image:: https://readthedocs.org/projects/mml/badge/?version=latest
    :target: https://mml.readthedocs.io/en/latest/
