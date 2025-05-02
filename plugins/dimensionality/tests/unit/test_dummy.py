@@ -4,6 +4,6 @@
 # SPDX-License-Identifier: MIT
 #
 
-VERSION = (0, 2, 2)
-__version__ = ".".join(map(str, VERSION))
-__all__ = ["__version__"]
+
+def test_dummy():
+    pass

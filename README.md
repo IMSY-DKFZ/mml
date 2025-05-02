@@ -2,15 +2,12 @@
 
 # Medical Meta Learner
 
-![mml_logo.png](docs%2Fsource%2F_static%2Fmml_logo.png)
-
-(Please note: badges are not yet finalized and are currently prepared for GitHub transition)
+![](https://raw.githubusercontent.com/IMSY-DKFZ/mml/main/docs/source/_static/mml_logo.png)
 
 [![docs status](https://readthedocs.org/projects/mml/badge/?version=latest)](https://mml.readthedocs.io/en/latest/)
-![build status](https://github.com/IMSY-DKFZ/mml/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+![CI status](https://github.com/IMSY-DKFZ/mml/actions/workflows/full-CI.yml/badge.svg)
 [![pypi Badge](https://img.shields.io/pypi/v/mml-core)](https://pypi.org/project/mml-core/)
 [![license](https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray)](https://github.com/ashleve/lightning-hydra-template#license)
-![docker status](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE>/badge.svg) 
 <br>
 [![Python](https://img.shields.io/pypi/pyversions/mml-core.svg)](https://pypi.org/project/mml-core)
 [![pytorch](https://img.shields.io/badge/PyTorch_2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
@@ -18,8 +15,10 @@
 [![hydra](https://img.shields.io/badge/Config-Hydra_1.3-89b8cd)](https://hydra.cc/) <br>
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
-CodeCov
-Pylint
+
+[//]: # (TODO CodeCov)
+
+[//]: # (TODO Pylint)
 
 </div>
 
@@ -57,20 +56,18 @@ conda create -n mml python=3.10
 conda activate mml
 ```
 
-Now create a gitlab access token via [this link](https://git.dkfz.de/-/user_settings/personal_access_tokens?name=mmlToken&scopes=read_api), 
-everything is already pre-filled, simply create and copy the token. Afterward within your projects virtual environment 
-you can call
+Now install the core of `mml` via
 
 ```commandline
-pip install --index-url https://mmlToken:<personal_access_token>@git.dkfz.de/api/v4/projects/89/packages/pypi/simple mml-core
+pip install mml-core
 ```
-
-and replace <personal_access_token> with your actual token. You may add extras appended to mml as described [below](#extras).
 
 ### plugins
 
 Plugins extend `mml` functionality. See [here](https://mml.readthedocs.io/en/latest/api/plugins/overview.html) for a 
-list of available plugins. Use the previous `pip` and replace `mml-core` with one of the plugins to install.
+list of available plugins. They are installable exactly like the previous `pip` command, just replace `mml-core` with 
+one of the plugins to install. Nevertheless, some plugins require additional setup steps. Check with the README of the 
+specific plugin for details.
 
 ### local environment variables
 
@@ -82,6 +79,7 @@ list of available plugins. Use the previous `pip` and replace `mml-core` with on
 You can use `mml-env-setup` from the command line at the location you want to place your `mml.env` file:
 
 ```commandline
+cd /path/to/your/config/location
 mml-env-setup
 ```
 
@@ -89,7 +87,7 @@ Now you only need to pinpoint `mml` to your `mml.env` file. This can be done via
 that needs to be present in the environment before starting `MML`. If you use conda this simplifies to 
 
 ```commandline
-conda env config vars set MML_ENV_PATH=/path/to/your/mml.env
+conda env config vars set MML_ENV_PATH=/path/to/your/config/location/mml.env
 # if your file is located at the current working directory, you may instead use
 # pwd | conda env config vars set MML_ENV_PATH=$(</dev/stdin)/mml.env
 # either way this requires re-activation of environment

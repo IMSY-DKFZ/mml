@@ -202,7 +202,7 @@ def get_data_iterators(case_paths, all_annotations):
                 for frame in vid[0].iterdir():  # loops over frames
                     data_iterators[phase].append(
                         {
-                            Modality.SAMPLE_ID: f'neg_vid{vid[0].stem}_frame{frame.stem.split("_")[-3]}_{frame.stem[-6:]}',
+                            Modality.SAMPLE_ID: f"neg_vid{vid[0].stem}_frame{frame.stem.split('_')[-3]}_{frame.stem[-6:]}",
                             Modality.IMAGE: frame,
                             Modality.CLASS: 0,
                         }

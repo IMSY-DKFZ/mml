@@ -45,13 +45,14 @@ def prepare_exp(self: CreateScheduler) -> None:
         # no we have to copy
         logger.info(f"Found dataset {d_set} on the DKFZ network drive - will try to copy now.")
         target_path = self.fm.get_download_path(dset_name=d_set)
-        if len(target_path.iterdir()) != 0:
-            # already existing downloads, will skip
+        if len(list(target_path.iterdir())) != 0:
+            # already existing downloads, better be careful and not mess something up
             logger.error(
                 f"Found existing download data (potentially from previous attempt) at {target_path}. "
                 f"This triggers to skip the data copy! If dset creation fails, you might want to "
                 f"clean delete {target_path} manually."
             )
+            continue
         with WIPBar() as bar:
             bar.desc = "Copying dataset"
             shutil.copytree(src=str(nw_downloads / d_set), dst=str(target_path), dirs_exist_ok=True)

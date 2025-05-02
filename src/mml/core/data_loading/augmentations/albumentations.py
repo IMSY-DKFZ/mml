@@ -67,7 +67,7 @@ class AlbumentationsAugmentationModule(AugmentationModule):
                 _is_float = True
         elif sum([x is None for x in [self.means, self.stds]]) == 1:
             raise RuntimeError(
-                "Was presented either only STD or only MEAN normalization values. " "Require either none or both!"
+                "Was presented either only STD or only MEAN normalization values. Require either none or both!"
             )
         else:
             # default case: requested normalization
@@ -156,7 +156,7 @@ class AlbumentationsAugmentationModule(AugmentationModule):
             norm_trans.append(A.ToFloat(max_value=255))
         elif sum([x is None for x in [mean, std]]) == 1:
             raise RuntimeError(
-                "Was presented either only STD or only MEAN normalization values. " "Require either none or both!"
+                "Was presented either only STD or only MEAN normalization values. Require either none or both!"
             )
         else:
             mean = mean.get_rgb()

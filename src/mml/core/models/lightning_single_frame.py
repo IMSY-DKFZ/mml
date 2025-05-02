@@ -73,7 +73,9 @@ class SingleFrameLightningModule(lightning.LightningModule):
         self.criteria = self.get_criteria()
         # construct metrics
         metric_lists = {name: self.get_metrics(struct) for name, struct in self.task_structs.items()}
-        metric_collections = {name: MetricCollection(metrics) for name, metrics in metric_lists.items()}
+        metric_collections = {
+            name: MetricCollection(metrics).set_dtype(torch.float) for name, metrics in metric_lists.items()
+        }
         for metric_collection in metric_collections.values():
             metric_collection.persistent(mode=True)
         self.train_metrics = torch.nn.ModuleDict(
@@ -436,7 +438,7 @@ class SingleFrameLightningModule(lightning.LightningModule):
                     collection.reset()
                 except ValueError:
                     logger.info(
-                        f"No metrics available for {task}. This may be due to evaluatio.n on a different task "
+                        f"No metrics available for {task}. This may be due to evaluation on a different task "
                         f"or previous multitask model being evaluated solely on one task"
                     )
 

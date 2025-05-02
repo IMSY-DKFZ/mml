@@ -79,7 +79,7 @@ class CreateScheduler(AbstractBaseScheduler):
                 continue
             if task in self.fm.task_index.keys() and "none" in self.fm.task_index[task]:
                 logger.info(
-                    f"Skipping creation of task {task} because there already seems to be a RAW version of " f"that."
+                    f"Skipping creation of task {task} because there already seems to be a RAW version of that."
                 )
                 continue
             filtered_tasks.append(task)

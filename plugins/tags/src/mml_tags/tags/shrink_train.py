@@ -37,9 +37,9 @@ def shrink_train(self: TaskCreator, val_string: str, seed: str = "42") -> None:
     max_samples = sum([len(fold) for fold in self.current_meta.train_folds[1:]])
     min_samples = (num_folds - 1) * MIN_OCC_PER_CLASS * len(new_total_class_occ)
     remaining = int(val_string)
-    assert (
-        min_samples <= remaining <= max_samples
-    ), f"was given tag subset with {val_string=}, must be in range [{min_samples}, {max_samples}]"
+    assert min_samples <= remaining <= max_samples, (
+        f"was given tag subset with {val_string=}, must be in range [{min_samples}, {max_samples}]"
+    )
     logger.info(
         f"Shrinking training folds of task {self.current_meta.name} to {remaining} of training "
         f"data (ensuring folds). Seed is: {seed}."
@@ -66,7 +66,7 @@ def shrink_train(self: TaskCreator, val_string: str, seed: str = "42") -> None:
                 == cls
             ]
             if len(cls_samples) < MIN_OCC_PER_CLASS:
-                logger.warning(f"Only {len(cls_samples)} samples for class {cls} " f"(requires {MIN_OCC_PER_CLASS}).")
+                logger.warning(f"Only {len(cls_samples)} samples for class {cls} (requires {MIN_OCC_PER_CLASS}).")
                 pre_selection.update(cls_samples)
             else:
                 pre_selection.update(rng.choice(a=cls_samples, size=MIN_OCC_PER_CLASS, replace=False).tolist())

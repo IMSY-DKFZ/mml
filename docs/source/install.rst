@@ -21,22 +21,18 @@ as virtual environment manager, but remain fully ``pip`` compatible
     conda create --yes --name mml python=3.10  # create environment, choose python version
     conda activate mml  # activate environment, start runs later on with activated environment
 
-Now create a gitlab access token via `this link <https://git.dkfz.de/-/user_settings/personal_access_tokens?name=mmlToken&scopes=read_api>`_
-(click "Add Token" and "Create personal access token", no need to configure anything else), do not forget to copy the token once created.
-Afterward, within your projects virtual environment you can call
+Now install the core of `mml` via
 
 .. code-block:: bash
 
-    pip install --index-url https://mmlToken:<personal_access_token>@git.dkfz.de/api/v4/projects/89/packages/pypi/simple mml-core
-
-and replace <personal_access_token> with your actual token.
+    pip install mml-core
 
 .. note::
     If you want to contribute to MML we suggest to install from source: clone the ``mml`` repository and install via
     ``pip install -e .[dev,docs]`` in editable mode with the extras for documentation generation and linting tools.
 
 .. note::
-    From version ``0.10.0`` the ``mml`` framework was split into the seperate installable packages ``mml-core`` and
+    From version ``0.10.0`` the ``mml`` framework was split into the separate installable packages ``mml-core`` and
     diverse plugins. Please do **NOT** install as ``pip install ... mml`` anymore!
 
 Local variables
@@ -146,6 +142,8 @@ Roughly as example for ``bash`` you can install mml tab completion with ``eval "
 Docker
 ------
 
+.. note::
+    The ``mml`` docker image is not yet published to a public container-registry. You may build it yourself though.
 
 prerequisites
 ~~~~~~~~~~~~~

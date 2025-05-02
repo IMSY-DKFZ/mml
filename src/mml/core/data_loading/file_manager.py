@@ -193,7 +193,7 @@ class MMLFileManager(Singleton):
         :rtype: ~pathlib.Path
         """
         assert preprocessing not in ["None", "none"], (
-            "Use None value instead none string to call " "get_dataset_path for raw data."
+            "Use None value instead none string to call get_dataset_path for raw data."
         )
         assert (raw_path is None) == (preprocessing is None), "See usage of get_dataset_path."
         assert (dset_name is None) != (raw_path is None), "See usage of get_dataset_path."
@@ -357,7 +357,7 @@ class MMLFileManager(Singleton):
             data_dict = orjson.loads(f.read())
         if any([key not in data_dict for key in ALL_TASK_DESCRIPTION_KEYS]):
             raise RuntimeError(
-                f"Task keys ({data_dict.keys()}) do not cover all required keys " f"({ALL_TASK_DESCRIPTION_KEYS})."
+                f"Task keys ({data_dict.keys()}) do not cover all required keys ({ALL_TASK_DESCRIPTION_KEYS})."
             )
         task_description = TaskDescription.from_json(data_dict)
         logger.debug(f"Successfully loaded task description from {path}.")
@@ -501,7 +501,7 @@ class MMLFileManager(Singleton):
                 proj_path = base_proj_path / proj
                 if not proj_path.exists():
                     raise MMLMisconfigurationException(
-                        f"specified project {proj} for reuse of {key} not found " f"(@{proj_path})."
+                        f"specified project {proj} for reuse of {key} not found (@{proj_path})."
                     )
                 if attr_reusable == self.GLOBAL_REUSABLE:
                     # global reusable -> follow path into folder
@@ -549,7 +549,7 @@ class MMLFileManager(Singleton):
                             if key == "models":
                                 if number is not None:
                                     raise MMLMisconfigurationException(
-                                        "May not specify a specific model to reuse -" "all models will be loaded."
+                                        "May not specify a specific model to reuse -all models will be loaded."
                                     )
                                 if "models" not in reusables[task_name]:
                                     reusables[task_name]["models"] = []
@@ -657,7 +657,7 @@ class MMLFileManager(Singleton):
             global_reusable = True
         if reusable and not global_reusable:
             reusable_err_msg = (
-                "Reusable path assignment requested, but path does not match requirements! Read " "documentation."
+                "Reusable path assignment requested, but path does not match requirements! Read documentation."
             )
             if len(path.parts) != 4:
                 raise ValueError(reusable_err_msg)
@@ -709,7 +709,7 @@ class MMLFileManager(Singleton):
         obj_class, path, enable_numbering, _ = self._path_assignments[key]
         if obj_class is not None:
             assert isinstance(obj, obj_class), (
-                f"Expected obj with type {obj_class} for saving key {key}, but got " f"{type(obj)}."
+                f"Expected obj with type {obj_class} for saving key {key}, but got {type(obj)}."
             )
         if "TASK_NAME" in path.parts and task_name is None:
             raise ValueError(f"Must provide task_name for {key=}")

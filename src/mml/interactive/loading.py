@@ -74,6 +74,7 @@ def default_file_manager(
     """
     _check_init()
     proj_path = Path(f"{os.getenv('MML_RESULTS_PATH')}/default")
+    proj_path.mkdir(exist_ok=True)
     tmp_log_path = proj_path / "tmp_log"
     tmp_log_path.mkdir(exist_ok=True)
     if reuse_config is None:

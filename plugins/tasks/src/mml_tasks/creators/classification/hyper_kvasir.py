@@ -87,7 +87,7 @@ def create_hyperkvasir_subtask(task: str, dset_path: Path, alias: str) -> None:
         dset_path=dset_path,
         name=alias,
         task_type=TaskType.CLASSIFICATION,
-        desc="Hyper-Kvasir Dataset is a large image and video dataset from the gastrointestinal " "tract",
+        desc="Hyper-Kvasir Dataset is a large image and video dataset from the gastrointestinal tract",
         ref=REFERENCE,
         url="https://datasets.simula.no/hyper-kvasir/",
         instr="download zips of labeled and unlabeled images via website",

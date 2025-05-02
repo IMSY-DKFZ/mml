@@ -45,7 +45,7 @@ def create_bt_classification(dset_path: Path):
         dset_path=dset_path,
         name="brain_tumor_type_classification",
         task_type=TaskType.CLASSIFICATION,
-        desc="The dataset containing  samples of meningioma(1), glioma(2), " "pituitary tumor(3) brain tumor types",
+        desc="The dataset containing  samples of meningioma(1), glioma(2), pituitary tumor(3) brain tumor types",
         ref=REFERENCE,
         url="https://www.kaggle.com/denizkavi1/brain-tumor",
         instr="download via https://www.kaggle.com/denizkavi1/brain-tumor",

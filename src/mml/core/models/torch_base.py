@@ -153,7 +153,7 @@ class BaseModel(torch.nn.Module, ABC):
         :param Union[Path, str] param_path: path to load checkpoint from
         :return:
         """
-        state = torch.load(param_path)
+        state = torch.load(param_path, weights_only=False)
         model: BaseModel = hydra.utils.instantiate(dict(_target_=state["__target__"], **state["__init_kwargs__"]))
         model.backbone.load_state_dict(state["backbone"])  # type: ignore[union-attr]
         model._frozen_params = state["__frozen_params__"]

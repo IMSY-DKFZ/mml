@@ -52,7 +52,7 @@ def create_task(dset_path: Path) -> None:
         dset_path=dset_path,
         name="hyperkvasir_polyp_segmentation",
         task_type=TaskType.SEMANTIC_SEGMENTATION,
-        desc="Hyper-Kvasir Dataset is a large image and video dataset from the gastrointestinal " "tract",
+        desc="Hyper-Kvasir Dataset is a large image and video dataset from the gastrointestinal tract",
         ref=REFERENCE,
         url="https://datasets.simula.no/hyper-kvasir/",
         instr="download zips of segmented images via website",
