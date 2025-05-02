@@ -243,7 +243,7 @@ def create_color_mapping(
         criteria = None
     # input values check
     assert sum([criteria is None, tag_groups is None, task_clusters is None]) >= 2, (
-        "provide at most one of criteria," " tag_groups or task_clusters"
+        "provide at most one of criteria, tag_groups or task_clusters"
     )
     if sum([criteria is None, tag_groups is None, task_clusters is None]) == 3:
         # default behaviour in case nothing was given

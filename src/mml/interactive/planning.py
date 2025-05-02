@@ -424,4 +424,4 @@ def write_out_commands(
             out = out + cmd.render() + "\n" + seperator
         with open(Path(os.path.abspath("")) / file_name, "w") as file:
             file.write(out)
-        print(f"Stored {len(cmd_list[split_idx * max_cmds: (split_idx + 1) * max_cmds])} commands at {file_name}.")
+        print(f"Stored {len(cmd_list[split_idx * max_cmds : (split_idx + 1) * max_cmds])} commands at {file_name}.")

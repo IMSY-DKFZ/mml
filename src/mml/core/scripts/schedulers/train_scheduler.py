@@ -44,8 +44,7 @@ class TrainingScheduler(AbstractBaseScheduler):
         # check compliance to new train scheduler behaviour
         if not cfg.pivot.name:
             raise MMLMisconfigurationException(
-                "Train mode (and all inherited ones) requires a pivot task to be set "
-                "from mml version 0.12.0 onwards."
+                "Train mode (and all inherited ones) requires a pivot task to be set from mml version 0.12.0 onwards."
             )
         if ("nested" in cfg.pivot.name or "nested" in cfg.pivot.tags) and cfg.mode.nested:
             warnings.warn(
@@ -61,8 +60,7 @@ class TrainingScheduler(AbstractBaseScheduler):
         if self.cfg.mode.multitask:
             if self.cfg.mode.multitask == 1:
                 raise MMLMisconfigurationException(
-                    "To enable multitask learning set mode.multitask to the TOTAL "
-                    "number of task to be learned jointly."
+                    "To enable multitask learning set mode.multitask to the TOTAL number of task to be learned jointly."
                 )
             if self.cfg.mode.co_tasks == "random":
                 choices = [task for task in self.cfg.task_list if not task.startswith(self.pivot)]
@@ -255,7 +253,7 @@ class TrainingScheduler(AbstractBaseScheduler):
                 if len(model_candidates) != 1:
                     # this can happen if reuse was used beforehand
                     logger.error(
-                        f"Ambiguous model choices for {task_name} and {fold}! Will skip while aggregating" f" results."
+                        f"Ambiguous model choices for {task_name} and {fold}! Will skip while aggregating results."
                     )
                     continue
                 model = model_candidates[0]

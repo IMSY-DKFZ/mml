@@ -1,8 +1,19 @@
 mml-drive plugin
 ================
 
-Features for DKFZ-LSF in combination with ``MML``. Currently supports:
+This plugin provides support for fast data installation via a shared network drive. It extends the create scheduler
+to look for respective downloaded files there first. This might be useful if a team works jointly with ``mml`` and you
+want to avoid redundant downloading of raw datasets.
 
-- derive number of workers by host (does not interfere with local host settings)
-- plan :class:`~mml.interactive.planning.MMLJobDescription` accordingly with ``LSFSubmissionRequirements``
-- submit jobs from notebooks leveraging ``LSFJobRunner``
+Install
+-------
+
+After installing this plugin via ``pip install mml-drive`` you need to mount a network drive. On that network drive
+there needs to reside the following file structure: ``MedicalMetaLearner/DOWNLOADS``. You may copy contents of your local
+``MML_DATA_PATH/DOWNLOADS`` into that folder to provide the downloaded files to others. Every user that wants to download
+is required to add ``export MML_NW_DRIVE=path/to/drive/root`` to their ``mml.env`` file.
+
+Usage
+-----
+
+Just use ``mml create`` as usual. If the network drive offers a benefit, ``mml`` will download data from there.

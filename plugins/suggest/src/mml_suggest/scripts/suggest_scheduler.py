@@ -59,7 +59,7 @@ class SuggestScheduler(AbstractBaseScheduler):
                 _data = df.to_numpy().astype(float) / df.abs().max(axis=None)
                 if np.isnan(_data).all():
                     raise RuntimeError(
-                        f"Something went wrong while normalising distance {dist} - normalization " f"failed."
+                        f"Something went wrong while normalising distance {dist} - normalization failed."
                     )
             self.distances[dist] = pd.DataFrame(_data, columns=df.columns, index=df.index)
         if len(self.distances) == 0:

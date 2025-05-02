@@ -1,6 +1,6 @@
 # MML drive plugin
 
-This plugin provides support for fast data installation via a shared network drives. It extends the create scheduler 
+This plugin provides support for fast data installation via a shared network drive. It extends the create scheduler 
 to look for respective downloaded files there first. This might be useful if a team works jointly with `mml` and you 
 want to avoid redundant downloading of raw datasets.  
 

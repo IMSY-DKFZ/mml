@@ -301,5 +301,5 @@ class LSFJobRunner(JobRunner):
             cmds.append(f"--exclude={dir}")
         cmds.append(f"{self.user_name}@{worker}:{cluster_path}/{project}/")
         cmds.append(f"{local_path}/{project}")
-        print(f'Executing {" ".join(cmds)}')
+        print(f"Executing {' '.join(cmds)}")
         self._sshpass_execute(cmds=cmds)

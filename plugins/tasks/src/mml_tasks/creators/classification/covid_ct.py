@@ -90,7 +90,7 @@ def create_covid_ct_classification(task: str, dset_path: Path, alias: str) -> No
         "generate more CT images",
         ref=REFERENCE + REFERENCE_2 + REFERENCE_3,
         url="https://www.kaggle.com/datasets/mloey1/covid19-chest-ct-image-augmentation-gan-dataset",
-        instr="download dataset via " "https://www.kaggle.com/mloey1/covid19-chest-ct-image-augmentation-gan-dataset",
+        instr="download dataset via https://www.kaggle.com/mloey1/covid19-chest-ct-image-augmentation-gan-dataset",
         lic=License.DATABASE_CONTENTS_LICENSE_1_0,
         release="2020 - version 4",
         keywords=[Keyword.MEDICAL, Keyword.CHEST, Keyword.CT_SCAN, Keyword.TISSUE_PATHOLOGY] + additional_tag,

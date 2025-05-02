@@ -33,7 +33,7 @@ class SampleBasedScheduler(AbstractTaskDistanceScheduler):
         self.extracted_features = None  # holds the features, used to avoid repeatedly loading
         if len(self.cfg.augmentations.gpu) != 0:
             raise MMLMisconfigurationException(
-                f"Distance computations for {self.distance_measure} do not support GPU" f" augmentations!"
+                f"Distance computations for {self.distance_measure} do not support GPU augmentations!"
             )
 
     def create_routine(self):

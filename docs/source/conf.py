@@ -22,7 +22,7 @@ warnings.simplefilter(action="default", category=DeprecationWarning)
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "mml"
-copyright = f'2021-{time.strftime("%Y")}, German Cancer Research Center (DKFZ), Heidelberg, Germany'
+copyright = f"2021-{time.strftime('%Y')}, German Cancer Research Center (DKFZ), Heidelberg, Germany"
 author = "Patrick Godau"
 release = mml.__version__
 version = release

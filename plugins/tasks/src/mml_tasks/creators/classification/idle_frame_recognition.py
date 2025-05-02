@@ -47,7 +47,7 @@ def create_idle_action_recognition(dset_path: Path):
         "cataract surgery videos for idle-frame-recognition networks",
         ref=REFERENCE,
         url="http://ftp.itec.aau.at/datasets/ovid/CatRelevanceCompression/",
-        instr="download Idle_frame_recognition dataset via " "ftp.itec.aau.at/datasets/ovid/CatRelevanceCompression/",
+        instr="download Idle_frame_recognition dataset via ftp.itec.aau.at/datasets/ovid/CatRelevanceCompression/",
         lic=License.CC_BY_NC_4_0,
         release="2020",
         keywords=[Keyword.MEDICAL, Keyword.CATARACT_SURGERY, Keyword.EYE],

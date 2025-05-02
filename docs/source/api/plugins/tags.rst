@@ -5,7 +5,7 @@ The ``mml-tags`` plugin increases possibilities to modify base tasks. Install vi
 
 .. code-block:: bash
 
-    pip install mml-tags --index-url https://__token__:<your_personal_token>@git.dkfz.de/api/v4/projects/89/packages/pypi/simple
+    pip install mml-tags
 
 Afterwards you may use the tags. For a list of (all) available tags, type ``mml-tags``. Using a task tag is demonstrated here:
 
