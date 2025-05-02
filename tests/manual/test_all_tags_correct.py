@@ -85,9 +85,9 @@ def test_installed_tasks(monkeypatch, tmp_path_factory):
                     ref = kwarg_mapper[attr]
                 else:
                     ref = attr
-                assert (
-                    getattr(written_meta, ref) == coded_meta[alias][attr]
-                ), f"{alias=}, {attr=}, {ref=}, {getattr(written_meta, ref)=}, {coded_meta[alias][attr]=}"
+                assert getattr(written_meta, ref) == coded_meta[alias][attr], (
+                    f"{alias=}, {attr=}, {ref=}, {getattr(written_meta, ref)=}, {coded_meta[alias][attr]=}"
+                )
     # clearance
     manager.clear_instance()
     MMLFileManager._path_assignments = assignments_backup

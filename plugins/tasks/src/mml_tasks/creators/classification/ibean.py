@@ -54,7 +54,7 @@ def create_task(dset_path: Path):
         "disease classes including Angular Leaf Spot and Bean Rust diseases.",
         ref=REFERENCE,
         url="https://github.com/AI-Lab-Makerere/ibean/",
-        instr="download individual train, validation and test dataset from" "github.com/AI-Lab-Makerere/ibean/",
+        instr="download individual train, validation and test dataset from github.com/AI-Lab-Makerere/ibean/",
         lic=License.MIT,
         release="2020",
         keywords=[Keyword.NATURAL_OBJECTS],

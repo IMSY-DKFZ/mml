@@ -51,7 +51,7 @@ class PostprocessScheduler(AbstractBaseScheduler):
         super(PostprocessScheduler, self).__init__(cfg=cfg, available_subroutines=["calibrate", "ensemble"])
         if self.cfg.mode.eval_frac < 0 or self.cfg.mode.eval_frac >= 1:
             raise MMLMisconfigurationException(
-                f"mode.eval_frac={self.cfg.mode.eval_frac} is not valid! Should be " f"strictly between 0 and 1!"
+                f"mode.eval_frac={self.cfg.mode.eval_frac} is not valid! Should be strictly between 0 and 1!"
             )
         if self.cfg.mode.temperature >= 1 or self.cfg.mode.weights_temperature >= 1:
             raise MMLMisconfigurationException("ensemble search temperatures must be below 1!")

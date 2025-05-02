@@ -34,7 +34,7 @@ class EnsembleDistancesScheduler(AbstractTaskDistanceScheduler):
         for dist in self.cfg.distance.sources:
             if dist not in self.fm.global_reusables:
                 raise MMLMisconfigurationException(
-                    f"Did not find {dist} in reusables. Make sure to set reuse.{dist} " f"accordingly."
+                    f"Did not find {dist} in reusables. Make sure to set reuse.{dist} accordingly."
                 )
             df = pd.read_csv(self.fm.global_reusables[dist], index_col=0)
             if self.cfg.distance.normalize:
@@ -74,7 +74,7 @@ class EnsembleDistancesScheduler(AbstractTaskDistanceScheduler):
                 val = df.at[source_task_name, target_task_name]
             except KeyError:
                 raise RuntimeError(
-                    f"Distance {source_task_name} -> {target_task_name} not yet computed for " f"distance {dist}."
+                    f"Distance {source_task_name} -> {target_task_name} not yet computed for distance {dist}."
                 )
             running_sum += weight * val
         return running_sum

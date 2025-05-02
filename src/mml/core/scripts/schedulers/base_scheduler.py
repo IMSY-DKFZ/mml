@@ -60,13 +60,13 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
         subroutines = list(self.cfg.mode.subroutines)
         if not isinstance(subroutines, list):
             raise TypeError(
-                f"Please hand in subroutines for the scheduler as a list type. You gave type " f"{type(subroutines)}."
+                f"Please hand in subroutines for the scheduler as a list type. You gave type {type(subroutines)}."
             )
         if len(subroutines) == 0:
             raise ValueError("Please hand in non-empty subroutines list for the scheduler.")
         if not set(subroutines).issubset(set(available_subroutines)):
             raise MMLMisconfigurationException(
-                f"Allowed subroutines for Scheduler are only {available_subroutines}, " f"but gave {subroutines}."
+                f"Allowed subroutines for Scheduler are only {available_subroutines}, but gave {subroutines}."
             )
         self.subroutines = subroutines
         # the active step naming variable will always be updated to the actual scheduler step and used for logging
@@ -315,8 +315,8 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
             choices = OmegaConf.to_container(hydra_cfg.runtime.choices)
             if Path(choices["preprocessing"]).stem != self.cfg.preprocessing.id:
                 raise MMLMisconfigurationException(
-                    f'Preprocessing config id {self.cfg.preprocessing.id} does not match'
-                    f' config file name {choices["preprocessing"]}!'
+                    f"Preprocessing config id {self.cfg.preprocessing.id} does not match"
+                    f" config file name {choices['preprocessing']}!"
                 )
         # check if preprocessing pipeline matches
         if self.cfg.preprocessing.id != "none":
@@ -447,9 +447,9 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
             # restore previous task structs
             self.task_factory.loading_old_dump()
             # assert compliance
-            assert set([task.name for task in self.task_factory.container]) == set(
-                self.cfg.task_list
-            ), f"Loading of {len(self.cfg.task_list)} tasks failed. Inconsistent tasks from loading path {os.getcwd()}!"
+            assert set([task.name for task in self.task_factory.container]) == set(self.cfg.task_list), (
+                f"Loading of {len(self.cfg.task_list)} tasks failed. Inconsistent tasks from loading path {os.getcwd()}!"
+            )
         else:
             logger.info("Preparing experiment ...")
             # create task struct for every task in task list

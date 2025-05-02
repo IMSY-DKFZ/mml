@@ -196,7 +196,7 @@ def ask_password(file: Optional[Path] = None) -> str:
         pwd = getpass(prompt=msg)
     except TimeoutError:
         logger.error(
-            "No input provided for necessary password, during dataset creation. Please restart and provide " "password!"
+            "No input provided for necessary password, during dataset creation. Please restart and provide password!"
         )
         raise
     return pwd

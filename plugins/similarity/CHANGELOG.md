@@ -5,6 +5,9 @@ All notable changes to this plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.3 (03/25/2025):
+Fix `fed` distance fim loading with new default value for `torch.load` in torch 2.6
+
 ## 0.5.2 (12/19/2024):
 Public release version.
 

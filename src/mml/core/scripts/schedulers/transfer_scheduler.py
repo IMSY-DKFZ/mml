@@ -71,7 +71,7 @@ class TransferScheduler(TrainingScheduler):
             logger.info(f"Chose pretrain model based on creation date (latest: {storage.created}).")
         else:
             raise MMLMisconfigurationException("mode.model_selection must be one of [performance, random, created].")
-        state = torch.load(f=storage.parameters)["state_dict"]
+        state = torch.load(f=storage.parameters, weights_only=False)["state_dict"]
         # remove metrics and heads
         to_be_removed = []
         for key in state.keys():
