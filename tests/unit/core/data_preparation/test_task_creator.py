@@ -10,9 +10,10 @@ from collections import Counter
 
 import numpy as np
 import pytest
+import torch
 from PIL import Image
 
-from mml.core.data_loading.task_attributes import DataSplit, Modality, TaskType
+from mml.core.data_loading.task_attributes import DataSplit, Modality, RGBInfo, Sizes, TaskType
 from mml.core.data_loading.task_dataset import TaskDataset
 from mml.core.data_preparation.task_creator import TaskCreator, implements_action
 from mml.core.data_preparation.utils import TaskCreatorActions, TaskCreatorState
@@ -136,7 +137,7 @@ def test_valid_traversals(dummy_meta_class_path, file_manager, patch_loading):
     creator = TaskCreator(dset_path=dummy_meta_class_path.parent)
     creator.load_existent(dummy_meta_class_path)
     creator.identity()
-    creator.infer_stats()
+    creator.set_stats(means=RGBInfo(0.5, 0.5, 0.5), stds=RGBInfo(0.29, 0.29, 0.29), sizes=Sizes(224, 224, 224, 224))
 
 
 def test_auto_complete_after_modify(dummy_meta_class_path, file_manager, patch_loading):
@@ -158,7 +159,7 @@ def test_auto_complete_after_modify(dummy_meta_class_path, file_manager, patch_l
         ]
     )
     creator._state = TaskCreatorState.DATA_FOUND
-    creator.auto_complete()
+    creator.auto_complete(device=torch.device("cpu"))
 
 
 def test_identity_tag(file_manager, dummy_meta_class_path, patch_loading):
