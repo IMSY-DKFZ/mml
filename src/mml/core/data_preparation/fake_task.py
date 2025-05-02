@@ -14,7 +14,7 @@ from pathlib import Path
 from torch.utils.data import Dataset
 from torchvision.datasets import FakeData
 
-from mml.core.data_loading.task_attributes import Keyword, License, TaskType
+from mml.core.data_loading.task_attributes import Keyword, License, RGBInfo, Sizes, TaskType
 from mml.core.data_preparation.dset_creator import DSetCreator
 from mml.core.data_preparation.registry import register_dsetcreator, register_taskcreator
 from mml.core.data_preparation.task_creator import TaskCreator
@@ -80,5 +80,5 @@ def create_fake_task(dset_path: Path) -> Path:
         idx_to_class=idx_to_class,
     )
     task.split_folds(n_folds=5, ensure_balancing=True)
-    task.infer_stats()
+    task.set_stats(means=RGBInfo(0.5, 0.5, 0.5), stds=RGBInfo(0.29, 0.29, 0.29), sizes=Sizes(224, 224, 224, 224))
     return task.push_and_test()
