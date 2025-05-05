@@ -136,7 +136,7 @@ class DSetCreator:
         target = self.download_path / "kaggle"
         if target.exists():
             raise RuntimeError(
-                "Current kaggle download does not support rerun or multiple downloads from kaggle " "to one dataset."
+                "Current kaggle download does not support rerun or multiple downloads from kaggle to one dataset."
             )
         target.mkdir()
         if sum((bool(competition), bool(dataset))) != 1:
@@ -177,12 +177,11 @@ class DSetCreator:
         path = self.download_path / file_name
         if not path.exists():
             raise ValueError(
-                f"file {file_name} not found at {self.download_path}, please follow these "
-                f"instructions: {instructions}."
+                f"file {file_name} not found at {self.download_path}, please follow these instructions: {instructions}."
             )
         if md5 and path.is_dir():
             raise IsADirectoryError(
-                f"Hash checking only supported for archived folders or files. {file_name} is not " f"a file"
+                f"Hash checking only supported for archived folders or files. {file_name} is not a file"
             )
         archive = DataArchive(path=path, md5sum=md5, kind=data_kind)
         archive.check_hash()
@@ -240,13 +239,13 @@ class DSetCreator:
             assert key in ["training", "testing", "unlabeled"], f"invalid key {key}"
             if not allow_transforms:
                 if hasattr(dataset, "transform"):
-                    assert (
-                        dataset.transform is None
-                    ), "dataset has a transform applied, set allow_transforms True if desired"
+                    assert dataset.transform is None, (
+                        "dataset has a transform applied, set allow_transforms True if desired"
+                    )
                 if hasattr(dataset, "target_transform"):
-                    assert (
-                        dataset.target_transform is None
-                    ), "dataset has a target_transform applied, set allow_transforms True if desired"
+                    assert dataset.target_transform is None, (
+                        "dataset has a target_transform applied, set allow_transforms True if desired"
+                    )
         # iterate over samples, load these and store correctly at readable format and intuitive place
         id_iterator = 0  # used as IDs
         for key, dataset in datasets.items():
@@ -345,12 +344,12 @@ class DSetCreator:
 
         example = list(transform.keys())[0]
 
-        assert all(
-            [len(mask_value) == len(example) for mask_value in list(transform.keys()) + ignore]
-        ), "tuples used as transform (or ignore) keys require identical shape"
-        assert all(
-            [0 <= val < 255 for val in transform.values()]
-        ), f"was provided with incorrect classes ({transform.values()}) to fit into greyscale."
+        assert all([len(mask_value) == len(example) for mask_value in list(transform.keys()) + ignore]), (
+            "tuples used as transform (or ignore) keys require identical shape"
+        )
+        assert all([0 <= val < 255 for val in transform.values()]), (
+            f"was provided with incorrect classes ({transform.values()}) to fit into greyscale."
+        )
         assert all([key not in ignore for key in transform.keys()]), "provided mask values are not unique"
 
         mapping = transform.copy()
@@ -375,7 +374,7 @@ def mask_transform(mask_path: Path, dset_path: Path, out_base: Path, load: str, 
     :return: boolean indicating success of saving the transformed mask
     """
     assert dset_path in mask_path.parents, (
-        f"path {mask_path} not within dataset, make sure to unpack " f"before transforming"
+        f"path {mask_path} not within dataset, make sure to unpack before transforming"
     )
     # loading
     mask = None  # IDE related

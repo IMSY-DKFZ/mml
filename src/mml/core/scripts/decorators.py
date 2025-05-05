@@ -77,7 +77,7 @@ def timeout(seconds: int) -> Callable:
             except KeyboardInterrupt:
                 if timer.finished.is_set():
                     raise TimeoutError(
-                        f"Execution of {_callable.__qualname__} took to long (limit: {seconds} " f"seconds)."
+                        f"Execution of {_callable.__qualname__} took to long (limit: {seconds} seconds)."
                     )
                 else:
                     raise

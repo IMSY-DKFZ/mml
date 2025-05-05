@@ -3,7 +3,7 @@ Medical Meta Learner
 
 .. image:: _static/mml_logo.png
 
-|Python Badge| |Pipeline Badge| |Coverage Badge| |Release Badge| |Pylint Badge| |Docs Badge| |Style Badge| |License Badge|
+|Python Badge| |Pipeline Badge| |PyPI Badge| |Docs Badge| |Style Badge| |License Badge|
 
 ``mml`` is a research oriented Python package which aims to provide an easy and scalable
 way of deep learning on multiple image tasks (see `Meta-Learning <https://arxiv.org/abs/2004.05439>`_).
@@ -138,20 +138,16 @@ If you use this code in a research paper, **please cite**:
         }
 
 
-.. |Pipeline Badge| image:: https://git.dkfz.de/imsy/ise/mml/badges/master/pipeline.svg
-   :target: https://git.dkfz.de/imsy/ise/mml/-/commits/master
-.. |Coverage Badge| image:: https://git.dkfz.de/imsy/ise/mml/badges/master/coverage.svg
-   :target: https://git.dkfz.de/imsy/ise/mml/-/commits/master
-.. |Release Badge| image:: https://git.dkfz.de/imsy/ise/mml/-/badges/release.svg
-   :target: https://git.dkfz.de/imsy/ise/mml/-/releases
-.. |Pylint Badge| image:: https://git.dkfz.de/imsy/ise/mml/-/jobs/artifacts/master/raw/pylint/pylint.svg?job=test-code-quality
-   :target: https://git.dkfz.de/imsy/ise/mml/-/jobs/artifacts/master/raw/pylint/pylint.log?job=pylint
-.. |Python Badge| image:: https://img.shields.io/badge/python-3.8|3.9|3.10-informational
+.. |Pipeline Badge| image:: https://github.com/IMSY-DKFZ/mml/actions/workflows/full-CI.yml/badge.svg
+   :target: https://github.com/IMSY-DKFZ/mml
+.. |PyPI Badge| image:: https://img.shields.io/pypi/v/mml-core
+   :target: https://pypi.org/project/mml-core/
+.. |Python Badge| image:: https://img.shields.io/badge/python-3.10-informational
    :target: https://www.python.org/doc/versions/
-.. |Docs Badge| image:: https://img.shields.io/badge/docs-sphinx-informational
+.. |Docs Badge| image:: https://readthedocs.org/projects/mml/badge/?version=latest
    :target: https://mml.readthedocs.io/en/latest/
-.. |Style Badge| image:: https://img.shields.io/badge/style-flake8-informational
-   :target: https://flake8.pycqa.org/en/latest/
+.. |Style Badge| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+   :target: https://github.com/astral-sh/ruff
 .. |License Badge| image:: https://img.shields.io/badge/license-MIT-blue
    :target: https://opensource.org/license/mit/
 

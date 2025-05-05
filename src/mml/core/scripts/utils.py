@@ -135,7 +135,7 @@ def load_env() -> None:
             raise MMLMisconfigurationException("Invalid MML_DATA_PATH, have you modified the mml.env entry?")
     else:
         raise MMLMisconfigurationException(
-            f".env file not found at {dotenv_path}! Please follow the documentation " f"instructions to setup MML."
+            f".env file not found at {dotenv_path}! Please follow the documentation instructions to setup MML."
         )
 
 

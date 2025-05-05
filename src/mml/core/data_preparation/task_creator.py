@@ -138,13 +138,13 @@ class TaskCreator:
             data_path=Path(os.getenv("MML_DATA_PATH")), proj_path=Path(os.getcwd()), log_path=Path(tempfile.mkdtemp())
         )
         if name in self.fm.task_index.keys():
-            logger.warning(f"Task name {name} already used with prepossessings " f"{self.fm.task_index[name].keys()}.")
+            logger.warning(f"Task name {name} already used with prepossessings {self.fm.task_index[name].keys()}.")
         if any(
             [symbol in name for symbol in [" ", "%", mml.core.scripts.utils.TAG_SEP, mml.core.scripts.utils.ARG_SEP]]
         ):
             raise ValueError(
-                f'The following symbols are not allowed within (raw) task aliases: '
-                f'{[" ", "%", mml.core.scripts.utils.TAG_SEP, mml.core.scripts.utils.ARG_SEP]}'
+                f"The following symbols are not allowed within (raw) task aliases: "
+                f"{[' ', '%', mml.core.scripts.utils.TAG_SEP, mml.core.scripts.utils.ARG_SEP]}"
             )
         if name == self.fm.GLOBAL_REUSABLE:
             raise ValueError("Invalid task name!")
@@ -280,7 +280,7 @@ class TaskCreator:
                 modalities = data_dict.keys()
                 if any([mod not in Modality for mod in modalities]):
                     raise TypeError(
-                        f"iterator dicts have to provide keys from within {Modality}, was given " f"{modalities}."
+                        f"iterator dicts have to provide keys from within {Modality}, was given {modalities}."
                     )
                 if data_split != DataSplit.UNLABELLED:
                     # check if required modalities are present in train & test data
@@ -480,9 +480,9 @@ class TaskCreator:
         all_ids = set(chain(*fold_definition))
         assert all([data_id in valid_ids for data_id in all_ids]), "Invalid id provided!"
         # check if ids are unused
-        assert all(
-            [data_id in all_ids for data_id in valid_ids]
-        ), "There are unused ids, please provide complete folderization or decrease data provided to find_data."
+        assert all([data_id in all_ids for data_id in valid_ids]), (
+            "There are unused ids, please provide complete folderization or decrease data provided to find_data."
+        )
         logger.debug("Provided folds are compatible!")
         self.current_meta.train_folds = fold_definition
         self.current_meta.train_samples = self.data[DataSplit.FULL_TRAIN]
@@ -568,8 +568,12 @@ class TaskCreator:
         ):
             raise RuntimeError("Inconsistent classes across idx_to_class and class_occ")
         if self.current_meta.task_type == TaskType.CLASSIFICATION and (
-                sum(self.current_meta.class_occ.values()) not in
-                [len(self.current_meta.train_samples), sum([len(fold) for fold in self.current_meta.train_folds[1:]])]):
+            sum(self.current_meta.class_occ.values())
+            not in [
+                len(self.current_meta.train_samples),
+                sum([len(fold) for fold in self.current_meta.train_folds[1:]]),
+            ]
+        ):
             # class occurrences should either describe all train data or the train data except the validation split
             raise RuntimeError("Class occurrences are incorrect.")
         if self.current_meta.name == "default":
@@ -599,16 +603,17 @@ class TaskCreator:
         )
         return path
 
-    def auto_complete(self) -> Path:
+    def auto_complete(self, device: Optional[torch.device] = None) -> Path:
         """
         Shortcut for finishing task creation.
 
+        :param Optional[torch.device] device: torch device that will be forwarded to :meth:`infer_stats`
         :return: the task path as returned by :meth:`push_and_test`.
         """
         if self._state == TaskCreatorState.DATA_FOUND:
             self.split_folds()
         if self._state == TaskCreatorState.FOLDS_SPLIT:
-            self.infer_stats()
+            self.infer_stats(device=device)
         if self._state == TaskCreatorState.STATS_SET:
             return self.push_and_test()
         raise InvalidTransitionError(f"Auto-complete not available with state {self._state}.")
@@ -784,7 +789,7 @@ def verify_softclasses_modality(
     creator: TaskCreator, value: Any, idx_to_class: Dict[int, str], class_occ: Dict[str, int]
 ) -> None:
     if not isinstance(value, tuple):
-        raise TypeError(f"Provide tuple values for Modality.SOFT_CLASSES key instead of " f"{type(value)}.")
+        raise TypeError(f"Provide tuple values for Modality.SOFT_CLASSES key instead of {type(value)}.")
     if len(value) != len(idx_to_class):
         ValueError(f"length of soft labels {value} does not match idx_to_class")
     for elem_idx, elem in enumerate(value):

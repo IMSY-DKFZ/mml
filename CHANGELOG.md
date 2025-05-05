@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.4 (05/02/2025):
+This patch transitions the testing strategy from GPU based to purely CPU tests. 
+
+### Bug fixes
+ - make dataloader pin_memory depend on lightning accelerator
+ - cast metric datatype to avoid occasional errors
+
+### Features
+ - make tests fully cpu compatible
+ - speed up fake task creation by avoiding infer stats
+ - add optional kwarg to task creator autocomplete that determines the device
+
 ## 1.0.3 (03/25/2025):
 Post release fixes.
 

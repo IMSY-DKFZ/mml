@@ -339,7 +339,7 @@ class TaskStructFactory:
         # generate struct from meta info provided by file manager
         def_kwargs = self.fm.get_task_info(task_name=undup_name, preprocess=self.cfg.preprocessing.id)
         if def_kwargs["name"] != name:
-            raise RuntimeError(f'Received incorrect task information for task {name} (got {def_kwargs["name"]}).')
+            raise RuntimeError(f"Received incorrect task information for task {name} (got {def_kwargs['name']}).")
         new_task = TaskStruct(**def_kwargs)
         self.container.append(new_task)
         # apply defaults to task struct

@@ -106,10 +106,10 @@ class UpgradeScheduler(AbstractBaseScheduler):
         else:
             # ensure user is aware of implications
             msg = (
-                f'You are about to {"upgrade" if self.upgrading else "downgrading"} your MML environment, '
-                f'from version {self.version if self.upgrading else mml.VERSION} to version '
-                f'{mml.VERSION if self.upgrading else self.version}. Although the effects should be revertible it '
-                f'is recommended to create a backup of your data and/or results! Do you want to continue? '
+                f"You are about to {'upgrade' if self.upgrading else 'downgrading'} your MML environment, "
+                f"from version {self.version if self.upgrading else mml.VERSION} to version "
+                f"{mml.VERSION if self.upgrading else self.version}. Although the effects should be revertible it "
+                f"is recommended to create a backup of your data and/or results! Do you want to continue? "
                 f'Please type "y"'
             )
             try:
