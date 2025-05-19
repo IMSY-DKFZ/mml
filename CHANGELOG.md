@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.X.X (XX/XX/2025)
+
+### Bug fixes
+ - fixed incorrect handling of hydra choices in CONTINUE mode
+
 ## 1.0.4 (05/02/2025):
 This patch transitions the testing strategy from GPU based to purely CPU tests. 
 

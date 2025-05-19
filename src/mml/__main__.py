@@ -123,11 +123,12 @@ def wrapped_mml() -> float:
         # catch other corner cases e.g. mml --help, we do not want to raise awareness in these cases
         pass
     elif "=" in sys.argv[1]:
-        # options are given, but no mode has been provided
-        print(
-            "\nWARNING:\nYou did not provide a mode to mml. Will fallback to info mode. Please use "
-            '"mml info KWARGS" instead.\n\n'
-        )
+        # options are given, but no mode has been provided (no need to provide for continue functionality)
+        if not any(arg.startswith("continue=") for arg in sys.argv):
+            print(
+                "\nWARNING:\nYou did not provide a mode to mml. Will fallback to info mode. Please use "
+                '"mml info KWARGS" instead.\n\n'
+            )
     else:
         # now we can expect the user to have intended that the argv[1] should be extended with mode=
         sys.argv[1] = "mode=" + sys.argv[1]
@@ -233,14 +234,20 @@ def wrapped_mml() -> float:
         cfg["num_workers"] = int(cfg["num_workers"])
         # activate warnings logging (if configured)
         logging.captureWarnings(cfg.logging.capture_warnings)
-        try:
-            hydra_cfg = HydraConfig.get()
-            choices = OmegaConf.to_container(hydra_cfg.runtime.choices)
-            mode = choices["mode"]
-        except ValueError:
-            mode = "unknown"
+        if cfg["continue"]:
+            # the runtime choices may be incorrect in this case
+            mode_to_log = "CONTINUE"
+        else:
+            # try to get the value for mode config group
+            try:
+                hydra_cfg = HydraConfig.get()
+                choices = OmegaConf.to_container(hydra_cfg.runtime.choices)
+                mode_to_log = str(choices["mode"]).upper()
+            except ValueError:
+                # fallback, should not happen, but to prevent any future break or other misuse
+                mode_to_log = "UNKNOWN"
         logger.info(
-            f"Started MML {mml.__version__} on Python {platform.python_version()} with mode {str(mode).upper()}."
+            f"Started MML {mml.__version__} on Python {platform.python_version()} with mode {mode_to_log}."
         )
         logger.info(f"Plugins loaded: {list(mml.core.scripts.utils.MML_PLUGINS_LOADED.keys())}")
         # instantiate notifiers
@@ -282,12 +289,15 @@ def wrapped_mml() -> float:
             except Exception as e:
                 logger.exception("MML failed during runtime!")
                 if isinstance(e, KeyboardInterrupt) or isinstance(e, InterruptedError):
+                    # for user caused interruptions we do not notify
                     logger.info(f"Omitted notification for class {e.__class__}.")
                 else:
+                    # emit all notifications
                     for notifier in all_notifiers:
                         notifier.notify_on_failure(error=e)
                 raise e
             finally:
+                # make sure to remove lock file
                 if scheduler.lock_path.exists():
                     scheduler.lock_path.unlink()
                     logger.debug(f"Deleted run path lock at {scheduler.lock_path}.")
@@ -301,12 +311,13 @@ def wrapped_mml() -> float:
                 response = float("1.e5")
                 logger.error(f"Was returned {val}, will convert to {response} to ensure optuna usage.")
                 val = response
-            # log final return value of the scheduler
+            # log final return value of the scheduler, can be used in scripts
             return_val_path = Path(os.getcwd()) / "return_val.txt"
             with open(return_val_path, "w") as f:
                 f.write(str(val))
             logger.info(f"Return value is {val}.")
         for notifier in all_notifiers:
+            # emit all notifications
             notifier.notify_on_end(return_value=val)
         return val
 

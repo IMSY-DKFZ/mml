@@ -311,7 +311,8 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
             hydra_cfg = HydraConfig.get()
         except ValueError:
             hydra_cfg = None
-        if hydra_cfg:
+        # check preprocessing ID (only available if not in continue mode as runtime choices may deviate)
+        if hydra_cfg and not self.continue_status:
             choices = OmegaConf.to_container(hydra_cfg.runtime.choices)
             if Path(choices["preprocessing"]).stem != self.cfg.preprocessing.id:
                 raise MMLMisconfigurationException(
