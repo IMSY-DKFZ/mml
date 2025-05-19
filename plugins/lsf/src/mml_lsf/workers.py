@@ -7,6 +7,7 @@
 import logging
 import os
 import socket
+import warnings
 
 from hydra.core.hydra_config import HydraConfig
 from omegaconf import OmegaConf
@@ -14,6 +15,8 @@ from omegaconf import OmegaConf
 from mml.core.scripts.schedulers.base_scheduler import AbstractBaseScheduler
 
 logger = logging.getLogger(__name__)
+
+DEFAULT_CPU_CAP = 12
 
 
 def get_allowed_n_proc():
@@ -45,7 +48,7 @@ def get_allowed_n_proc():
     elif hostname.startswith("hdf19-gpu") or hostname.startswith("e071-gpu"):
         use_this = 12
     else:
-        use_this = 12  # default value
+        use_this = DEFAULT_CPU_CAP
 
     use_this = min(use_this, os.cpu_count())
     return use_this
@@ -58,19 +61,23 @@ def check_lsf_workers(scheduler: AbstractBaseScheduler) -> None:
     :param scheduler: the scheduler the hook runs upon
     :return:
     """
-    # check if preprocessing id is set correctly (only necessary if started via hydra)
-    try:
-        hydra_cfg = HydraConfig.get()
-    except ValueError:
-        hydra_cfg = None
-    if hydra_cfg:
-        choices = OmegaConf.to_container(hydra_cfg.runtime.choices)
-        # if any(part.startswith('num_workers=') for part in hydra_cfg.overrides.task):
-        #     logger.info('LSF cluster plugin detected CLI override for num_workers.')
-        if choices["sys"] == "local":
-            logger.info("LSF cluster plugin detected local system, no changes made to the number of workers.")
-            return
-        logger.info(f"LSF cluster plugin detected system: {choices['sys']}.")
+    if scheduler.continue_status:
+        warnings.warn(
+            f"LSF cluster plugin detected CONTINUE run. This means system check will be skipped and CPUs will "
+            f"be capped by at least {DEFAULT_CPU_CAP}.")
+    else:
+        try:
+            hydra_cfg = HydraConfig.get()
+        except ValueError:
+            hydra_cfg = None
+        if hydra_cfg:
+            choices = OmegaConf.to_container(hydra_cfg.runtime.choices)
+            # if any(part.startswith('num_workers=') for part in hydra_cfg.overrides.task):
+            #     logger.info('LSF cluster plugin detected CLI override for num_workers.')
+            if choices["sys"] == "local":
+                logger.info("LSF cluster plugin detected local system, no changes made to the number of workers.")
+                return
+            logger.info(f"LSF cluster plugin detected system: {choices['sys']}.")
     configured = scheduler.cfg.num_workers
     allowed = get_allowed_n_proc()
     if configured > allowed:

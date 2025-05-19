@@ -5,6 +5,11 @@ All notable changes to this plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.2 (XX/XX/2025)
+
+### Bug fixes
+ - fixed incorrect handling of hydra choices in CONTINUE mode
+
 ## 0.5.1 (12/19/2024):
 Public release version.
 
