@@ -38,6 +38,13 @@ except OSError:
     kaggle_api = None
 
 
+WIP_FILE_NAME = "wip.txt"
+WIP_CONTENT = (
+    "If you encountered an issue while preparing this dataset, please remove the folder containing this "
+    "file before trying to create the dataset again."
+)
+
+
 class DSetCreator:
     """
     The dataset creator handles all relevant steps to prepare the dataset on your device. This includes:
@@ -200,6 +207,10 @@ class DSetCreator:
         if self.dset_path is not None:
             raise RuntimeError("dset_path should not be given beforehand if unpacking new data!")
         self.dset_path = self.fm.get_dataset_path(dset_name=self.dset_name, preprocessing=None)
+        # set wip file
+        with open(self.dset_path / WIP_FILE_NAME, "x") as f:
+            f.write(WIP_CONTENT)
+        # no perform extraction
         for sub in DataKind.list():
             sub_path = self.dset_path / sub
             archives = [arch for arch in self.archives if arch.kind == sub]
@@ -207,6 +218,9 @@ class DSetCreator:
                 continue
             sub_path.mkdir(exist_ok=True)
             unpack_files(archives=archives, target=sub_path)
+        # if successful remove the wip file
+        (self.dset_path / WIP_FILE_NAME).unlink()
+        # optionally clear downloads
         if clear_download_folder:
             shutil.rmtree(self.download_path)
             logger.debug("Removed download folder.")

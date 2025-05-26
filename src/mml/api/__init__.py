@@ -3,6 +3,29 @@
 # SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
 # SPDX-License-Identifier: MIT
 #
+"""
+The ``mml.api`` module serves as a more straightforward access point to import from for external applications.
+
+.. code-block: python
+
+    from mml.api import register_dsetcreator, DSetCreator, TaskType
+
+
+    dset_name = 'my_dataset'
+
+    @register_dsetcreator(dset_name=dset_name)
+    def create_dset():
+        dset_creator = DSetCreator(dset_name=dset_name)
+        # DSetCreator has various help functions to create datasets (e.g. from kaggle, pytorch datasets, ...)
+        train_dset = MyExistingPyTorchDataSet(root=dset_creator.download_path, download=True, train=True)
+        test_dset = MyExistingPyTorchDataSet(root=dset_creator.download_path, download=True, train=False)
+        dset_path = dset_creator.extract_from_pytorch_datasets(datasets={'training': train_dset,
+                                                                         'testing': test_dset},
+                                                               task_type=TaskType.CLASSIFICATION,
+                                                               class_names=train_dset.classes)
+        return dset_path
+
+"""
 
 # data loading imports
 from mml.core.data_loading.file_manager import MMLFileManager, ReuseConfig

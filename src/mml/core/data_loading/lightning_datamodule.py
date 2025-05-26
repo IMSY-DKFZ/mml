@@ -33,6 +33,19 @@ logger = logging.getLogger(__name__)
 
 
 class MultiTaskDataModule(lightning.LightningDataModule):
+    """
+    This class wraps one or multiple :class:`~mml.core.data_loading.task_dataset.TaskDataset`s for lightning.
+    Given the respective :class:`~mml.core.data_loading.task_structs.TaskStruct`s it takes care of setting up all
+    correct data splits. It particularly interprets the following elements of the config:
+
+     * `loaders`: the :class:`~mml.core.data_loading.modality_loaders.ModalityLoader`s
+     * `preprocessing`: the :class:`~mml.core.data_loading.augmentations.augmentation_module.AugmentationModule`
+     * `augmentations`: also :class:`~mml.core.data_loading.augmentations.augmentation_module.AugmentationModule`
+     * all aspects with respect to sampling and the dataloader
+
+    Importantly it provides the necessary lightning interface (e.g., :meth:`setup`, :meth:`train_dataloader`, etc.).
+    """
+
     def __init__(self, task_structs: List[TaskStruct], cfg: DictConfig, fold: int = 0):
         logger.debug("Initializing Lightning datamodule.")
         super().__init__()
@@ -89,6 +102,13 @@ class MultiTaskDataModule(lightning.LightningDataModule):
         pass
 
     def setup(self, stage: str) -> None:
+        """
+        Implements the lightning interface to prepare the datamodule. In particular sets up the
+        :class:`~mml.core.data_loading.task_dataset.TaskDataset`s
+
+        :param stage:
+        :return:
+        """
         logger.debug("Datamodule setup started")
         with catch_time() as timer:
             if stage == "fit":
@@ -186,6 +206,12 @@ class MultiTaskDataModule(lightning.LightningDataModule):
     def get_cpu_transforms(
         self, struct: TaskStruct, phase: LearningPhase = LearningPhase.TRAIN
     ) -> Union[AugmentationModule, AugmentationModuleContainer]:
+        """
+        Returns the necessary
+        :param struct:
+        :param phase:
+        :return:
+        """
         # preprocessing is always an albumentations pipeline
         pp_tfs = []
         if self.cfg.preprocessing.id != struct.preprocessed:

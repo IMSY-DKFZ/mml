@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Features
  - persistent model checkpoints now only rely on the MML format (instead of previously using the lightning format)
 
+### Features
+ - improved error handling with interrupted dataset creation, which gives clear instructions how to resolve
+
 ### Bug fixes
  - fixed incorrect handling of hydra choices in CONTINUE mode
 
