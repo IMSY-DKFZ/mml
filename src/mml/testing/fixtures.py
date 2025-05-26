@@ -130,12 +130,12 @@ def dummy_fake_pipeline_path():
 
 
 @pytest.fixture
-def image():
+def image() -> np.ndarray:
     return np.random.randint(low=0, high=256, size=(100, 100, 3), dtype=np.uint8)
 
 
 @pytest.fixture
-def mask():
+def mask() -> np.ndarray:
     return np.random.randint(low=0, high=2, size=(100, 100), dtype=np.uint8)
 
 

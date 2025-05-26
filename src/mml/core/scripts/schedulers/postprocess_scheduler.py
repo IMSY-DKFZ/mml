@@ -230,7 +230,7 @@ class PostprocessScheduler(AbstractBaseScheduler):
             f"Will perform ensemble selection based on {len(eval_ids)} samples from test split "
             f"({len(eval_ids) / len(all_test_ids):.2%})."
         )
-        # use the loss function with optional class weights, but need to ensure no unintended weighing is performed
+        # use the loss function with optional class weights, but need to ensure no unintended weighting is performed
         with omegaconf.open_dict(self.cfg):
             self.cfg.sampling.balanced = False
             self.cfg.loss.auto_activate_weighing = False

@@ -635,13 +635,17 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
         return self.fm.checkpoint_path / self.active_step_naming
 
     def create_model(
-        self, task_structs: List[TaskStruct], task_weights: Optional[List[float]] = None
+        self,
+        task_structs: List[TaskStruct],
+        task_weights: Optional[List[float]] = None,
+        load_parameters: Optional[Path] = None,
     ) -> lightning.LightningModule:
         """
         Creates a pytorch lightning module.
 
         :param List[TaskStruct] task_structs: list of task structs to construct lightning module
         :param Optional[List[float]] task_weights: (optional) list of task weights to weigh loss
+        :param Optional[Path] load_parameters: (optional) path to load model weights
         :return: LightningModule instance
         """
         if any([Modality.IMAGE not in struct.modalities for struct in task_structs]):
@@ -651,7 +655,9 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
         duplicate_structs = [copy.deepcopy(struct) for struct in task_structs]
         for struct in duplicate_structs:
             struct.models = []  # models might cause hparams saving issues with pytorch lightning
-        model = SingleFrameLightningModule(task_structs=duplicate_structs, cfg=self.cfg, weights=task_weights)
+        model = SingleFrameLightningModule(
+            task_structs=duplicate_structs, cfg=self.cfg, task_weights=task_weights, load_parameters=load_parameters
+        )
         if self.cfg.compile.enable:
             model.model = torch.compile(model.model, **self.cfg.compile.kwargs)
         # deactivate strict loading for more compatibility

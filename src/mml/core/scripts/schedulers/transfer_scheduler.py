@@ -71,29 +71,44 @@ class TransferScheduler(TrainingScheduler):
             logger.info(f"Chose pretrain model based on creation date (latest: {storage.created}).")
         else:
             raise MMLMisconfigurationException("mode.model_selection must be one of [performance, random, created].")
-        state = torch.load(f=storage.parameters, weights_only=False)["state_dict"]
-        # remove metrics and heads
-        to_be_removed = []
-        for key in state.keys():
-            if any(
-                [
-                    key.startswith(prefix)
-                    for prefix in [
-                        "model.heads",
-                        "train_metrics",
-                        "val_metrics",
-                        "test_metrics",
-                        "train_cms",
-                        "val_cms",
-                        "test_cms",
+        # legacy compatibilty (for stored parameters as lightning checkpoint)
+        if storage.parameters.suffix != ".mml":
+            warnings.warn(
+                "You are loading a legacy model checkpoint. Full support of all features may not be "
+                "guaranteed. MML will try to continue nevertheless."
+            )
+            state = torch.load(f=storage.parameters, weights_only=False)["state_dict"]
+            # remove metrics and heads
+            to_be_removed = []
+            for key in state.keys():
+                if any(
+                    [
+                        key.startswith(prefix)
+                        for prefix in [
+                            "model.heads",
+                            "train_metrics",
+                            "val_metrics",
+                            "test_metrics",
+                            "train_cms",
+                            "val_cms",
+                            "test_cms",
+                        ]
                     ]
-                ]
-            ):
-                to_be_removed.append(key)
-        for key in to_be_removed:
-            del state[key]
-        # load module and continue with training
-        model.load_state_dict(state_dict=state, strict=False)
+                ):
+                    to_be_removed.append(key)
+            for key in to_be_removed:
+                del state[key]
+            # load module and continue with training
+            model.load_state_dict(state_dict=state, strict=False)
+        else:
+            # new loading logic for MML checkpoints
+            new_module = self.create_model(
+                task_structs=module.task_structs,
+                task_weights=module.weights.tolist(),
+                load_parameters=storage.parameters,
+            )
+            # replace model
+            module.model = new_module.model
         logger.info(f"Successfully loaded pretrain weights from task {self.cfg.mode.pretrain_task}.")
         if self.cfg.mode.freeze:
             model.model.freeze_backbone()

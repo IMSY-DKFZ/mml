@@ -60,7 +60,7 @@ class TimmGenericModel(BaseModel):
         )
 
     def supports(self, task_type: TaskType) -> bool:
-        """TimmModel support classification tasks."""
+        """TimmModel supports classification and regression tasks."""
         return task_type in [TaskType.CLASSIFICATION, TaskType.MULTILABEL_CLASSIFICATION, TaskType.REGRESSION]
 
 

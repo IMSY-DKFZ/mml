@@ -148,7 +148,9 @@ class BaseModel(torch.nn.Module, ABC):
     @staticmethod
     def load_checkpoint(param_path: Union[Path, str]) -> "BaseModel":
         """
-        Load from a checkpoint.
+        Load from a checkpoint. Be aware that MML uses its own checkpoint structure (different from the one in
+        `lightning <https://github.com/Lightning-AI/lightning>`_). Detail can be found in
+        :meth:`~mml.core.models.torch_base.BaseModel.save_checkpoint`.
 
         :param Union[Path, str] param_path: path to load checkpoint from
         :return:
@@ -161,7 +163,7 @@ class BaseModel(torch.nn.Module, ABC):
             head = model._create_head(**init_kwargs)
             model.heads[head_name] = head
             head.load_state_dict(state[head_name])
-        logger.info("Loaded checkpoint!")
+        logger.info("Loaded MML checkpoint!")
         logger.debug(f"@ {param_path}")
         return model
 

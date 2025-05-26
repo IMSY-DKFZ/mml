@@ -5,12 +5,12 @@
 #
 
 import pytest
-from lightning.pytorch.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf
 
 from mml.core.data_loading.task_attributes import Keyword, Modality, RGBInfo, Sizes, TaskType
 from mml.core.data_loading.task_struct import TaskStruct
 from mml.core.scripts.model_storage import ModelStorage
+from mml.testing.boring_model import BoringModel
 
 
 @pytest.fixture()
@@ -32,7 +32,7 @@ def dummy_task_struct():
 
 @pytest.fixture()
 def dummy_model_storage(file_manager, dummy_task_struct):
-    par_path = file_manager.construct_saving_path(ModelCheckpoint(), key="parameters", task_name=dummy_task_struct.name)
+    par_path = file_manager.construct_saving_path(BoringModel(), key="parameters", task_name=dummy_task_struct.name)
     pip_path = file_manager.construct_saving_path(
         obj=OmegaConf.create({}), key="pipeline", task_name=dummy_task_struct.name
     )
