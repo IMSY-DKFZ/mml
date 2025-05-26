@@ -64,7 +64,8 @@ def check_lsf_workers(scheduler: AbstractBaseScheduler) -> None:
     if scheduler.continue_status:
         warnings.warn(
             f"LSF cluster plugin detected CONTINUE run. This means system check will be skipped and CPUs will "
-            f"be capped by at least {DEFAULT_CPU_CAP}.")
+            f"be capped by at least {DEFAULT_CPU_CAP}."
+        )
     else:
         try:
             hydra_cfg = HydraConfig.get()
