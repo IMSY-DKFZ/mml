@@ -45,6 +45,7 @@ class MultiTaskDataModule(lightning.LightningDataModule):
 
     Importantly it provides the necessary lightning interface (e.g., :meth:`setup`, :meth:`train_dataloader`, etc.).
     """
+
     def __init__(self, task_structs: List[TaskStruct], cfg: DictConfig, fold: int = 0):
         logger.debug("Initializing Lightning datamodule.")
         super().__init__()

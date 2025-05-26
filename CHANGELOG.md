@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.X.X (XX/XX/2025)
 
+### Features
+ - improved error handling with interrupted dataset creation, which gives clear instructions how to resolve
+
 ### Bug fixes
  - fixed incorrect handling of hydra choices in CONTINUE mode
 

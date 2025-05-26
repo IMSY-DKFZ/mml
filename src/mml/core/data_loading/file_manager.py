@@ -60,6 +60,7 @@ class ReuseConfig:
     During runtime this is an OmegaConf DictConfig and may contain additional entries!
     See :meth:`_find_reusables` on how this is used.
     """
+
     blueprint: Optional[Union[str, List[str]]] = None
     models: Optional[Union[str, List[str]]] = None
     parameters: Optional[Union[str, List[str]]] = None
@@ -72,6 +73,7 @@ class RemoveConfig:
     During runtime this is an OmegaConf DictConfig and may contain additional entries!
     See :meth:`remove_intermediates` on how this is used.
     """
+
     img_examples: bool = False
     blueprint: bool = False
     parameters: bool = False
@@ -227,6 +229,7 @@ class MMLFileManager(Singleton):
                 f"Dataset {dset_name} already present at {candidate}! Please choose a different name."
             )
         candidate.mkdir(parents=False, exist_ok=False)
+        logger.debug(f"Created RAW folder for dataset {dset_name}.")
         return candidate
 
     def get_all_dset_names(self) -> Dict[str, Dict[str, Path]]:

@@ -246,9 +246,7 @@ def wrapped_mml() -> float:
             except ValueError:
                 # fallback, should not happen, but to prevent any future break or other misuse
                 mode_to_log = "UNKNOWN"
-        logger.info(
-            f"Started MML {mml.__version__} on Python {platform.python_version()} with mode {mode_to_log}."
-        )
+        logger.info(f"Started MML {mml.__version__} on Python {platform.python_version()} with mode {mode_to_log}.")
         logger.info(f"Plugins loaded: {list(mml.core.scripts.utils.MML_PLUGINS_LOADED.keys())}")
         # instantiate notifiers
         all_notifiers: List[BaseNotifier] = [
