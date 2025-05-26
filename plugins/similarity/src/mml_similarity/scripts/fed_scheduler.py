@@ -13,6 +13,7 @@ from mml_similarity.scripts.fisher import compute_fisher_information_embedding, 
 from mml_similarity.scripts.vector_distances import compute_task_distance
 from omegaconf import DictConfig
 
+from mml.core.models.torch_base import BaseModel
 from mml.core.scripts.exceptions import MMLMisconfigurationException
 from mml.core.scripts.utils import LearningPhase
 
@@ -108,9 +109,9 @@ class FEDScheduler(AbstractTaskDistanceScheduler):
             )
         # loading model, need only torch.nn.Module not lightning module -> can drop this information
         logger.debug("Loading model...")
-        path = task_struct.paths["fc_tuned"]
-        model = self.create_model([task_struct]).model
-        model.load_checkpoint(param_path=path)
+        model = BaseModel.load_checkpoint(param_path=task_struct.paths["fc_tuned"])
+        if task_name not in model.heads:
+            raise RuntimeError(f"No head for task {task_name} in tuned model @ {task_struct.paths['fc_tuned']}.")
         logger.debug("Preparing data...")
         data_module = self.create_datamodule(task_structs=task_struct)
         data_module.setup(stage="fit")
