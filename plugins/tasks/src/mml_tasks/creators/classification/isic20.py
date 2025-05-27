@@ -103,12 +103,12 @@ def create_task(dset_path: Path):
                 Modality.CLASS: int(train_annotation.at[img_path.stem]),
             }
         )
-    test_iterator = []
+    unlabeled_iterator = []
     for img_path in (dset_path / DataKind.TESTING_DATA / "ISIC_2020_Test_Input").iterdir():
         if img_path.suffix != ".jpg":
             continue
-        test_iterator.append({Modality.SAMPLE_ID: img_path.stem, Modality.IMAGE: img_path})
-    task.find_data(train_iterator=train_iterator, test_iterator=test_iterator, idx_to_class=idx_to_class)
+        unlabeled_iterator.append({Modality.SAMPLE_ID: img_path.stem, Modality.IMAGE: img_path})
+    task.find_data(train_iterator=train_iterator, unlabeled_iterator=unlabeled_iterator, idx_to_class=idx_to_class)
     task.split_folds(n_folds=5, ensure_balancing=True)
     # because of varying sizes and high resolution inference takes multiple hours, set stats instead
     task.set_stats(
