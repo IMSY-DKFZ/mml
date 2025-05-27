@@ -6,6 +6,7 @@
 
 import pytest
 import torch
+from peft import LoraConfig
 
 from mml.core.data_loading.task_attributes import Modality, RGBInfo, Sizes, TaskType
 from mml.core.data_loading.task_struct import TaskStruct
@@ -82,3 +83,13 @@ def test_timm_count_parameters(model_name, dummy_task_struct):
     model.freeze_backbone()
     assert model.count_parameters()["backbone"] == 0
     assert model.count_parameters(only_trainable=False)["backbone"] > 0
+
+
+@pytest.mark.parametrize("model_name", ["resnet18", "vit_tiny_patch16_224.augreg_in21k"])
+def test_timm_peft(model_name):
+    lora_cfg = LoraConfig(r=8, target_modules="auto")
+    model = TimmGenericModel(name=model_name, pretrained=True, drop_rate=0.5)
+    model.set_peft(peft_cfg=lora_cfg)
+    c, h, w = model.input_size
+    t = torch.rand(1, c, h, w)
+    _ = model(t)

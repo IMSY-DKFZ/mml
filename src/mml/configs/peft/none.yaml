@@ -1,0 +1,12 @@
+# @package peft
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2025 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# used to set Parameter Efficient FineTuning
+# see https://github.com/huggingface/peft for detailed instructions
+
+_target_: null

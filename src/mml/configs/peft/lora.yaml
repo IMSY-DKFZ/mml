@@ -1,0 +1,29 @@
+# @package peft
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2025 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+# used to set Parameter Efficient FineTuning
+# see https://github.com/huggingface/peft for detailed instructions
+
+
+_target_: peft.LoraConfig
+###
+# default: 8
+#  - LoRa attention dimension (the "rank")
+r: 8
+###
+# default: auto
+#  - list of module names or regex expression of the module names to replace with LoRA
+#  - for example, ['q', 'v'] or '.*decoder.*(SelfAttention|EncDecAttention).*(q|v)$'
+#  - if "auto" will find all compatible layers
+target_modules: auto
+###
+# default: null
+#  - the names of the modules to not apply the adapter. When passing a string, a regex match will be performed.
+#  - when passing a list of strings, either an exact match will be performed
+#  - or it is checked if the name of the module ends with any of the passed strings
+exclude_modules: null

@@ -33,6 +33,7 @@ defaults:
   - compile: default
   - loaders: default
   - tta: none
+  - peft: none
   - mode: info  # is done very last to allow overriding above defaults
   - override hydra/hydra_logging: col_stdout
   - override hydra/help: mml_help

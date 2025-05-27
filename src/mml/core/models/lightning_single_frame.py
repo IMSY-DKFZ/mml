@@ -59,7 +59,7 @@ class SingleFrameLightningModule(lightning.LightningModule):
         """
         The default MML lightning module supporting frame wise training and inference.
 
-        :param List[TaskStruct] task_structs: :class:`~mml.core.data_loading:task_struct:TaskStruct` for all tasks that
+        :param List[TaskStruct] task_structs: :class:`~mml.core.data_loading.task_struct.TaskStruct` for all tasks that
             the model shall interact upon
         :param DictConfig cfg: the main config file, will use multiple config groups (e.g., arch, loss, sampling,
             logging, tta, metrics, ..)
@@ -105,6 +105,9 @@ class SingleFrameLightningModule(lightning.LightningModule):
                     logger.info(f"Task {name} was not yet present in model heads and was added now.")
         else:
             self.model: BaseModel = hydra.utils.instantiate(self.cfg.arch)
+            if self.cfg.peft._target_:
+                peft_cfg = hydra.utils.instantiate(self.cfg.peft)
+                self.model.set_peft(peft_cfg)
             for struct in self.task_structs.values():
                 self.model.add_head(task_struct=struct)
         # construct criterion

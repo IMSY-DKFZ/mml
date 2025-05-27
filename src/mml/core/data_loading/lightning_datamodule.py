@@ -34,11 +34,11 @@ logger = logging.getLogger(__name__)
 
 class MultiTaskDataModule(lightning.LightningDataModule):
     """
-    This class wraps one or multiple :class:`~mml.core.data_loading.task_dataset.TaskDataset`s for lightning.
-    Given the respective :class:`~mml.core.data_loading.task_structs.TaskStruct`s it takes care of setting up all
+    This class wraps one or multiple :class:`~mml.core.data_loading.task_dataset.TaskDataset` s for lightning.
+    Given the respective :class:`~mml.core.data_loading.task_structs.TaskStruct` s it takes care of setting up all
     correct data splits. It particularly interprets the following elements of the config:
 
-     * `loaders`: the :class:`~mml.core.data_loading.modality_loaders.ModalityLoader`s
+     * `loaders`: the :class:`~mml.core.data_loading.modality_loaders.ModalityLoader` s
      * `preprocessing`: the :class:`~mml.core.data_loading.augmentations.augmentation_module.AugmentationModule`
      * `augmentations`: also :class:`~mml.core.data_loading.augmentations.augmentation_module.AugmentationModule`
      * all aspects with respect to sampling and the dataloader
@@ -104,7 +104,7 @@ class MultiTaskDataModule(lightning.LightningDataModule):
     def setup(self, stage: str) -> None:
         """
         Implements the lightning interface to prepare the datamodule. In particular sets up the
-        :class:`~mml.core.data_loading.task_dataset.TaskDataset`s
+        :class:`~mml.core.data_loading.task_dataset.TaskDataset` s
 
         :param stage:
         :return:

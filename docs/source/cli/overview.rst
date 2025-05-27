@@ -62,6 +62,7 @@ This following is a list of ``mml`` config groups. To see all available current 
   * :doc:`metrics` - metrics to measure model performance
   * :doc:`mode` - central component defining the scheduler and other corresponding runtime settings
   * :doc:`optimizer` - network training optimizer
+  * :doc:`peft` - parameter efficient finetuning
   * :doc:`preprocessing` - image preprocessing pipeline (applied while training and predicting)
   * :doc:`reuse` - determines the reuse of previous results as well as clean up of intermediates
   * :doc:`sampling` - sets sampling strategy
@@ -93,6 +94,7 @@ The final configuration can be displayed with the help of hydra-flags
    metrics
    mode
    optimizer
+   peft
    preprocessing
    remove
    reuse

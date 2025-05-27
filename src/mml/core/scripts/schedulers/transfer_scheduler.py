@@ -6,6 +6,7 @@
 
 import logging
 import random
+import warnings
 
 import lightning
 import torch
@@ -103,12 +104,12 @@ class TransferScheduler(TrainingScheduler):
         else:
             # new loading logic for MML checkpoints
             new_module = self.create_model(
-                task_structs=module.task_structs,
-                task_weights=module.weights.tolist(),
+                task_structs=model.task_structs,
+                task_weights=model.weights.tolist(),
                 load_parameters=storage.parameters,
             )
             # replace model
-            module.model = new_module.model
+            model.model = new_module.model
         logger.info(f"Successfully loaded pretrain weights from task {self.cfg.mode.pretrain_task}.")
         if self.cfg.mode.freeze:
             model.model.freeze_backbone()
