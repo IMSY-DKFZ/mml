@@ -29,7 +29,7 @@ doi = {10.1145/3394171.3413658}
 def create_frame_recognition():
     dset_creator = DSetCreator(dset_name="idle_action")
     dset_creator.download(
-        url="ftp.itec.aau.at/datasets/ovid/CatRelevanceCompression/downloads/Idle_frame_recognition.zip",
+        url="https://ftp.itec.aau.at/datasets/ovid/CatRelevanceCompression/downloads/Idle_frame_recognition.zip",
         file_name="Idle_frame_recognition.zip",
         data_kind=DataKind.TRAINING_DATA,
     )
