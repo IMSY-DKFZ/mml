@@ -23,6 +23,7 @@ from transformers import Conv1D
 from mml.core.data_loading.task_attributes import RGBInfo, TaskType
 from mml.core.data_loading.task_struct import TaskStruct
 from mml.core.scripts.exceptions import MMLMisconfigurationException
+from mml.core.scripts.decorators import beta
 
 logger = logging.getLogger(__name__)
 
@@ -153,6 +154,7 @@ class BaseModel(torch.nn.Module, ABC):
         logger.debug(f"Unfroze {len(self._frozen_params)} params of model.")
         self._frozen_params = []
 
+    @beta('PEFT integration is still in beta.')
     def set_peft(self, peft_cfg: PeftConfig) -> None:
         """
         Applies a PEFT (Parameter Efficient FineTuning) method to the model. Usually this will lead to adapters injected
