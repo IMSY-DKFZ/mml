@@ -1,0 +1,18 @@
+# @package augmentations
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+normalization: imagenet  # image_net mean and std values are used
+cpu:
+  backend: albumentations
+  pipeline:
+    - name: RandomResizedCrop
+      size: [224,224]
+      p: 1.0
+    - name: HorizontalFlip
+      p: 0.5
+gpu: { }
