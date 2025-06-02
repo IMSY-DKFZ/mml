@@ -9,12 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Features
  - persistent model checkpoints now only rely on the MML format (instead of previously using the lightning format)
-
-### Features
  - improved error handling with interrupted dataset creation, which gives clear instructions how to resolve
+ - new config group `peft`, which offers to inject `huggingface/peft` adapters into models and reduce train parameters
 
 ### Bug fixes
  - fixed incorrect handling of hydra choices in CONTINUE mode
+ - fixed .env loading for non default system 
 
 ## 1.0.4 (05/02/2025):
 This patch transitions the testing strategy from GPU based to purely CPU tests. 
