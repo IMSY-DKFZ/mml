@@ -7,24 +7,30 @@ import copy
 import getpass
 import os
 import subprocess
-from collections import Counter
+import time
+import warnings
+from collections import Counter, deque
+from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional, Sequence, Set
 
+import orjson
 import pandas as pd
+from dacite import from_dict
+from mml_lsf.requirements import LSFSubmissionRequirements
+from tqdm.auto import tqdm
 
 from mml.core.scripts.decorators import timeout
-from mml.interactive import MMLJobDescription
-from mml.interactive.planning import JobRunner
+from mml.interactive import JobRunner, MMLJobDescription, default_file_manager
 
 
 class LSFJobRunner(JobRunner):
     """
     A runner that submits jobs to the DKFZ LSF. Under the hood it uses "sshpass" to provide ssh with your password
     (install via "sudp apt install sshpass"). Also supports interactive jobs via
-    `~mml_lsf.requirements.LSFSubmissionRequirements`. A single prompt during runner init allows for multiple jobs
-    being submitted without typing in password every time.
+    :class:`~mml_lsf.requirements.LSFSubmissionRequirements`. A single prompt during runner init allows for multiple
+    jobs being submitted without typing in password every time.
 
-    To set everything up please read the mml_lsf README.md. Be aware that sshpass may be a potential security risk,
+    To set everything up please read the ``mml_lsf`` README.md. Be aware that sshpass may be a potential security risk,
     although this implementation tries to hide the password via anonymous piping. See "SECURITY CONSIDERATIONS" in
     the manpage of "sshpass" for more details.
 
@@ -74,7 +80,7 @@ class LSFJobRunner(JobRunner):
 
     def _sshpass_execute(self, cmds: List[str], process_callback: Optional[Callable] = None) -> Any:
         """
-        Run the commands via sshpass. Ensure cmds are split as expected by subprocess.Popen.
+        Run the commands via sshpass. Ensure cmds are split as expected by :class:`subprocess.Popen`.
 
         :param cmds: list of commands to execute, e.g. ["ssh", "USER@HOST", "ls"]
         :param process_callback: a callback while the process is running, will receive the running process as single
@@ -82,7 +88,7 @@ class LSFJobRunner(JobRunner):
         :return: whatever is returned by process_callback
         """
         if process_callback is None:
-
+            # default process callback
             def process_callback(process) -> None:
                 # read in output
                 for line in iter(process.stdout.readline, ""):
@@ -131,7 +137,7 @@ class LSFJobRunner(JobRunner):
         def test_impl():
             """Timeout wrapped connection test execution."""
             try:
-                self._sshpass_execute(["ssh", f"{self.user_name}@{self.host}", "pwd"])
+                self._sshpass_execute(["ssh", f"{self.user_name}@{self.host}", "pwd"], process_callback=lambda _: None)
             except RuntimeError:
                 raise RuntimeError(
                     f"SSH connection failed. Username: {self.user_name}, Host: {self.host}. You may "
@@ -145,15 +151,20 @@ class LSFJobRunner(JobRunner):
                 "Connection timed out. Is the submission host reachable? Also ECDSA host key matching "
                 "may causes trouble. Please make sure the corresponding fingerprints match in advance."
             )
+        print("SSH connection established.")
 
-    def run(self, job: MMLJobDescription):
+    def run(self, job: MMLJobDescription, verbose: bool = True):
         """
         Submits a given MMLJob to the LSF Cluster. Caches the job and also catches the LSF JOB ID (for non-interactive
         jobs).
 
         :param MMLJobDescription job: job to be submitted
+        :param bool verbose: if True prints the response from submission host
         :return: the LSF return message(s) are printed, no value is returned
         """
+        if not isinstance(job.prefix_req, LSFSubmissionRequirements):
+            raise TypeError("Job requirements must be of type LSFSubmissionRequirements.")
+
         cmds = ["ssh", f"{self.user_name}@{self.host}", job.render()]
 
         def extract_job_id(process):
@@ -164,7 +175,8 @@ class LSFJobRunner(JobRunner):
                 # Job <XXXXXXXX> is submitted to queue <ABC>.
                 if line.startswith("Job <") and "> is submitted to queue" in line:
                     job_id = line[line.find("<") + 1 : line.find(">")]
-                print(line, end="")
+                if verbose:
+                    print(line, end="")
             return job_id
 
         job_id = self._sshpass_execute(cmds=cmds, process_callback=extract_job_id)
@@ -172,12 +184,56 @@ class LSFJobRunner(JobRunner):
         # now cache submission
         self._cache[int(job_id)] = copy.deepcopy(job)
 
+    def kill(self, jobid: Optional[int] = None, pend_only: bool = False) -> List[int]:
+        """
+        Kills a given job, or all previously submitted jobs. Note that only jobs from this runner will ever be affected.
+        For an emergency shutdown of all your jobs, send <bkill 0> manually to the cluster. May call :meth:`info`
+        to update all current job status.
+
+        :param jobid: a specific jobid, from a job submitted by this runner, or all jobs if None, the latter will
+            require manual confirmation by typing "KILL" once requested
+        :param pend_only: if True, will try to only kill jobs that are still pending and not affect running jobs
+        :return: list of job ids for all jobs killed
+        """
+        if len(self._cache) == 0:
+            raise RuntimeError("Cannot kill any job, since no jobs have been submitted with this runner before.")
+        if jobid is None:
+            response = getpass.getpass("Confirm killing all jobs by typing 'KILL':")
+            if response.lower() != "kill":
+                raise RuntimeError("Killing all jobs aborted.")
+            print("Updating job status info.")
+            current_info = self.info()
+            if pend_only:
+                current_info = current_info[current_info["status"] == "PEND"]
+            if len(current_info) == 0:
+                print("No jobs to kill after applying given filters. You may want to re-check with info method.")
+                return
+            jobid = current_info.index.tolist()
+        elif jobid not in self._cache:
+            raise ValueError(f"Job id {jobid} not found in cache. Any runner only handles its own jobs.")
+        else:
+            jobid = [jobid]
+            if pend_only:
+                warnings.warn("pend_only option is ignored when killing a single job.")
+
+        for _id in jobid:
+            cmds = ["ssh", f"{self.user_name}@{self.host}", "bkill", str(_id)]
+            try:
+                self._sshpass_execute(cmds=cmds)
+            except RuntimeError:
+                print(f"Could not kill job {_id}.")
+                continue
+
+        print(f"Killed {len(jobid)} job(s). It is recommended to wait ~20 seconds for shutdown before updating job "
+              f"status info.")
+        return jobid
+
     def info(self) -> pd.DataFrame:
         """
         Ask LSF about the status of submitted jobs. Shows some info about them. Be aware that the runner will only show
-        infos on jobs submitted by itself!
+        info on jobs submitted by itself!
 
-        Side effects: prints some general summary information, updates the internal _info dataframe
+        Side effects: prints some general summary information, updates the internal :attr:`_info` dataframe
 
         :return: a reduced dataframe of self._info with only relevant entries
         """
@@ -252,14 +308,15 @@ class LSFJobRunner(JobRunner):
             print(f" - {status}: {count} jobs")
         return relevant_info[["status", "queue", "exec"]]
 
-    def resubmit(self) -> None:
+    def resubmit(self, pbar: bool = True) -> None:
         """
         Allows to automatically re-submit failed jobs. The internal job cache is updated.
 
+        :param bool pbar: activates a progress bar and deactivates verbosity of the :meth:`run` method
         :return: no return value
         """
         if self._info is None:
-            print("No job info so far. Please call info() methids first.")
+            print("No job info so far. Please call info() method first.")
             return
         failed_ids = []
         for job_id in self._cache:
@@ -269,11 +326,122 @@ class LSFJobRunner(JobRunner):
             print("No failed jobs.")
             return
         print(f"{len(failed_ids)} jobs failed jobs found. Try resubmitting...")
-        for job_id in failed_ids:
-            self.run(self._cache[job_id])
+        for job_id in tqdm(failed_ids, desc="Submitting jobs", disable=not pbar):
+            self.run(self._cache[job_id], verbose=not pbar)
             # if this was successful, we remove the old entry
             self._cache.pop(job_id)
         print("All previously failed jobs re-submitted.")
+
+    def peek(self, jobid: Optional[int] = None, watch: bool = False, max_length: Optional[int] = 10) -> None:
+        """
+        Runs the LSF `bpeek` command (see
+        `LSF documentation <https://www.ibm.com/docs/en/spectrum-lsf/10.1.0?topic=reference-bpeek>`_). And redirects the
+        output to the interactive kernel.
+
+        :param jobid: a specific LSF jobid to peek, if not provided uses the oldest currently running job, that was
+         submitted by this runner (also make sure to run :meth:`info` before)
+        :param watch: stay connected to the job until interrupted or the job ends, otherwise only a snapshot is sent
+        :param max_length: if given an int, reduces the output the the most recent lines (like ``tail``), ignored when
+         watch is used
+        :return:
+        """
+        # jobid None maps to oldest running RUN job (make sure info has run before)
+        if jobid is None:
+            if self._info is None:
+                raise RuntimeError("Please run info() first to use auto-jobid mechanism. Or provide a jobid.")
+            run_ids = []
+            for _job_id in self._cache:
+                if _job_id in self._info.index and self._info.loc[_job_id]["status"] == "RUN":
+                    run_ids.append(_job_id)
+            if len(run_ids) == 0:
+                print("No running jobs. Check job status by calling info().")
+                return
+            jobid = min(run_ids)
+
+        cmds = ["ssh", f"{self.user_name}@{self.host}", "bpeek"]
+        # watch adds -f flag and streams
+        if watch:
+            cmds += ["-f"]
+        cmds += [str(jobid)]
+
+        def peek_process_callback(process) -> Optional[deque]:
+            # max_length (ignored when watch) cuts the history
+            if not watch and max_length is not None:
+                print_deque = deque(maxlen=max_length)
+            else:
+                print_deque = None
+            # read in output
+            try:
+                for line in iter(process.stdout.readline, ""):
+                    if print_deque is not None:
+                        print_deque.append(line)
+                    else:
+                        print(line, end="")
+            except KeyboardInterrupt:
+                if watch:
+                    print("Interrupted watching.")
+                else:
+                    raise
+            return print_deque
+
+        print(f"Peeking into job {jobid}:")
+        print("-----------------------------")
+        print(self._cache[jobid])
+        print("-----------------------------")
+        potential_deque = self._sshpass_execute(cmds=cmds, process_callback=peek_process_callback)
+        if potential_deque is not None:
+            while len(potential_deque) > 0:
+                print(potential_deque.popleft(), end="")
+
+    def dump(self, id: Optional[str] = None, overwrite: bool = False) -> str:
+        """
+        Dumps the cache of the runner, permanently storing submitted jobs and their respective LSF jobids. Can be fully
+        reverted by the :meth:`load` method to create a compatible internal :attr:`_cache`.
+
+        :param id: an identifier for the cache, will not overwrite existing cache for the same identifier (and raise an
+         ValueError instead), if not provided (i.e., None) will use current datetime string
+        :param overwrite: if True, will overwrite existing cache for the same identifier
+        :return: returns the identifier
+        """
+        if id is None:
+            id = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        with default_file_manager() as fm:
+            path = fm.construct_saving_path(obj=None, key="lsf_jobs", file_name=id)
+            if path.exists():
+                if not overwrite:
+                    raise ValueError(f"ID {id} already exists as LSF backup.")
+                else:
+                    print(f"Overwriting existing cache with ID {id}.")
+                    path.unlink()
+            # must ensure str keys for orjson
+            reformatted = {str(job_id): job_desc for job_id, job_desc in self._cache.items()}
+            with open(path, "wb") as f:
+                f.write(orjson.dumps(reformatted))
+        print(f"Stored cache with {len(self._cache)} jobs. Run `load(id={id})` to restore at a later point.")
+        return path.name
+
+    def load(self, id: str) -> None:
+        """
+        Loads the cache of a previous :meth:`dump` call to restore the runner cache.
+
+        :param id: the identifier used to store the cache
+        :return: no return value as :attr:`_cache` is restored in place
+        """
+        if self._cache:
+            raise RuntimeError(
+                "This runner has a non-empty cache. To avoid loss of information please create a new "
+                "runner instance from scratch to load."
+            )
+        with default_file_manager() as fm:
+            path = fm.construct_saving_path(obj=None, key="lsf_jobs", file_name=id)
+            if not path.exists():
+                raise ValueError(f"ID {id} does not exists as LSF backup.")
+            with open(path, "rb") as f:
+                data = orjson.loads(f.read())
+        for k, v in data.items():
+            v["prefix_req"] = from_dict(data_class=LSFSubmissionRequirements, data=v["prefix_req"])
+            self._cache[int(k)] = from_dict(data_class=MMLJobDescription, data=v)
+        print(f"Restored cache with {len(self._cache)} jobs. Run `info()` to get current job status.")
 
     def retrieve(self, project: str, excludes: Sequence[str] = ("PARAMETERS", "hpo", "runs")) -> None:
         """
