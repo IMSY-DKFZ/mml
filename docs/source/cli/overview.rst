@@ -106,6 +106,8 @@ The final configuration can be displayed with the help of hydra-flags
    tta
    tune
 
+.. _main-config-file:
+
 main config file
 ~~~~~~~~~~~~~~~~
 
