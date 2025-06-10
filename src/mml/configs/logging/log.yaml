@@ -10,6 +10,7 @@ defaults:
   - exp_logger: tensorboard
   - render: colorlog
   - notifier: none
+
 ###
 # default: True
 #  - enables the highlight text feature of the base AbstractBaseScheduler, colouring specific parts of logs

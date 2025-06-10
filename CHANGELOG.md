@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - improved error handling with interrupted dataset creation, which gives clear instructions how to resolve
  - new config group `peft`, which offers to inject `huggingface/peft` adapters into models and reduce train parameters
 
+### API changes
+ - changed the `logging` defaults for the `sys=cluster` configuration to improve readability 
+
 ### Bug fixes
  - fixed incorrect handling of hydra choices in CONTINUE mode
  - fixed .env loading for non default system 

@@ -12,7 +12,6 @@
 # specify here default training configuration
 defaults:
   - _self_
-  - sys: local
   - tasks: none
   - arch: timm
   - optimizer: adam
@@ -26,6 +25,7 @@ defaults:
   - preprocessing: default
   - augmentations: default
   - logging: log
+  - sys: local                # sys after logging so that colors can be deactivated
   - sampling: full
   - search_space: none
   - hpo: default
@@ -34,7 +34,7 @@ defaults:
   - loaders: default
   - tta: none
   - peft: none
-  - mode: info  # is done very last to allow overriding above defaults
+  - mode: info                # is done very last to allow overriding above defaults
   - override hydra/hydra_logging: col_stdout
   - override hydra/help: mml_help
 
