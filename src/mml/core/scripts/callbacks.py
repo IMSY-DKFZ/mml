@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 import lightning
+import lightning.pytorch.tuner.lr_finder
 import torch
 from lightning.pytorch.callbacks import ModelCheckpoint, RichProgressBar, TQDMProgressBar
 

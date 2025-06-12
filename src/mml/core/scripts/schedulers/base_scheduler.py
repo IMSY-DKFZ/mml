@@ -379,17 +379,37 @@ class AbstractBaseScheduler(metaclass=abc.ABCMeta):
 
     def after_preparation_hook(self) -> None:
         """
-        This hook is usually used if the scheduler itself contains data that is
-        modified across subroutines. To ensure the capability to use the continue flag, this routine may search for
-        a dumped version and load it. See mml.task_similarity.scripts.abstract_task_distance_scheduler for an example
-        usage.
+        This hook will be called at the end of the :meth:`prepare_exp` step. That step basically prepares the task
+        structs accordingly. Once this is done, this hook can be used for remaining setups necessary that rely on
+        task structs (e.g. compatibility checks).
+
+        In contrast to the other scheduler steps in the schedule, the :meth:`prepare_exp` is also performed in
+        CONTINUE mode. This hook can be used to ensure continue capability of the scheduler, e.g., by loading
+        additional ressources from previous runs. More on CONTINUE mode: :ref:`continue-option`
+
+        Example usages:
+
+         * :meth:`~mml.core.scripts.schedulers.postprocess_scheduler.PostprocessScheduler.after_preparation_hook`
+         * :meth:`~mml.core.scripts.schedulers.preprocess_scheduler.PreprocessScheduler.after_preparation_hook`
+         * :meth:`~mml_similarity.scripts.abstract_task_distance_scheduler.AbstractTaskDistanceScheduler.after_preparation_hook`
         """
         pass
 
     def before_finishing_hook(self):
         """
-        Final hook at the end of an experiment, depending on the subroutines executed. Example could be some results
-        plotting. See mml_similarity.scripts.abstract_task_distance_scheduler for an example usage.
+        This hook will be called at the beginning of the :meth:`finish_exp` step. That step performs dumping and clean
+        up of intermediates. As such this hook is the perfect opportunity to aggregate results or other intermediates
+        from the previous computing steps (e.g., some results plotting).
+
+        It is also ideally placed to set the :attr:`return_value` of the scheduler, which will be returned by the
+        :meth:`run` method and can be used for experiment evaluation and in hyperparameter optimization (see
+        :doc:`/hpo`).
+
+        Example usages:
+
+         * :meth:`~mml.core.scripts.schedulers.postprocess_scheduler.PostprocessScheduler.after_preparation_hook`
+         * :meth:`~mml.core.scripts.schedulers.preprocess_scheduler.PreprocessScheduler.after_preparation_hook`
+         * :meth:`~mml_similarity.scripts.abstract_task_distance_scheduler.AbstractTaskDistanceScheduler.after_preparation_hook`
         """
         pass
 

@@ -212,10 +212,11 @@ class TaskCreator:
             `Modality.SAMPLE_ID` is required and the corresponding value has to be unique.
             Some further potential entries are `Modality.CLASS` with `int` value,
             and `Modality.MASK` with Path to some (greyscale) image, both with vals in idx_to_class.
-        :param Optional[List[SampleDescription]] test_iterator:
-            test data iterator, same type as train_iterator
-        :param Optional[List[SampleDescription]] unlabeled_iterator:
-            unlabeled data iterator, same type as train_iterator
+        :param Optional[List[SampleDescription]] test_iterator: test data iterator, same type as train_iterator, note
+            that MML expects test data to include labels (!), any label-free data is provided with unlabeled_iterator
+        :param Optional[List[SampleDescription]] unlabeled_iterator: unlabeled data iterator, same type as
+            train_iterator, can be used to either provide additional unlabeled "train data" or alternatively as
+            prediction data
         :param Optional[Dict[int, str]] idx_to_class: dict mapping ints to class names (e.g.
             {0 -> background, 1 -> instrument}), may also be non-continuous (e.g. {0 -> background, 3 -> instrument})
             for subclassing or mapping indices to the same class (e.g.

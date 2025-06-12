@@ -124,7 +124,7 @@ def load_env() -> None:
     if dotenv_path.exists():
         load_dotenv(dotenv_path=dotenv_path)
         # as long as the default system (=local) is used, check for the minimum env variables
-        if not any(cli_arg.startswith('sys=') for cli_arg in sys.argv):
+        if not any(cli_arg.startswith("sys=") for cli_arg in sys.argv):
             if not Path(os.getenv("MML_DATA_PATH")).exists():
                 raise MMLMisconfigurationException("Invalid MML_DATA_PATH, have you modified the mml.env entry?")
             if not Path(os.getenv("MML_RESULTS_PATH")).exists():
