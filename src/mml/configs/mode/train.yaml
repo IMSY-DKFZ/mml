@@ -80,8 +80,8 @@ mode:
   #  - see the ``suggest`` plugin for an example how to generate blueprints
   use_blueprint: False
   ###
-  # default: [arch,augmentations,cbs,loss,lr_scheduler,mode,optimizer,preprocessing,sampling,trainer,tta,tune]
-  #  - these pipeline keys will be for one stored as a documentation of the training pipeline
+  # default: [arch,augmentations,cbs,loss,lr_scheduler,mode,optimizer,peft,preprocessing,sampling,trainer,tta,tune]
+  #  - these pipeline keys will be stored as a documentation of the training pipeline
   #  - on the other hand if using a blueprint, only these keys will be loaded to override the given sections
   pipeline_keys:
     - 'arch'
@@ -91,6 +91,7 @@ mode:
     - 'lr_scheduler'
     - 'mode'
     - 'optimizer'
+    - 'peft'
     - 'preprocessing'
     - 'sampling'
     - 'trainer'

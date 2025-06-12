@@ -123,16 +123,16 @@ def load_env() -> None:
         logger.debug(f"No MML_ENV_PATH provided, will try to load env variables from default path ({dotenv_path}).")
     if dotenv_path.exists():
         load_dotenv(dotenv_path=dotenv_path)
-        if not Path(os.getenv("MML_DATA_PATH")).exists():
-            raise MMLMisconfigurationException("Invalid MML_DATA_PATH, have you modified the mml.env entry?")
-        if not Path(os.getenv("MML_RESULTS_PATH")).exists():
-            raise MMLMisconfigurationException("Invalid MML_RESULTS_PATH, have you modified the mml.env entry?")
-        try:
-            _ = int(os.getenv("MML_LOCAL_WORKERS"))
-        except ValueError:
-            raise MMLMisconfigurationException("Invalid MML_LOCAL_WORKERS, have you modified the mml.env entry?")
-        if not Path(os.getenv("MML_DATA_PATH")).exists():
-            raise MMLMisconfigurationException("Invalid MML_DATA_PATH, have you modified the mml.env entry?")
+        # as long as the default system (=local) is used, check for the minimum env variables
+        if not any(cli_arg.startswith("sys=") for cli_arg in sys.argv):
+            if not Path(os.getenv("MML_DATA_PATH")).exists():
+                raise MMLMisconfigurationException("Invalid MML_DATA_PATH, have you modified the mml.env entry?")
+            if not Path(os.getenv("MML_RESULTS_PATH")).exists():
+                raise MMLMisconfigurationException("Invalid MML_RESULTS_PATH, have you modified the mml.env entry?")
+            try:
+                _ = int(os.getenv("MML_LOCAL_WORKERS"))
+            except ValueError:
+                raise MMLMisconfigurationException("Invalid MML_LOCAL_WORKERS, have you modified the mml.env entry?")
     else:
         raise MMLMisconfigurationException(
             f".env file not found at {dotenv_path}! Please follow the documentation instructions to setup MML."

@@ -76,9 +76,6 @@ class InfoScheduler(AbstractBaseScheduler):
             self.commands.append(self.info_models)
             self.params.append([])
 
-    def after_preparation_hook(self):
-        pass
-
     def before_finishing_hook(self):
         logger.info(f"Total number of all samples: {self.total_sample_sum}.")
 

@@ -10,6 +10,7 @@ ToDo summary
 
 ### Bug fixes
  - fixes issue #16, an incorrect download url in the idle_action_recognition task
+ - fix creation issue with ISIC20 task because of incorrect iterator
 
 ## 0.6.0 (12/19/2024):
 Public release version after last license compatibility fixes. Includes a renaming from mml-data to mml-tasks!

@@ -1,0 +1,45 @@
+# @package tta
+
+# LICENSE HEADER MANAGED BY add-license-header
+#
+# SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
+# SPDX-License-Identifier: MIT
+#
+
+###
+# default: mean
+#  - sets the mode of the :class:`~mml.core.models.merger.PredictionMerger`
+#  - currently only "mean" is supported
+mode: mean
+###
+# default: ???
+#  - central parameter to specify output size
+#  - expects two ints
+size: ???
+variations:
+  ###
+  # default: {name: RandomHorizontalFlip, p: 0.0}
+  #  - perform no augmentation
+  identity:
+    - name: RandomHorizontalFlip
+      p: 0.0
+  ###
+  # default: {name: RandomResizedCrop, p: 1.0, size: ${tta.size}}
+  #  - crop a part of the image
+  crop1:
+    - name: RandomResizedCrop
+      size: ${tta.size}
+      p: 1.0
+  ###
+  # default: {name: RandomResizedCrop, p: 1.0, size: ${tta.size}}
+  #  - crop a part of the image
+  crop2:
+    - name: RandomResizedCrop
+      size: ${tta.size}
+      p: 1.0
+  ###
+  # default: {name: RandomResizedCrop, p: 1.0, size: ${tta.size}}
+  #  - crop a part of the image
+  crop3:
+    - size: ${tta.size}
+      p: 1.0

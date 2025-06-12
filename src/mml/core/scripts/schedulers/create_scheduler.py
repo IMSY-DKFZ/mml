@@ -11,6 +11,7 @@ from _collections import OrderedDict
 from omegaconf import DictConfig
 
 import mml.core.data_preparation.task_creator
+from mml.core.data_preparation.dset_creator import WIP_FILE_NAME
 from mml.core.data_preparation.registry import (
     _DATASET_CREATORS,
     _TASKCREATORS,
@@ -104,6 +105,11 @@ class CreateScheduler(AbstractBaseScheduler):
                 f"dataset, delete {all_dsets['none'][dset_name]} and rerun."
             )
             dset_path = all_dsets["none"][dset_name]
+            if (dset_path / WIP_FILE_NAME).exists():
+                raise RuntimeError(
+                    f"Something must have gone wrong during a previous data set creation for "
+                    f"{dset_name}. It is necessary to remove the folder {dset_path} before retrying."
+                )
         else:
             dset_creator = get_dset_creator(dset_name=dset_name)
             # run creator

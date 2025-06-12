@@ -12,10 +12,18 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
 import hydra.utils
+import peft
 import torch
+from humanize import intword
+from peft import LoraConfig
+from peft.config import PeftConfig
+from sqlalchemy.testing.plugin.plugin_base import warnings
+from transformers import Conv1D
 
 from mml.core.data_loading.task_attributes import RGBInfo, TaskType
 from mml.core.data_loading.task_struct import TaskStruct
+from mml.core.scripts.decorators import beta
+from mml.core.scripts.exceptions import MMLMisconfigurationException
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +51,7 @@ class BaseModel(torch.nn.Module, ABC):
         # store init kwargs
         self._init_kwargs: Dict[str, Any] = kwargs  # stores stuff that needs to be persistent when re-initializing
         self._head_init_kwargs: List[Dict[str, Any]] = []  # stores init kwargs of heads
+        self._peft_kwargs: Dict[str, Any] = {}  # stores any peft kwargs
         # actually init backbone
         self._init_model(**kwargs)
         logger.debug("Model initialised.")
@@ -145,23 +154,78 @@ class BaseModel(torch.nn.Module, ABC):
         logger.debug(f"Unfroze {len(self._frozen_params)} params of model.")
         self._frozen_params = []
 
+    @beta("PEFT integration is still in beta.")
+    def set_peft(self, peft_cfg: PeftConfig) -> None:
+        """
+        Applies a PEFT (Parameter Efficient FineTuning) method to the model. Usually this will lead to adapters injected
+        to the base model that complement existing weights. The advantage is that the majority of existing weights is
+        frozen (the .requires_grad attribute of the tensors is set to false) while only the smaller adapters are kept
+        trainable.
+
+        :param PeftConfig peft_cfg: PEFTConfig instance, see
+            `huggingface/peft <https://github.com/huggingface/peft/tree/main>`_
+        :return: None, since model is mofified in place
+        """
+        if self._peft_kwargs:
+            raise RuntimeError("PEFT already set for this model!")
+        if self._frozen_params:
+            warnings.warn(
+                "Backbone was frozen prior to applying PEFT, will first unfreeze backbone and then apply."
+                "You may re-freeze the backbone (i.e. the injected adapters)."
+            )
+            self.unfreeze_backbone()
+        if peft_cfg.is_prompt_learning or peft_cfg.is_adaption_prompt:
+            raise MMLMisconfigurationException(f"Applying {peft_cfg.peft_type} is likely an unsupported PEFT type.")
+        self._peft_kwargs = peft_cfg.to_dict()
+        if isinstance(peft_cfg, LoraConfig) and peft_cfg.target_modules == "auto":
+            peft_cfg.target_modules = self.get_lora_compatible_layers(self.backbone)
+            logger.info(f"Auto detected {len(peft_cfg.target_modules)} compatible layers for LoRa in model backbone.")
+        pre_params = self.count_parameters(only_trainable=True)["backbone"]
+        self.backbone = peft.get_peft_model(model=self.backbone, peft_config=peft_cfg)
+        post_params = self.count_parameters(only_trainable=True)["backbone"]
+        logger.info(
+            f"After applying {peft_cfg.peft_type} from {intword(pre_params)} params only {intword(post_params)}"
+            f" remain trainable (={post_params / pre_params:.2%})."
+        )
+
+    @staticmethod
+    def get_lora_compatible_layers(backbone: torch.nn.Module) -> List[str]:
+        """
+        Helper function to extract all Lora compatible layers (from the peft library).
+
+        :param torch.nn.Module backbone: the model to extract layers from
+        :return: list of strings the correspond to the respective layer names
+        """
+        layer_names = []
+        for name, module in backbone.named_modules():
+            # these are the currently LORA supported layers
+            if isinstance(module, (torch.nn.Linear, torch.nn.Embedding, torch.nn.Conv2d, Conv1D)):
+                layer_names.append(name)
+        return layer_names
+
     @staticmethod
     def load_checkpoint(param_path: Union[Path, str]) -> "BaseModel":
         """
-        Load from a checkpoint.
+        Load from a checkpoint. Be aware that MML uses its own checkpoint structure (different from the one in
+        `lightning <https://github.com/Lightning-AI/lightning>`_). Detail can be found in
+        :meth:`~mml.core.models.torch_base.BaseModel.save_checkpoint`.
 
         :param Union[Path, str] param_path: path to load checkpoint from
         :return:
         """
         state = torch.load(param_path, weights_only=False)
         model: BaseModel = hydra.utils.instantiate(dict(_target_=state["__target__"], **state["__init_kwargs__"]))
+        # for backward compatibility we check whether the keyword is present in the state
+        if "__peft_kwargs__" in state and len(state["__peft_kwargs__"]) > 0:
+            peft_cfg = PeftConfig.from_peft_type(**state["__peft_kwargs__"])
+            model.set_peft(peft_cfg)
         model.backbone.load_state_dict(state["backbone"])  # type: ignore[union-attr]
         model._frozen_params = state["__frozen_params__"]
         for head_name, init_kwargs in zip(state["__head_names__"], state["__head_init_kwargs__"]):
             head = model._create_head(**init_kwargs)
             model.heads[head_name] = head
             head.load_state_dict(state[head_name])
-        logger.info("Loaded checkpoint!")
+        logger.info("Loaded MML checkpoint!")
         logger.debug(f"@ {param_path}")
         return model
 
@@ -181,6 +245,7 @@ class BaseModel(torch.nn.Module, ABC):
                 "__target__": self.__class__,
                 "__frozen_params__": self._frozen_params,
                 "__head_init_kwargs__": self._head_init_kwargs,
+                "__peft_kwargs__": self._peft_kwargs,
             }
         )
         torch.save(state, param_path)

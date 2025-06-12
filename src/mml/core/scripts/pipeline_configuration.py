@@ -131,6 +131,7 @@ PIPELINE_CONFIG_PARTS = [
     "lr_scheduler",
     "mode",
     "optimizer",
+    "peft",
     "preprocessing",
     "sampling",
     "trainer",

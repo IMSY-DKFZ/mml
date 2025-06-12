@@ -7,7 +7,7 @@
 #
 
 defaults:
-  - override /hydra/job_logging: col_stdout_and_file
+  - override /hydra/job_logging: stdout_and_file
 
 logging:
   render:

@@ -6,6 +6,7 @@
 
 import logging
 import warnings
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import hydra.utils
@@ -29,6 +30,7 @@ from mml.core.data_loading.task_attributes import Modality, TaskType
 from mml.core.data_loading.task_dataset import TaskDataset
 from mml.core.data_loading.task_struct import TaskStruct
 from mml.core.models.merger import PredictionMerger
+from mml.core.models.torch_base import BaseModel
 from mml.core.scripts.exceptions import MMLMisconfigurationException
 from mml.core.scripts.utils import LearningPhase
 from mml.core.visualization.cm import render_confusion_matrix
@@ -47,28 +49,67 @@ CONFIGS_ROUTES = {
 
 
 class SingleFrameLightningModule(lightning.LightningModule):
-    """
-    The default MML lightning module supporting frame wise training and inference.
-    """
+    def __init__(
+        self,
+        task_structs: List[TaskStruct],
+        cfg: DictConfig,
+        task_weights: Optional[List[float]] = None,
+        load_parameters: Optional[Path] = None,
+    ):
+        """
+        The default MML lightning module supporting frame wise training and inference.
 
-    def __init__(self, task_structs: List[TaskStruct], cfg: DictConfig, weights: Optional[List[float]] = None):
+        :param List[TaskStruct] task_structs: :class:`~mml.core.data_loading.task_struct.TaskStruct` for all tasks that
+            the model shall interact upon
+        :param DictConfig cfg: the main config file, will use multiple config groups (e.g., arch, loss, sampling,
+            logging, tta, metrics, ..)
+        :param Optional[List[float]] task_weights: if provided this determines a specific weighting of tasks for the
+            loss, if `None` all tasks contribute equally
+        :param Optional[Path] load_parameters: if given will load model and weights, this ignores the current `cfg.arch`
+            and if any of the task_structs has already a model head with the loaded model it will be reused (otherwise
+            a new head is created for every task)
+        """
         super(SingleFrameLightningModule, self).__init__()
         # save hyperparameters
         self.save_hyperparameters()
         self.cfg = cfg
-        if weights is None:
-            weights = [1.0] * len(task_structs)
-        if len(task_structs) != len(weights):
-            raise ValueError(f"Number of weights ({len(weights)} does not match number of tasks {len(task_structs)}.")
-        self.weights = torch.as_tensor(weights)
+        if task_weights is None:
+            task_weights = [1.0] * len(task_structs)
+        if len(task_structs) != len(task_weights):
+            raise ValueError(
+                f"Number of task_weights ({len(task_weights)} does not match number of tasks {len(task_structs)}."
+            )
+        self.weights = torch.as_tensor(task_weights)
         self.task_structs = {struct.name: struct for struct in task_structs}
         self.targets: Dict[str, str] = {  # type: ignore
             name: struct.target.value for name, struct in self.task_structs.items() if struct.target is not None
         }
         # construct model
-        self.model = hydra.utils.instantiate(self.cfg.arch)
-        for struct in self.task_structs.values():
-            self.model.add_head(task_struct=struct)
+        if load_parameters is not None:
+            # for backward compatibility: make sure to handle previous stored lightning checkpoints
+            if load_parameters.suffix != ".mml":
+                warnings.warn(
+                    "You are loading a legacy model checkpoint. Full support of all features may not be "
+                    "guaranteed. MML will try to continue nevertheless."
+                )
+                # a bit cumbersome, we have to fully load the lightning module but discard everything except the model
+                self.model: BaseModel = SingleFrameLightningModule.load_from_checkpoint(load_parameters).model
+            else:
+                self.model = BaseModel.load_checkpoint(load_parameters)
+            # ensure compatibility with current task structs and existing heads
+            for name, struct in self.task_structs.items():
+                if name in self.model.heads:
+                    logger.info(f"Task {name} already present in model heads.")
+                else:
+                    self.model.add_head(task_struct=struct)
+                    logger.info(f"Task {name} was not yet present in model heads and was added now.")
+        else:
+            self.model: BaseModel = hydra.utils.instantiate(self.cfg.arch)
+            if self.cfg.peft._target_:
+                peft_cfg = hydra.utils.instantiate(self.cfg.peft)
+                self.model.set_peft(peft_cfg)
+            for struct in self.task_structs.values():
+                self.model.add_head(task_struct=struct)
         # construct criterion
         self.criteria = self.get_criteria()
         # construct metrics
@@ -248,7 +289,7 @@ class SingleFrameLightningModule(lightning.LightningModule):
         :param Dict[str, torch.Tensor] logits: logits as provided by model :meth:step
         :param Dict[str, torch.Tensor] targets: targets as provided by :meth:step
         :param LearningPhase phase: may be either train, val or test, used to access underlying
-            :class:~mml.core.data_loading:task_dataset:TaskDataset and as a logging prefix
+            :class:`~mml.core.data_loading:task_dataset:TaskDataset` and as a logging prefix
         :return:
         """
         if self.is_tuning:

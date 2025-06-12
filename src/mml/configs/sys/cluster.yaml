@@ -6,6 +6,9 @@
 # SPDX-License-Identifier: MIT
 #
 
+defaults:
+  - override /hydra/job_logging: stdout_and_file
+
 ###
 # default: ${oc.env:MML_CLUSTER_DATA_PATH}
 #  - path to data folder
@@ -26,3 +29,5 @@ trainer:
   # default: False
   #  - disable progress bar for detached system
   enable_progress_bar: False
+logging:
+  highlight_text: False

@@ -5,10 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.X.X (XX/XX/2025)
+## 1.1.0 (XX/XX/2025)
+
+### Features
+ - persistent model checkpoints now only rely on the MML format (instead of previously using the lightning format)
+ - improved error handling with interrupted dataset creation, which gives clear instructions how to resolve
+ - new config group `peft`, which offers to inject `huggingface/peft` adapters into models and reduce train parameters
+
+### API changes
+ - changed the `logging` defaults for the `sys=cluster` configuration to improve readability 
 
 ### Bug fixes
  - fixed incorrect handling of hydra choices in CONTINUE mode
+ - fixed .env loading for non default system 
 
 ## 1.0.4 (05/02/2025):
 This patch transitions the testing strategy from GPU based to purely CPU tests. 

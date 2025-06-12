@@ -1,4 +1,4 @@
-# @package _global_
+# @package peft
 
 # LICENSE HEADER MANAGED BY add-license-header
 #
@@ -6,9 +6,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-defaults:
-  - override /hydra/job_logging: col_stdout_and_file
+# used to set Parameter Efficient FineTuning
+# see https://github.com/huggingface/peft for detailed instructions
 
-logging:
-  render:
-    rich: False
+_target_: null

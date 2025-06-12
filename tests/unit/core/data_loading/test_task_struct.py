@@ -7,13 +7,13 @@
 from pathlib import Path
 
 import pytest
-from lightning.pytorch.callbacks import ModelCheckpoint
 from omegaconf import OmegaConf
 
 from mml.core.data_loading.task_struct import TaskStruct, undup_names
 from mml.core.scripts.exceptions import TaskNotFoundError
 from mml.core.scripts.model_storage import ModelStorage
 from mml.core.scripts.utils import ARG_SEP, TAG_SEP
+from mml.testing.boring_model import BoringModel
 
 
 def test_paths_representation(dummy_task_struct):
@@ -28,7 +28,7 @@ def test_paths_representation(dummy_task_struct):
 
 def test_models_representation(dummy_task_struct, file_manager):
     attr = TaskStruct.non_permanent_task_attributes()
-    par_path = file_manager.construct_saving_path(ModelCheckpoint(), key="parameters", task_name=dummy_task_struct.name)
+    par_path = file_manager.construct_saving_path(BoringModel(), key="parameters", task_name=dummy_task_struct.name)
     pip_path = file_manager.construct_saving_path(
         obj=OmegaConf.create({}), key="pipeline", task_name=dummy_task_struct.name
     )

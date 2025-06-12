@@ -80,7 +80,7 @@ class UpgradeScheduler(AbstractBaseScheduler):
     def prepare_exp(self) -> None:
         """
         Prepare experiment expects tasks to be present and loads these into task factory container. Here this should
-        be avoided.
+        be avoided (including :meth:`after_preparation_hook`).
         """
         logger.debug("Skipping experiment setup!")
 

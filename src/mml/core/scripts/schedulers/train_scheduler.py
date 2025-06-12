@@ -6,7 +6,6 @@
 
 import logging
 import random
-import shutil
 import warnings
 from typing import List, Optional
 
@@ -292,7 +291,7 @@ class TrainingScheduler(AbstractBaseScheduler):
     ) -> None:
         """
         This hook allows of setup modification before the model fitting starts (and also before lightning tuning).
-        Allows to modify weights, data, trainer callbacks, etc. May be overwritten as part of inheriting from
+        Allows to modify task_weights, data, trainer callbacks, etc. May be overwritten as part of inheriting from
         TrainScheduler.
 
         :param lightning.LightningDataModule datamodule: the prepared datamodule (no setup run yet)
@@ -314,7 +313,7 @@ class TrainingScheduler(AbstractBaseScheduler):
     ) -> None:
         """
         This hook allows of setup modification after the model fitting ended (and potential lightning tuning).
-        Allows to modify weights, data, trainer callbacks, etc. May be overwritten as part of inheriting from
+        Allows to modify task_weights, data, trainer callbacks, etc. May be overwritten as part of inheriting from
         TrainScheduler.
 
         :param lightning.LightningDataModule datamodule: the datamodule used
@@ -380,19 +379,20 @@ class TrainingScheduler(AbstractBaseScheduler):
                     "make sure to activate validation with lightning trainer."
                 )
         self.monitored_performances.append(best_score)
-        parameters_path = self.fm.construct_saving_path(
-            self.checkpoint_callback, key="parameters", task_name=pivot_struct.name
-        )
+        parameters_path = self.fm.construct_saving_path(module, key="parameters", task_name=pivot_struct.name)
         if self.cfg.mode.store_parameters:
-            # copy parameter file from the (temporary) checkpoint directory to the correct parameters directory
+            # determine the correct parameters directory
             cpt_path = (
                 self.checkpoint_callback.best_model_path
                 if self.cfg.mode.store_best
                 else self.checkpoint_callback.last_model_path
             )
-            shutil.copy2(src=cpt_path, dst=parameters_path)
+            # load these weights
+            state_dict = torch.load(cpt_path, map_location=torch.device("cpu"), weights_only=False)["state_dict"]
+            module.load_state_dict(state_dict)
+            # store model
+            module.model.save_checkpoint(param_path=parameters_path)
         else:
-            parameters_path.unlink()
             logger.info("mode.store_parameters is set false, so no parameters will be stored!")
         storage = ModelStorage(
             pipeline=pipeline_path,
@@ -418,33 +418,40 @@ class TrainingScheduler(AbstractBaseScheduler):
         choices.sort(key=lambda x: x.created)
         storage = choices[-1]
         logger.info(f"Found {len(choices)} matching model storages, used the latest from {storage.created}.")
-        pipeline = PipelineCfg.load(path=storage.pipeline)
-        with pipeline.activate(current_cfg=self.cfg):  # activate pipeline to have identical model creation
-            module = self.create_model(task_structs=[task_struct])
-            if eval_on and eval_on != task_name:
-                eval_task = self.get_struct(eval_on)
-                eval_task_name = eval_on
-                logger.info("Will predict on task " + self.highlight_text(eval_task_name) + "!")
-                module.setup_redirection(head=task_name, task=eval_task_name)
-            else:
-                eval_task_name = task_name
-                eval_task = task_struct
-            datamodule = self.create_datamodule(task_structs=eval_task, fold=fold)
-            trainer = self.create_trainer()
-            split_batched_predictions = {}
-            with catch_time() as predict_timer:
-                for split in [DataSplit.TEST, DataSplit.VAL, DataSplit.UNLABELLED]:
-                    # switch prediction split
-                    logger.info(f"Predicting split {split.name}.")
-                    datamodule.predict_on = split
-                    split_batched_predictions[split] = trainer.predict(
-                        model=module, dataloaders=datamodule, return_predictions=True, ckpt_path=storage.parameters
-                    )
-                    if split_batched_predictions[split] is not None:
-                        logger.info(
-                            f"Predicted {len(split_batched_predictions[split])} batches for split {split.name}."
-                        )
-            logger.debug(f"Prediction time was {predict_timer.pretty_time}.")
+        # check preprossing compatibility
+        original_pipeline = PipelineCfg.load(path=storage.pipeline)
+        if original_pipeline.pipeline_cfg.preprocessing.id != self.cfg.preprocessing.id:
+            warnings.warn(
+                f"Current preprocessing is {self.cfg.preprocessing.id} but the loaded model was originally "
+                f"preprocessed as {original_pipeline.pipeline_cfg.preprocessing.id}. MML will try to continue "
+                f"with the given preprocessing pipeline."
+            )
+        # prepare model
+        module = self.create_model(task_structs=[task_struct], load_parameters=storage.parameters)
+        if eval_on and eval_on != task_name:
+            eval_task = self.get_struct(eval_on)
+            eval_task_name = eval_on
+            logger.info("Will predict on task " + self.highlight_text(eval_task_name) + "!")
+            module.setup_redirection(head=task_name, task=eval_task_name)
+        else:
+            eval_task_name = task_name
+            eval_task = task_struct
+        # prepare data and trainer
+        datamodule = self.create_datamodule(task_structs=eval_task, fold=fold)
+        trainer = self.create_trainer()
+        # perform predictions
+        split_batched_predictions = {}
+        with catch_time() as predict_timer:
+            for split in [DataSplit.TEST, DataSplit.VAL, DataSplit.UNLABELLED]:
+                # switch prediction split
+                logger.info(f"Predicting split {split.name}.")
+                datamodule.predict_on = split
+                split_batched_predictions[split] = trainer.predict(
+                    model=module, dataloaders=datamodule, return_predictions=True
+                )
+                if split_batched_predictions[split] is not None:
+                    logger.info(f"Predicted {len(split_batched_predictions[split])} batches for split {split.name}.")
+        logger.debug(f"Prediction time was {predict_timer.pretty_time}.")
         # reformat predictions as dict -> image_id : prediction for each data split and combine them
         split_unbatched_predictions = {}
         for data_split, pred_dict_list in split_batched_predictions.items():
@@ -478,21 +485,30 @@ class TrainingScheduler(AbstractBaseScheduler):
         choices = sorted(task_struct.models, key=lambda x: x.created)
         storage = choices[-1]
         logger.info(f"Found {len(choices)} matching model storages, used the latest from {storage.created}.")
-        pipeline = PipelineCfg.load(path=storage.pipeline)
-        with pipeline.activate(current_cfg=self.cfg):
-            module = self.create_model(task_structs=[task_struct])
-            if eval_on and eval_on != task_name:
-                eval_task = self.get_struct(eval_on)
-                eval_task_name = eval_on
-                logger.info("Will test on task" + self.highlight_text(eval_task_name) + "!")
-                module.setup_redirection(head=task_name, task=eval_task_name)
-            else:
-                eval_task = task_struct
-            datamodule = self.create_datamodule(task_structs=eval_task)
-            trainer = self.create_trainer(metrics_callback=True)
-            with catch_time() as test_timer:
-                trainer.test(model=module, datamodule=datamodule, ckpt_path=storage.parameters)
-            logger.debug(f"Testing time was {test_timer.pretty_time}.")
+        # check preprossing compatibility
+        original_pipeline = PipelineCfg.load(path=storage.pipeline)
+        if original_pipeline.pipeline_cfg.preprocessing.id != self.cfg.preprocessing.id:
+            warnings.warn(
+                f"Current preprocessing is {self.cfg.preprocessing.id} but the loaded model was originally "
+                f"preprocessed as {original_pipeline.pipeline_cfg.preprocessing.id}. MML will try to continue "
+                f"with the given preprocessing pipeline."
+            )
+        # prepare model
+        module = self.create_model(task_structs=[task_struct], load_parameters=storage.parameters)
+        if eval_on and eval_on != task_name:
+            eval_task = self.get_struct(eval_on)
+            eval_task_name = eval_on
+            logger.info("Will test on task" + self.highlight_text(eval_task_name) + "!")
+            module.setup_redirection(head=task_name, task=eval_task_name)
+        else:
+            eval_task = task_struct
+        # prepare data and trainer
+        datamodule = self.create_datamodule(task_structs=eval_task)
+        trainer = self.create_trainer(metrics_callback=True)
+        # run the testing
+        with catch_time() as test_timer:
+            trainer.test(model=module, datamodule=datamodule)
+        logger.debug(f"Testing time was {test_timer.pretty_time}.")
         storage.metrics += self.metrics_callback.metrics
         storage.store()
         logger.info(f"Results: {self.metrics_callback.metrics}")

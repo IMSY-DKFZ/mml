@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright 2024 German Cancer Research Center (DKFZ) and contributors.
 # SPDX-License-Identifier: MIT
 #
+
 VERSION = (0, 5, 1)
 __version__ = ".".join(map(str, VERSION))
-__all__ = ["__version__"]
+__all__ = ["__version__", "LSFJobRunner", "LSFSubmissionRequirements"]

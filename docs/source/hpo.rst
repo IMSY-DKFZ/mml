@@ -3,7 +3,10 @@ Hyperparameter optimization
 
 
 Attaching ``--multirun`` to your command will start the job in hpo mode. Note that multirun does not offer
-the ``continue`` (see :doc:`usage`) functionality!
+the ``continue`` (see :ref:`continue-option`) functionality!
+
+.. note::
+    More details on the config options can be found at :doc:`cli/hpo`.
 
 Gridsearch
 ----------
@@ -30,7 +33,8 @@ usage
 
 Create a config file defining your search space for the hyperparameters at ``configs/search_space``.
 And afterwards call the program as follows (make sure your mode has a return value to optimize using
-:class:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler`'s ``return_value``).
+:class:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler`'s
+:attr:`~mml.core.scripts.schedulers.base_scheduler.AbstractBaseScheduler.return_value`).
 
 .. code-block:: bash
 
