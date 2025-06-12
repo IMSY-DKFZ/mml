@@ -7,7 +7,6 @@ import copy
 import getpass
 import os
 import subprocess
-import time
 import warnings
 from collections import Counter, deque
 from datetime import datetime
@@ -224,8 +223,10 @@ class LSFJobRunner(JobRunner):
                 print(f"Could not kill job {_id}.")
                 continue
 
-        print(f"Killed {len(jobid)} job(s). It is recommended to wait ~20 seconds for shutdown before updating job "
-              f"status info.")
+        print(
+            f"Killed {len(jobid)} job(s). It is recommended to wait ~20 seconds for shutdown before updating job "
+            f"status info."
+        )
         return jobid
 
     def info(self) -> pd.DataFrame:
