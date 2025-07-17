@@ -719,6 +719,7 @@ class TaskCreator:
             func = creator.map_tag(tag)
             func(*values)
             creator.current_meta.name += f"{mml.core.scripts.utils.TAG_SEP}{tag_string}"
+            creator.protocol(msg=f"Auto tagging with tag <{tag_string}>.")
         # complete any remaining inference as well as testing and pushing
         path = creator.auto_complete()
         logger.info(f"Auto created {full_alias} from {base}.")
