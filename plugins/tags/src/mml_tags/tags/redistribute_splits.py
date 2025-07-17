@@ -95,7 +95,7 @@ def redistribute_splits(self: TaskCreator, *new_distribution: str) -> None:
     else:
         self.data = {
             DataSplit.FULL_TRAIN: self.current_meta.train_samples,
-            DataSplit.TEST: self.current_meta.test_samplestest_tuples,
+            DataSplit.TEST: self.current_meta.test_samples,
         }
     # calculate validation split and run self.split_folds
     if modify_test:

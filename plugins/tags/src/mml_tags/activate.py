@@ -9,16 +9,21 @@ from mml_tags.tags.redistribute_splits import redistribute_splits
 from mml_tags.tags.shrink_train import shrink_train
 from mml_tags.tags.subclass import subclass_task
 from mml_tags.tags.subset import subset_task
+from mml_tags.tags.shrink_equal import shrink_equal
 
 from mml.core.data_preparation.task_creator import TASK_CREATOR_TAG_MAP, TaskCreator
 
+# add methods to TaskCreator
 TaskCreator.shrink_train = shrink_train
+TaskCreator.shrink_equal = shrink_equal
 TaskCreator.confuse_task = confuse_task
 TaskCreator.redistribute_splits = redistribute_splits
 TaskCreator.subclass_task = subclass_task
 TaskCreator.subset_task = subset_task
 
+# link methods to identifiers used in task identifiers
 TASK_CREATOR_TAG_MAP["shrink_train"] = "shrink_train"
+TASK_CREATOR_TAG_MAP["shrink_equal"] = "shrink_equal"
 TASK_CREATOR_TAG_MAP["redistribute_splits"] = "redistribute_splits"
 TASK_CREATOR_TAG_MAP["confuse"] = "confuse_task"
 TASK_CREATOR_TAG_MAP["subset"] = "subset_task"
