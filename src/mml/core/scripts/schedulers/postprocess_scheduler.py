@@ -16,7 +16,7 @@ import quapy.data.datasets
 import sklearn.base
 import torch
 import torch.nn as nn
-from omegaconf import DictConfig
+from omegaconf import DictConfig, ListConfig
 from psrcal.calibration import AffineCalLogLoss, calibrate
 from quapy.method.aggregative import ACC
 from torchmetrics import BootStrapper, MetricCollection
@@ -106,11 +106,17 @@ class PostprocessScheduler(AbstractBaseScheduler):
             # load prediction
             all_splits_prediction = torch.load(model.predictions[pred])
             # we use the validation split as base for inferring calibration parameters
-            if DataSplit.VAL.value not in all_splits_prediction:
+            if DataSplit.VAL.value not in all_splits_prediction or len(all_splits_prediction[DataSplit.VAL.value]) == 0:
                 raise RuntimeError(
                     f"No predictions have been made on validation data for model @ {model._stored}"
                     f"and prediction on {pred} (@ {model.predictions[pred]})."
                 )
+            if (len(all_splits_prediction[DataSplit.TEST.value]) == 0) and (len(all_splits_prediction[DataSplit.UNLABELLED.value]) == 0):
+                warnings.warn(
+                    f"No predictions have been made on unlabeled & test data for model @ {model._stored}"
+                    f"and prediction on {pred} (@ {model.predictions[pred]}). Will omit re-calibration."
+                )
+                continue
             all_logits = {}
             all_labels = {}
             for split in [DataSplit.VAL, DataSplit.TEST, DataSplit.UNLABELLED]:
@@ -176,9 +182,9 @@ class PostprocessScheduler(AbstractBaseScheduler):
                     # to avoid any zero division we assume a minimum probability
                     prior = np.clip(prior, a_min=1e-8, a_max=None)
                     prior = prior / np.sum(prior)
-            elif isinstance(self.cfg.mode.prior, list):
+            elif isinstance(self.cfg.mode.prior, list) or isinstance(self.cfg.mode.prior, ListConfig):
                 # use given priors
-                prior = self.cfg.mode.prior
+                prior = list(self.cfg.mode.prior)
             elif self.cfg.mode.prior == "val":
                 # infer priors on validation data, psrcal infers them
                 prior = None
@@ -214,6 +220,7 @@ class PostprocessScheduler(AbstractBaseScheduler):
                 for case_idx, case_logits in enumerate(logits):
                     all_splits_prediction[split.value][case_idx]["calibrated"] = case_logits
             torch.save(obj=all_splits_prediction, f=model.predictions[pred])
+            logger.info(f"Updated calibrated predictions for model @ {model._stored} and prediction on {pred}.")
 
     def select_ensemble(self):
         pivot_struct = self.get_struct(self.pivot)

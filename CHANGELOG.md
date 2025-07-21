@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Bug fixes
  - fixed incorrect handling of hydra choices in CONTINUE mode
  - fixed .env loading for non default system 
+ - fixed re-calibration parameter handling in post-processing
 
 ## 1.0.4 (05/02/2025):
 This patch transitions the testing strategy from GPU based to purely CPU tests. 
